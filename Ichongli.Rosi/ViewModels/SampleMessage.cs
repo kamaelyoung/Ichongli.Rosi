@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ichongli.Rosi.ViewModels
 {
-    class SampleMessage
+    public class SampleMessage
     {
     }
 }

@@ -1,14 +1,16 @@
-namespace Ichongli.Rosi {
-	using System;
-	using System.Collections.Generic;
-	using System.Windows.Controls;
-	using Microsoft.Phone.Controls;
-	using Caliburn.Micro;
+namespace Ichongli.Rosi
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Controls;
+    using Microsoft.Phone.Controls;
+    using Caliburn.Micro;
     using Ichongli.Rosi.ViewModels;
     using System.Windows.Navigation;
+    using Ichongli.Rosi.Services;
 
-	public class AppBootstrapper : PhoneBootstrapperBase
-	{
+    public class AppBootstrapper : PhoneBootstrapperBase
+    {
         private PhoneContainer container;
         private PhoneApplicationFrame rootFrame;
         private bool reset;
@@ -31,7 +33,7 @@ namespace Ichongli.Rosi {
                 container.RegisterPhoneServices(RootFrame);
 
             container.PerRequest<MainPageViewModel>();
-
+            container.PerRequest<IPostService, PostService>();
             AddCustomConventions();
 
             rootFrame.Navigated += rootFrame_Navigated;
@@ -109,5 +111,5 @@ namespace Ichongli.Rosi {
                     return false;
                 };
         }
-	}
+    }
 }
