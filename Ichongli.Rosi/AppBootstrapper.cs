@@ -1,5 +1,6 @@
 namespace Ichongli.Rosi
 {
+    /*
     using System;
     using System.Collections.Generic;
     using System.Windows.Controls;
@@ -112,4 +113,5 @@ namespace Ichongli.Rosi
                 };
         }
     }
+     */
 }
