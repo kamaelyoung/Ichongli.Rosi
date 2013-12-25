@@ -47,7 +47,9 @@
 
         <!--ContentPanel - 在此处放置其他内容-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
+            <ListBox ItemsSource="{Binding Posts}" DisplayMemberPath="title">
+                
+            </ListBox>
         </Grid>
 
         <!--取消注释，以显示对齐网格，从而帮助确保
