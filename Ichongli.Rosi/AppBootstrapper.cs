@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ichongli.Rosi
 {
-    public partial class AppBootstrapper : PhoneBootstrapperBase
+    public partial class AppBootstrapper : PhoneBootstrapper
     {
         private IKernel _kernel;
         
