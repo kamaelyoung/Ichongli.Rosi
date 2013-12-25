@@ -95,10 +95,12 @@
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Entitys\PostItem.cs" />
+    <Compile Include="IChongliHelper.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Services\IPostService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
+    <Compile Include="Utilities\JsonTryParse.cs" />
     <Compile Include="ViewModels\SampleMessage.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

@@ -9,11 +9,11 @@
 
     public class PostService : IPostService
     {
-        public async Task<List<PostItem>> get_recent_posts(string url)
+        public async Task<Posts> get_recent_posts(int pageIndex)
         {
-            var result = new List<PostItem>();
-
-            return result;
+            var url = string.Format(IChongliHelper.get_recent_postsUrl, pageIndex);
+            var json = await IChongliHelper.RequestAwait(url);
+            return JsonTryParse.Parse<Posts>(json);
         }
     }
 }

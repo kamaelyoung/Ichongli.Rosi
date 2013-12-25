@@ -9,6 +9,6 @@ namespace Ichongli.Rosi.Services
 {
     public interface IPostService
     {
-        Task<List<PostItem>> get_recent_posts(string url);
+        Task<Posts> get_recent_posts(int pageIndex);
     }
 }
