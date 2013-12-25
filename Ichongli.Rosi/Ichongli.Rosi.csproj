@@ -101,6 +101,8 @@
     <Compile Include="Services\IPostService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
+    <Compile Include="Utilities\ImageHelper.cs" />
+    <Compile Include="Utilities\ImageNodify.cs" />
     <Compile Include="Utilities\JsonTryParse.cs" />
     <Compile Include="ViewModels\SampleMessage.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
