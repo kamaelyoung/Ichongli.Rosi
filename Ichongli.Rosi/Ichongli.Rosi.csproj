@@ -93,11 +93,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Entitys\PostItem.cs" />
     <Compile Include="IChongliHelper.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="NinjectBootStrapper.cs" />
+    <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Services\IPostService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
