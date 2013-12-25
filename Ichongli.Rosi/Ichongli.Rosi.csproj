@@ -97,6 +97,7 @@
     <Compile Include="Entitys\PostItem.cs" />
     <Compile Include="IChongliHelper.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="NinjectBootStrapper.cs" />
     <Compile Include="Services\IPostService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
@@ -165,6 +166,9 @@
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp8\Caliburn.Micro.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.2-unstable-9051\lib\sl4-windowsphone71\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp8\System.Windows.Interactivity.dll</HintPath>
     </Reference>

@@ -7,7 +7,8 @@
 
     <!--应用程序资源-->
     <Application.Resources>
-        <local:AppBootstrapper xmlns:local="clr-namespace:Ichongli.Rosi" x:Key="AppBootstrapper"/>
+        <local:NinjectBootStrapper xmlns:local="clr-namespace:Ichongli.Rosi" x:Key="NinjectBootStrapper"/>
+        <!--<local:AppBootstrapper xmlns:local="clr-namespace:Ichongli.Rosi" x:Key="AppBootstrapper"/>-->
     </Application.Resources>
 
 </Application>
