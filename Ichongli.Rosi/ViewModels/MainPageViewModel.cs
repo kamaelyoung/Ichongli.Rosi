@@ -57,6 +57,19 @@ namespace Ichongli.Rosi.ViewModels
                 }
             }
         }
+        private bool isLoading = false;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set
+            {
+                if (value != isLoading)
+                {
+                    isLoading = value;
+                    NotifyOfPropertyChange("IsLoading");
+                }
+            }
+        }
 
 
         public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker)
@@ -69,6 +82,7 @@ namespace Ichongli.Rosi.ViewModels
 
         protected override async void OnActivate()
         {
+            this.isLoading = true;
             if (this.Categories.Count == 0)
             {
                 var categories = await serviceBroker.GetCategories();
@@ -116,6 +130,8 @@ namespace Ichongli.Rosi.ViewModels
             }
             if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
                 BigImage = latest.posts[0].attachments[0].images.full.url;
+
+            this.isLoading = false;
         }
 
         public void Handle(SampleMessage message)
