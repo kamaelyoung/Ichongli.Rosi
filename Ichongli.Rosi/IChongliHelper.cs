@@ -10,9 +10,7 @@ namespace Ichongli.Rosi
 {
     public static class IChongliHelper
     {
-        private const string baseUrl = "http://rosimm.ichongli.com/api/";
-        public const string get_postsUrl = "get_posts/?read_more=More&count=10&page={0}";
-        public const string get_recent_postsUrl = "get_recent_posts/?read_more=More&count=10&page={0}";
+        public const string baseUrl = "http://rosimm.ichongli.com/";
 
         public static Task<string> RequestAwait(string url)
         {
@@ -22,7 +20,7 @@ namespace Ichongli.Rosi
                 HttpWebResponse response = null;
                 try
                 {
-                    HttpWebRequest request = HttpWebRequest.Create(baseUrl + url) as HttpWebRequest;
+                    HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
 
                     response = (HttpWebResponse)await Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, TaskCreationOptions.None);
                     using (var stream = response.GetResponseStream())

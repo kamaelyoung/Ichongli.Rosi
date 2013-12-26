@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Ichongli.Rosi.Interfaces;
 using Ichongli.Rosi.Services;
 using Microsoft.Phone.Shell;
 using Ninject;
@@ -28,7 +29,7 @@ namespace Ichongli.Rosi
             this._kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             this._kernel.Bind<IPhoneService>().ToConstant(new PhoneApplicationServiceAdapter(PhoneApplicationService.Current, RootFrame)).InSingletonScope();
             this._kernel.Bind<ILog>().ToMethod(context => LogManager.GetLog(context.Request.Target == null ? typeof(ILog) : context.Request.Target.Type));
-            this._kernel.Bind<IPostService>().To<PostService>();
+            this._kernel.Bind<IServiceBroker>().To<ServiceBroker>();
 
         }
 
