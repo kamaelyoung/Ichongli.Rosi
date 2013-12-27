@@ -10,7 +10,7 @@ namespace Ichongli.Rosi
 {
     public static class IChongliHelper
     {
-        public const string baseUrl = "http://rosimm.ichongli.com/";
+        public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
 
         public static Task<string> RequestAwait(string url)
         {
