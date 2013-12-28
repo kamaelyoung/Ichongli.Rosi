@@ -1,27 +1,21 @@
-﻿<ResourceDictionary
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
-	xmlns:System="clr-namespace:System;assembly=mscorlib"
-    xmlns:code4FunControls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-	>
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:code4FunControls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls" xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro">
 
     <!--<LabelsInternational:PublicInternational x:Key="LabelsManager"/>-->
 
-    <Color x:Key="MainBackground">#ffffff</Color>
+    <Color x:Key="MainBackground">#eeeeee</Color>
     <Color x:Key="Mainforground">#ffffff</Color>
-    
+
     <Color x:Key="SecondaryBackground">#c6bea6</Color>
     <Color x:Key="ThirdBackground">#48423f</Color>
-    
-    <SolidColorBrush x:Key="MainBackgroundBrush" Color="{StaticResource MainBackground}"/>
-    <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="{StaticResource SecondaryBackground}"/>
-    <SolidColorBrush x:Key="ThirdBackgroundBrush" Color="{StaticResource ThirdBackground}"/>
+
+    <SolidColorBrush x:Key="MainBackgroundBrush" Color="{StaticResource MainBackground}" />
+    <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="{StaticResource SecondaryBackground}" />
+    <SolidColorBrush x:Key="ThirdBackgroundBrush" Color="{StaticResource ThirdBackground}" />
 
 
     <DataTemplate x:Key="PanoramaTitleTemplate">
-        <StackPanel Orientation="Horizontal" Margin="-10,30,20,0" >
-            <Image Source="/Assets/TopPanoramaLogo.png" Margin="10,0,00,0"/>
+        <StackPanel Orientation="Horizontal" Margin="-10,30,20,0">
+            <Image Source="/Assets/TopPanoramaLogo.png" Margin="10,0,0,0" />
 
         </StackPanel>
     </DataTemplate>
@@ -30,60 +24,34 @@
     <DataTemplate x:Key="PivotHeader">
         <Border BorderThickness="0,10,0,0" Margin="-12,0,0,0">
             <Border.BorderBrush>
-                <SolidColorBrush Color="{StaticResource ThirdBackground}"/>
+                <SolidColorBrush Color="#427fed" />
             </Border.BorderBrush>
-
-            <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" 
-                       Foreground="{StaticResource ThirdBackgroundBrush}" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource ThirdBackgroundBrush}" TextWrapping="Wrap" />
         </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PanoramaHeaderTemplate">
-        <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" 
-                   Foreground="{StaticResource ThirdBackgroundBrush}"
-                   Margin="0,20,0,0" 
-                   />
-
+        <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource ThirdBackgroundBrush}" Margin="0,20,0,0" />
     </DataTemplate>
-    
+
     <DataTemplate x:Key="NewsItems">
-            <Border HorizontalAlignment="Stretch"  Margin="5" BorderBrush="{StaticResource ThirdBackgroundBrush}" BorderThickness="0,0,0,3">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="160"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <!--<Image Grid.Column="0" Margin="12,0,0,0" x:Name="ShowImage" Stretch="UniformToFill" Height="150" Width="150" 
+        <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]"  HorizontalAlignment="Stretch" Margin="5" BorderBrush="{StaticResource ThirdBackgroundBrush}" BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <!--<Image Grid.Column="0" Margin="12,0,0,0" x:Name="ShowImage" Stretch="UniformToFill" Height="150" Width="150" 
                         				delay:LowProfileImageLoader.UriSource="{Binding Url}"
                         				HorizontalAlignment="Center" VerticalAlignment="Top"/>-->
-                <code4FunControls:SuperImage Grid.Column="0" Margin="12,0,0,0" 
-                                        x:Name="ShowImage"
-                                        Stretch="UniformToFill"
-                                        Height="150" Width="150" 
-                        				Source="{Binding Url}"
-                        				PlaceholderImageStretch="Uniform" 
-                                        PlaceholderImageSource="/Assets/Background_173_173.png" 
-                                        HorizontalAlignment="Center" 
-                                        VerticalAlignment="Top"/>
-                <StackPanel Grid.Column="1" >
-                        <TextBlock VerticalAlignment="Bottom" Text="{Binding Title}" 
-                        					TextWrapping="Wrap"  
-                        					Style="{StaticResource PhoneTextTitle2Style}" 
-                        					Foreground="{StaticResource ThirdBackgroundBrush}"
-                                               />
-                        <TextBlock VerticalAlignment="Bottom" Text="{Binding Date}" 
-                        					TextWrapping="Wrap"  
-                        					Style="{StaticResource PhoneTextTitle3Style}" 
-                        					Foreground="{StaticResource SecondaryBackgroundBrush}"
-                                               />
-                        <TextBlock VerticalAlignment="Bottom" Text="{Binding Author}" 
-                        					TextWrapping="Wrap"  
-                        					Style="{StaticResource PhoneTextTitle3Style}" 
-                        					Foreground="{StaticResource SecondaryBackgroundBrush}"
-                                               />
-                    </StackPanel>
-                </Grid>
-            </Border>
-        </DataTemplate>
-    
+                <code4FunControls:SuperImage Grid.Column="0" Margin="12,0,0,0" x:Name="ShowImage" Stretch="UniformToFill" Height="150" Width="150" Source="{Binding Url}" PlaceholderImageStretch="Uniform" PlaceholderImageSource="/Assets/Background_173_173.png" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <StackPanel Grid.Column="1">
+                    <TextBlock VerticalAlignment="Bottom" Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}" Foreground="#262626" />
+                    <TextBlock VerticalAlignment="Bottom" Text="{Binding Date}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle3Style}" Foreground="#999999" />
+                    <TextBlock VerticalAlignment="Bottom" Text="{Binding Author}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle3Style}" Foreground="#999999" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
 </ResourceDictionary>

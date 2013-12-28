@@ -14,7 +14,7 @@ namespace Ichongli.Rosi
     public partial class AppBootstrapper : PhoneBootstrapper
     {
         private IKernel _kernel;
-        
+
         protected override void Configure()
         {
             this.ConfigureContainer();
@@ -27,6 +27,7 @@ namespace Ichongli.Rosi
             this._kernel.Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
             this._kernel.Bind<INavigationService>().ToConstant(new FrameAdapter(RootFrame)).InSingletonScope();
             this._kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
+            this._kernel.Bind<IUxService>().To<UiUx>().InSingletonScope();
             this._kernel.Bind<IPhoneService>().ToConstant(new PhoneApplicationServiceAdapter(PhoneApplicationService.Current, RootFrame)).InSingletonScope();
             this._kernel.Bind<ILog>().ToMethod(context => LogManager.GetLog(context.Request.Target == null ? typeof(ILog) : context.Request.Target.Type));
             this._kernel.Bind<IServiceBroker>().To<ServiceBroker>();

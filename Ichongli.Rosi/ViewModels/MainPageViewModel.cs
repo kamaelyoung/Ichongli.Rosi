@@ -9,6 +9,9 @@ namespace Ichongli.Rosi.ViewModels
     using System.Windows;
     using System.Threading.Tasks;
     using System.Text.RegularExpressions;
+    using Ichongli.Rosi.Models.Ui;
+    using Ichongli.Rosi.Models;
+    using System.Collections.Generic;
 
     public class MainPageViewModel : Screen, IHandle<SampleMessage>
     {
@@ -25,7 +28,7 @@ namespace Ichongli.Rosi.ViewModels
                 if (_Categories != value)
                 {
                     _Categories = value;
-                    this.NotifyOfPropertyChange("Categories");
+                    this.NotifyOfPropertyChange(() => Categories);
                 }
             }
         }
@@ -39,7 +42,7 @@ namespace Ichongli.Rosi.ViewModels
                 if (_Items != value)
                 {
                     _Items = value;
-                    this.NotifyOfPropertyChange("Items");
+                    this.NotifyOfPropertyChange(() => Items);
                 }
             }
         }
@@ -50,11 +53,8 @@ namespace Ichongli.Rosi.ViewModels
             get { return this._BigImage; }
             set
             {
-                if (_BigImage != value)
-                {
-                    _BigImage = value;
-                    NotifyOfPropertyChange("BigImage");
-                }
+                _BigImage = value;
+                NotifyOfPropertyChange(() => BigImage);
             }
         }
         private bool isLoading = false;
@@ -80,7 +80,7 @@ namespace Ichongli.Rosi.ViewModels
             this.eventAggregator.Subscribe(this);
         }
 
-        protected override async void OnActivate()
+        protected override async void OnInitialize()
         {
             this.isLoading = true;
             if (this.Categories.Count == 0)
@@ -103,35 +103,50 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-
         private async Task LoadLastPosts()
         {
-            var latest = await serviceBroker.GetPostsFrom("2", 0);
+            AppBase.Current.Posts = new Dictionary<string, Models.REST.CategoryPosts.RootObject>();
+            var latest = await serviceBroker.GetLatestPosts(0);
             Items.Clear();
-            foreach (var item in latest.posts)
+            if (latest.count > 0)
             {
-                string img = item.thumbnail;
-                if (string.IsNullOrEmpty(img))
+                foreach (var item in latest.posts)
                 {
-                    img = Regex.Match(item.content, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
+                    AppBase.Current.Posts["2"] = latest;
+
+                    string img = item.thumbnail;
+                    if (string.IsNullOrEmpty(img))
+                    {
+                        img = Regex.Match(item.content, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
+                    }
+                    var p = new Models.Ui.HomeItem
+                    {
+                        Title = item.title,
+                        Resume = item.excerpt,
+                        Date = item.date,
+                        UniqueId = item.id.ToString(),
+                        Url = img,
+                        Author = item.author.name
+                    };
+                    this.Items.Add(p);
+
                 }
-                var p = new Models.Ui.HomeItem
-                {
-                    Title = item.title,
-                    Resume = item.excerpt,
-                    CategoryId = "2",
-                    Date = item.date,
-                    UniqueId = item.id.ToString(),
-                    Url = img,
-                    Author = item.author.name
-                };
-                this.Items.Add(p);
+                if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
+                    BigImage = latest.posts[0].attachments[0].images.full.url;
 
+                this.isLoading = false;
             }
-            if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
-                BigImage = latest.posts[0].attachments[0].images.full.url;
-
-            this.isLoading = false;
+        }
+        
+        public void NaivgatoDetail(HomeItem obj)
+        {
+            if (obj is HomeItem)
+            {
+                this.navigationService.UriFor<PostPageViewModel>()
+                    .WithParam(viewMode => viewMode.PostID, int.Parse(obj.UniqueId))
+                    .WithParam(viewMode => viewMode.CategoryId, obj.CategoryId)
+                    .Navigate();
+            }
         }
 
         public void Handle(SampleMessage message)

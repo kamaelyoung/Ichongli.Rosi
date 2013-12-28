@@ -95,20 +95,28 @@
     </Compile>
     <Compile Include="IChongliHelper.cs" />
     <Compile Include="Interfaces\IServiceBroker.cs" />
+    <Compile Include="Interfaces\IServiceUser.cs" />
+    <Compile Include="Interfaces\IUxService.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Models\AppBase.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\REST\Categories.cs" />
     <Compile Include="Models\REST\CategoryPost.cs" />
+    <Compile Include="Models\REST\Nonce.cs" />
+    <Compile Include="Models\REST\Register.cs" />
     <Compile Include="Models\Ui\Author.cs" />
     <Compile Include="Models\Ui\HomeItem.cs" />
     <Compile Include="Models\Ui\ListItem.cs" />
     <Compile Include="Models\Ui\PostProperties.cs" />
     <Compile Include="Services\ServiceBroker.cs" />
+    <Compile Include="Services\ServiceUser.cs" />
+    <Compile Include="Services\UiUx.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\ImageNodify.cs" />
     <Compile Include="Utilities\JsonTryParse.cs" />
+    <Compile Include="ViewModels\PostPageViewModel.cs" />
     <Compile Include="ViewModels\SampleMessage.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -119,6 +127,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PostPage.xaml.cs">
+      <DependentUpon>PostPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +146,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PostPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +214,9 @@
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.2-unstable-9051\lib\sl4-windowsphone71\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PhonePerformance">
+      <HintPath>..\packages\PhonePerformance.1.2.1\lib\sl4-windowsphone71\PhonePerformance.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp8\System.Windows.Interactivity.dll</HintPath>

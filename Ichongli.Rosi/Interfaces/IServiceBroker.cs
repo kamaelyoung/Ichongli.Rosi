@@ -13,5 +13,7 @@ namespace Ichongli.Rosi.Interfaces
         Task<Models.REST.CategoryPosts.RootObject> GetPostsFrom(string id, int page);
 
         Task<Models.REST.CategoryPosts.RootObject> GetLatestPosts(int page);
+
+        Task<Models.REST.CategoryPosts.RootPost> GetPostById(int id);
     }
 }

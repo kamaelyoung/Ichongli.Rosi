@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,9 +11,19 @@ namespace Ichongli.Rosi
 {
     public static class IChongliHelper
     {
-        public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
+        //public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
+        //public const string baseUrl = "http://rosimm.ichongli.com/";
 
-        public static Task<string> RequestAwait(string url)
+        public const string baseUrl = "http://tuigirls.scfanxian.com/wordpress/";
+
+
+        public async static Task<T> DoHttpGet<T>(StringBuilder Url)
+        {
+            var content = await RequestAwait(Url.ToString());
+            return JsonConvert.DeserializeObject<T>(content);
+        }
+
+        private static Task<string> RequestAwait(string url)
         {
             return Task.Run(async () =>
             {

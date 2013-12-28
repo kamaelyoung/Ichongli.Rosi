@@ -95,6 +95,11 @@ namespace Ichongli.Rosi.Models.REST.CategoryPosts
         public Images images { get; set; }
     }
 
+    public class custom_fields
+    {
+        public List<string> download_value { get; set; }
+    }
+
     public class Post
     {
         public int id { get; set; }
@@ -116,6 +121,14 @@ namespace Ichongli.Rosi.Models.REST.CategoryPosts
         public int comment_count { get; set; }
         public string comment_status { get; set; }
         public string thumbnail { get; set; }
+        public custom_fields custom_fields { get; set; }
+    }
+
+
+    public class RootPost
+    {
+        public string status { get; set; }
+        public Post Post { get; set; }
     }
 
     public class RootObject

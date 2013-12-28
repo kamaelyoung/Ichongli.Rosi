@@ -22,11 +22,8 @@ namespace Ichongli.Rosi.Services
             StringBuilder Url = new StringBuilder();
             Url.Append(IChongliHelper.baseUrl);
             Url.Append(CategoryIndex);
-
-            return await DoHttpGet<Models.REST.Categories.RootObject>(Url);
-
+            return await IChongliHelper.DoHttpGet<Models.REST.Categories.RootObject>(Url);
         }
-
 
         public async Task<Models.REST.CategoryPosts.RootObject> GetPostsFrom(string id, int page)
         {
@@ -34,7 +31,7 @@ namespace Ichongli.Rosi.Services
             Url.Append(IChongliHelper.baseUrl);
             Url.AppendFormat(PostFromCategory, id, page);
             Debug.WriteLine(Url.ToString());
-            return await DoHttpGet<Models.REST.CategoryPosts.RootObject>(Url);
+            return await IChongliHelper.DoHttpGet<Models.REST.CategoryPosts.RootObject>(Url);
         }
 
         public async Task<Models.REST.CategoryPosts.RootObject> GetLatestPosts(int page)
@@ -42,14 +39,15 @@ namespace Ichongli.Rosi.Services
             StringBuilder Url = new StringBuilder();
             Url.Append(IChongliHelper.baseUrl);
             Url.AppendFormat(LatestPosts, page);
-            return await DoHttpGet<Models.REST.CategoryPosts.RootObject>(Url);
+            return await IChongliHelper.DoHttpGet<Models.REST.CategoryPosts.RootObject>(Url);
         }
 
-
-        private async Task<T> DoHttpGet<T>(StringBuilder Url)
+        public async Task<Models.REST.CategoryPosts.RootPost> GetPostById(int id)
         {
-            var content = await IChongliHelper.RequestAwait(Url.ToString());
-            return JsonConvert.DeserializeObject<T>(content);
+            StringBuilder Url = new StringBuilder();
+            Url.Append(IChongliHelper.baseUrl);
+            Url.AppendFormat(Post, id);
+            return await IChongliHelper.DoHttpGet<Models.REST.CategoryPosts.RootPost>(Url);
         }
     }
 }
