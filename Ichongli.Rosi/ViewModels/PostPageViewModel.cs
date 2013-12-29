@@ -245,11 +245,11 @@ namespace Ichongli.Rosi.ViewModels
                 if (post.attachments != null && post.attachments.Count > 0)
                 {
                     var item = post.attachments[0];
-                    this.BigImage = item.images.medium.url;
+                    this.BigImage = item.images.large.url;
                     foreach (var photo in post.attachments)
                     {
                         Debug.WriteLine(photo.images.medium.url);
-                        this.Photos.Add(new Models.Ui.ItemWithUrl { Title = photo.title, Url = photo.images.medium.url });
+                        this.Photos.Add(new Models.Ui.ItemWithUrl { Title = photo.title, Url = photo.images.thumbnail.url });
                     }
                 }
             }

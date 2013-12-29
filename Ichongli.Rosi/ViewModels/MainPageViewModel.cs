@@ -12,12 +12,14 @@ namespace Ichongli.Rosi.ViewModels
     using Ichongli.Rosi.Models.Ui;
     using Ichongli.Rosi.Models;
     using System.Collections.Generic;
+    using System;
 
     public class MainPageViewModel : Screen, IHandle<SampleMessage>
     {
         private readonly INavigationService navigationService;
         private readonly IEventAggregator eventAggregator;
         private readonly IServiceBroker serviceBroker;
+        private readonly IServiceUser _serviceUser;
 
         private ObservableCollection<Models.Ui.Item> _Categories = new ObservableCollection<Models.Ui.Item>();
         public ObservableCollection<Models.Ui.Item> Categories
@@ -72,11 +74,12 @@ namespace Ichongli.Rosi.ViewModels
         }
 
 
-        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker)
+        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser)
         {
             this.navigationService = navigationService;
             this.eventAggregator = eventAggregator;
             this.serviceBroker = serviceBroker;
+            this._serviceUser = serviceUser;
             this.eventAggregator.Subscribe(this);
         }
 
@@ -85,35 +88,36 @@ namespace Ichongli.Rosi.ViewModels
             this.isLoading = true;
             if (this.Categories.Count == 0)
             {
-                var categories = await serviceBroker.GetCategories();
-
-                if (categories.status.ToLower() == "ok")
+                try
                 {
-                    var filtered = categories.categories.Where(o => o.parent == 0);
-                    foreach (var item in filtered)
+                    var categories = await serviceBroker.GetCategories();
+
+                    if (categories.status.ToLower() == "ok")
                     {
-                        this.Categories.Add(new Models.Ui.Item { Title = item.title.ToLower(), ItemId = item.id.ToString() });
-                    }
+                        var filtered = categories.categories.Where(o => o.parent == 0);
+                        foreach (var item in filtered)
+                        {
+                            this.Categories.Add(new Models.Ui.Item { Title = item.title.ToLower(), ItemId = item.id.ToString() });
+                        }
 
-                    await LoadLastPosts();
+                        await LoadLastPosts();
+                    }
+                    else
+                    {
+                    }
                 }
-                else
-                {
-                }
+                catch (Exception ex) { }
             }
         }
 
         private async Task LoadLastPosts()
         {
-            AppBase.Current.Posts = new Dictionary<string, Models.REST.CategoryPosts.RootObject>();
             var latest = await serviceBroker.GetLatestPosts(0);
             Items.Clear();
             if (latest.count > 0)
             {
                 foreach (var item in latest.posts)
                 {
-                    AppBase.Current.Posts["2"] = latest;
-
                     string img = item.thumbnail;
                     if (string.IsNullOrEmpty(img))
                     {
@@ -137,7 +141,7 @@ namespace Ichongli.Rosi.ViewModels
                 this.isLoading = false;
             }
         }
-        
+
         public void NaivgatoDetail(HomeItem obj)
         {
             if (obj is HomeItem)
@@ -147,6 +151,11 @@ namespace Ichongli.Rosi.ViewModels
                     .WithParam(viewMode => viewMode.CategoryId, obj.CategoryId)
                     .Navigate();
             }
+        }
+
+        public async void Register()
+        {
+            var r = await this._serviceUser.Register("xiaohai", "49403700@qq.com", "yongqi", "ÎµÀ¶º£");
         }
 
         public void Handle(SampleMessage message)

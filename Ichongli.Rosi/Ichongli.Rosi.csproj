@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="IChongliHelper.cs" />
     <Compile Include="Interfaces\IServiceBroker.cs" />
+    <Compile Include="Interfaces\IServiceAuth.cs" />
     <Compile Include="Interfaces\IServiceUser.cs" />
     <Compile Include="Interfaces\IUxService.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -110,14 +111,19 @@
     <Compile Include="Models\Ui\ListItem.cs" />
     <Compile Include="Models\Ui\PostProperties.cs" />
     <Compile Include="Services\ServiceBroker.cs" />
+    <Compile Include="Services\ServiceAuth.cs" />
     <Compile Include="Services\ServiceUser.cs" />
     <Compile Include="Services\UiUx.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\ImageNodify.cs" />
     <Compile Include="Utilities\JsonTryParse.cs" />
+    <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\PostPageViewModel.cs" />
     <Compile Include="ViewModels\SampleMessage.cs" />
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -144,6 +150,10 @@
     <Page Include="Assets\LocalResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>

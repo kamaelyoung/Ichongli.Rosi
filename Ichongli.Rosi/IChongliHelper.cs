@@ -11,11 +11,20 @@ namespace Ichongli.Rosi
 {
     public static class IChongliHelper
     {
-        //public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
+        public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
         //public const string baseUrl = "http://rosimm.ichongli.com/";
 
-        public const string baseUrl = "http://tuigirls.scfanxian.com/wordpress/";
+        //public const string baseUrl = "http://tuigirls.scfanxian.com/wordpress/";
 
+        private const string nonceUrl = "?json=get_nonce&controller={0}&method={1}";
+
+        public async static Task<Models.REST.Nonce> get_nonce(string controller, string method)
+        {
+            StringBuilder Url = new StringBuilder();
+            Url.Append(IChongliHelper.baseUrl);
+            Url.AppendFormat(nonceUrl, controller, method);
+            return await IChongliHelper.DoHttpGet<Models.REST.Nonce>(Url);
+        }
 
         public async static Task<T> DoHttpGet<T>(StringBuilder Url)
         {
@@ -43,7 +52,6 @@ namespace Ichongli.Rosi
                     }
                     if (response != null)
                         response.Close();
-
                 }
                 catch
                 {
