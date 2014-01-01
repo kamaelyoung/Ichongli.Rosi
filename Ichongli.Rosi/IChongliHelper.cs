@@ -11,10 +11,10 @@ namespace Ichongli.Rosi
 {
     public static class IChongliHelper
     {
-        public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
+        //public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
         //public const string baseUrl = "http://rosimm.ichongli.com/";
 
-        //public const string baseUrl = "http://tuigirls.scfanxian.com/wordpress/";
+        public const string baseUrl = "http://www.moodjoy.com/";
 
         private const string nonceUrl = "?json=get_nonce&controller={0}&method={1}";
 

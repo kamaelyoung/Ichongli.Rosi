@@ -240,7 +240,7 @@ namespace Ichongli.Rosi.ViewModels
                     img = Regex.Match(post.content, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
                 }
                 this.Url = img;
-                this.ArticleUrl = post.custom_fields == null ? string.Empty : post.custom_fields.download_value[0];
+                //this.ArticleUrl = post.custom_fields == null ? string.Empty : post.custom_fields.download_value[0];
                 this.Photos.Clear();
                 if (post.attachments != null && post.attachments.Count > 0)
                 {
@@ -249,7 +249,15 @@ namespace Ichongli.Rosi.ViewModels
                     foreach (var photo in post.attachments)
                     {
                         Debug.WriteLine(photo.images.medium.url);
-                        this.Photos.Add(new Models.Ui.ItemWithUrl { Title = photo.title, Url = photo.images.thumbnail.url });
+                        this.Photos.Add(new Models.Ui.ItemWithUrl
+                        {
+                            Title = photo.title,
+                            ItemImage = new Models.Ui.ItemImage()
+                            {
+                                Thumbnail = photo.images.thumbnail.url,
+                                Medium = photo.images.medium.url
+                            }
+                        });
                     }
                 }
             }

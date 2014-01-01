@@ -9,23 +9,57 @@ namespace Ichongli.Rosi.Models.Ui
     public class ItemWithUrl : Item
     {
 
-        private string _Url;
-        public string Url
+        private ItemImage _itemImage;
+        public ItemImage ItemImage
         {
-            get { return this._Url; }
+            get { return this._itemImage; }
             set
             {
-                if (_Url != value)
+                if (_itemImage != value)
                 {
-                    _Url = value;
+                    _itemImage = value;
                     NotifyPropertyChanged();
                 }
             }
         }
-        
+
     }
 
-  public  class Item:ModelBase
+    public class ItemImage : ModelBase
+    {
+        private string _thumbnail;
+        public string Thumbnail
+        {
+            get
+            {
+                return this._thumbnail;
+            }
+            set
+            {
+                if (this._thumbnail != value)
+                {
+                    this._thumbnail = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _medium;
+        public string Medium
+        {
+            get
+            { return this._medium; }
+            set
+            {
+                if (this._medium != value)
+                {
+                    this._medium = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+    }
+
+    public class Item : ModelBase
     {
 
         private string _ItemId;
@@ -55,6 +89,6 @@ namespace Ichongli.Rosi.Models.Ui
                 }
             }
         }
-        
+
     }
 }

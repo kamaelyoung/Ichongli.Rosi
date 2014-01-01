@@ -1,4 +1,4 @@
-﻿<Application x:Class="Ichongli.Rosi.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:c4fControlsConverters="clr-namespace:Coding4Fun.Toolkit.Controls.Converters;assembly=Coding4Fun.Toolkit.Controls" xmlns:local="clr-namespace:Ichongli.Rosi">
+﻿<Application x:Class="Ichongli.Rosi.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:c4fControlsConverters="clr-namespace:Coding4Fun.Toolkit.Controls.Converters;assembly=Coding4Fun.Toolkit.Controls" xmlns:local="clr-namespace:Ichongli.Rosi" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
     <!--应用程序资源-->
     <Application.Resources>
@@ -11,6 +11,32 @@
             <c4fControlsConverters:BooleanToVisibilityConverter p11:Key="BooleanToVisibilityConverter" xmlns:p11="http://schemas.microsoft.com/winfx/2006/xaml" />
             <c4fControlsConverters:VisibilityToBooleanConverter p11:Key="VisibilityToBooleanConverter" xmlns:p11="http://schemas.microsoft.com/winfx/2006/xaml" />
             <c4fControlsConverters:ThemedImageConverter p11:Key="ThemedImageConverter" xmlns:p11="http://schemas.microsoft.com/winfx/2006/xaml" />
+            <Style x:Key="SilderResource" TargetType="phone:PhoneApplicationPage">
+                <Setter Property="toolkit:TransitionService.NavigationInTransition">
+                    <Setter.Value>
+                        <toolkit:NavigationInTransition>
+                            <toolkit:NavigationInTransition.Backward>
+                                <toolkit:SlideTransition Mode="SlideRightFadeIn" />
+                            </toolkit:NavigationInTransition.Backward>
+                            <toolkit:NavigationInTransition.Forward>
+                                <toolkit:SlideTransition Mode="SlideLeftFadeIn" />
+                            </toolkit:NavigationInTransition.Forward>
+                        </toolkit:NavigationInTransition>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="toolkit:TransitionService.NavigationOutTransition">
+                    <Setter.Value>
+                        <toolkit:NavigationOutTransition>
+                            <toolkit:NavigationOutTransition.Backward>
+                                <toolkit:SlideTransition Mode="SlideRightFadeOut" />
+                            </toolkit:NavigationOutTransition.Backward>
+                            <toolkit:NavigationOutTransition.Forward>
+                                <toolkit:SlideTransition Mode="SlideLeftFadeOut" />
+                            </toolkit:NavigationOutTransition.Forward>
+                        </toolkit:NavigationOutTransition>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>

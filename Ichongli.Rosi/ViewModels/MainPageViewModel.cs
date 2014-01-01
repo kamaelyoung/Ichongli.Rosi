@@ -136,7 +136,7 @@ namespace Ichongli.Rosi.ViewModels
 
                 }
                 if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
-                    BigImage = latest.posts[0].attachments[0].images.full.url;
+                    BigImage = latest.posts[0].attachments[0].images.medium.url;
 
                 this.isLoading = false;
             }
