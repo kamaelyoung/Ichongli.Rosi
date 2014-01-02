@@ -13,6 +13,12 @@ namespace Ichongli.Rosi.ViewModels
     using Ichongli.Rosi.Models;
     using System.Collections.Generic;
     using System;
+    using System.IO.IsolatedStorage;
+    using System.ComponentModel;
+    using System.Windows.Threading;
+    using Ichongli.Rosi.Utilities;
+    using Microsoft.Phone.Controls;
+    using Microsoft.Phone.Shell;
 
     public class MainPageViewModel : Screen, IHandle<SampleMessage>
     {
@@ -129,7 +135,7 @@ namespace Ichongli.Rosi.ViewModels
                         UniqueId = item.id.ToString(),
                         Url = img,
                     };
-                    this.Items.Add(p);                   
+                    this.Items.Add(p);
                 }
                 //if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
                 BigImage = latest.posts[0].thumbnail;//[0].images.medium.url;
@@ -152,6 +158,87 @@ namespace Ichongli.Rosi.ViewModels
         public async void Register()
         {
             var r = await this._serviceUser.Register("xiaohai", "49403700@qq.com", "yongqi", "蔚蓝海");
+        }
+
+
+        private int ProcessContract(int n1, int n2)
+        {
+            try
+            {
+                return System.Convert.ToInt32(Math.Round(System.Convert.ToDecimal(float.Parse(n1.ToString()) / float.Parse(n2.ToString())), 2) * new Decimal(100));
+            }
+            catch
+            {
+            }
+            return 0;
+        }
+
+        public void ClearCache()
+        {
+            Common.MsgBoxShow("提示", "确定", "取消", "清除缓存").Dismissed += (EventHandler<DismissedEventArgs>)((s1, e1) =>
+            {
+                if (e1.Result == CustomMessageBoxResult.LeftButton)
+                {
+                    //UmengAnalytics.onEvent("114", "手动清空缓存");
+                    MyStatic.WaitState("清除缓存", 0.6);
+                    this.ClearCacheMethod();
+                }
+                else
+                    SystemTray.Opacity = 0;
+            });
+        }
+
+        private void ClearCacheMethod()
+        {
+            IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication();
+            if (file.DirectoryExists("ImageCache"))
+            {
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.WorkerReportsProgress = true;
+                bw.DoWork += (DoWorkEventHandler)((s1, e1) =>
+                {
+                    string[] local_1 = file.GetFileNames("ImageCache" + "\\*");
+                    int local_2 = local_1.Length - 1;
+                    for (int local_3 = 0; local_3 < local_1.Length; ++local_3)
+                    {
+                        bw.ReportProgress(ProcessContract(local_3, local_2));
+                        file.DeleteFile("ImageCache" + "\\" + local_1[local_3]);
+                    }
+                });
+                bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
+                {
+                    //Common.ShowMsg(AppResource.ClearSuccess, new double[0]);
+                    MyStatic.Cancel();
+                    GC.Collect();
+                    file.Dispose();
+                });
+                bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
+                {
+                    MyStatic.WaitState("已清理" + (object)e1.ProgressPercentage + "%", 0.6);
+                });
+                bw.RunWorkerAsync();
+            }
+            else
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(3000.0);
+                timer.Tick += (EventHandler)((s1, e1) =>
+                {
+                    timer.Stop();
+                    MyStatic.Cancel();
+                    //Common.ShowMsg(AppResource.ClearSuccess, new double[0]);
+                });
+                timer.Start();
+                try
+                {
+                    //SettingHelper.RemoveKey("ApiStart");
+                    //SettingHelper.RemoveKey("Expires");
+                    //SettingHelper.RemoveKey("ApiInit");
+                }
+                catch
+                {
+                }
+            }
         }
 
         public void Handle(SampleMessage message)

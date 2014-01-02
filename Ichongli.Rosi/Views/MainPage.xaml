@@ -37,6 +37,7 @@
             <phone:PanoramaItem Header="用户">
                 <StackPanel>
                     <Button Content="注册" x:Name="Register" />
+                    <Button Content="清除缓存" x:Name="ClearCache" />
                 </StackPanel>
             </phone:PanoramaItem>
         </phone:Panorama>
