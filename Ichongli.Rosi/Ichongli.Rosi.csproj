@@ -36,6 +36,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -115,9 +116,12 @@
     <Compile Include="Services\ServiceUser.cs" />
     <Compile Include="Services\UiUx.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
+    <Compile Include="Utilities\AsyncExtensions.cs" />
+    <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\ImageNodify.cs" />
     <Compile Include="Utilities\JsonTryParse.cs" />
+    <Compile Include="Utilities\MD5.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\PostPageViewModel.cs" />
     <Compile Include="ViewModels\SampleMessage.cs" />

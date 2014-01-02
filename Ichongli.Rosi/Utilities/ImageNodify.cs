@@ -1,4 +1,4 @@
-﻿namespace Ichongli.Rosi
+﻿namespace Ichongli.Rosi.Utilities
 {
     using System;
     using System.Net;
@@ -19,7 +19,6 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using Windows.Storage;
-
 
     public class ImageNodify
     {
@@ -63,8 +62,8 @@
             img.Tag = url;
 
             await Task.Delay(100);
-            /*
-             if (!string.IsNullOrEmpty(url))
+
+            if (!string.IsNullOrEmpty(url))
             {
                 try
                 {
@@ -98,7 +97,8 @@
                                                     fileStream.Write(bytes, 0, bytes.Length);
                                                 }
                                             }
-                                            var source = await Common.Parse1(bytes);
+
+                                            var source = Common.GetWriteableBitmap(bytes);
                                             if (img.Tag.Equals(url))
                                             {
                                                 img.Source = source;
@@ -112,7 +112,7 @@
                                 {
                                     byte[] bytes = new byte[s.Length];
                                     s.Read(bytes, 0, bytes.Length);
-                                    var source = await Common.Parse1(bytes);
+                                    var source = Common.GetWriteableBitmap(bytes);
                                     if (MD5.GetMd5String(img.Tag.ToString()).Equals(fileName))
                                     {
                                         img.Source = source;
@@ -129,7 +129,7 @@
                                 {
                                     byte[] bytes = new byte[stream.Length];
                                     await stream.ReadAsync(bytes, 0, bytes.Length);
-                                    var source = await Common.Parse1(bytes);
+                                    var source = Common.GetWriteableBitmap(bytes);
                                     if (img.Tag.Equals(url))
                                     {
                                         img.Source = source;
@@ -138,7 +138,7 @@
                                         {
                                             using (var fileStream = new IsolatedStorageFileStream(filePath, FileMode.Create, isoFile))
                                             {
-                                                App.Current.sizes += bytes.Length / 1024;
+                                                // App.Current.sizes += bytes.Length / 1024;
                                                 fileStream.Write(bytes, 0, bytes.Length);
                                             }
                                         }
@@ -155,8 +155,8 @@
                     }
                 }
                 catch { }
-            
-            } * */
+
+            }
         }
 
         public static void StoryBordImg(Image img)
