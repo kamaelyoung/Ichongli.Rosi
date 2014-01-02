@@ -12,8 +12,10 @@
     {
         public override void Configure()
         {
-            //Property(x => x)
-            //    .InPhoneState();
+            Property(x => x.Categories)
+                .InPhoneState();
+            Property(x => x.Items)
+                .InAppSettings();
         }
     }
 }

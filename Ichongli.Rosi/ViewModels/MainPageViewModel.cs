@@ -119,24 +119,20 @@ namespace Ichongli.Rosi.ViewModels
                 foreach (var item in latest.posts)
                 {
                     string img = item.thumbnail;
-                    if (string.IsNullOrEmpty(img))
-                    {
-                        img = Regex.Match(item.content, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
-                    }
+                    //if (string.IsNullOrEmpty(img))
+                    //{
+                    //    img = Regex.Match(item.content, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
+                    //}
                     var p = new Models.Ui.HomeItem
                     {
                         Title = item.title,
-                        Resume = item.excerpt,
-                        Date = item.date,
                         UniqueId = item.id.ToString(),
                         Url = img,
-                        Author = item.author.name
                     };
-                    this.Items.Add(p);
-
+                    this.Items.Add(p);                   
                 }
-                if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
-                    BigImage = latest.posts[0].attachments[0].images.medium.url;
+                //if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
+                BigImage = latest.posts[0].thumbnail;//[0].images.medium.url;
 
                 this.isLoading = false;
             }
