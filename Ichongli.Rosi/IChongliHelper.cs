@@ -41,13 +41,24 @@ namespace Ichongli.Rosi
                 try
                 {
                     HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+                    request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip"; 
 
                     response = (HttpWebResponse)await Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, TaskCreationOptions.None);
+                    var gzip = response.Headers[HttpRequestHeader.ContentEncoding];
                     using (var stream = response.GetResponseStream())
                     {
-                        using (var reader = new StreamReader(stream))
+                        if (gzip != null)
                         {
-                            json = await reader.ReadToEndAsync();
+                            byte[] gzipBs = new byte[stream.Length];
+                            await stream.ReadAsync(gzipBs, 0, gzipBs.Length);
+                            json = GZipStream.UncompressString(gzipBs);
+                        }
+                        else
+                        {
+                            using (var reader = new StreamReader(stream))
+                            {
+                                json = await reader.ReadToEndAsync();
+                            }
                         }
                     }
                     if (response != null)
