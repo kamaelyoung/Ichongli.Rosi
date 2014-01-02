@@ -1,14 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ichongli.Rosi
+﻿namespace Ichongli.Rosi
 {
+    using Ichongli.SDK.Third.Gzip;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public static class IChongliHelper
     {
         //public const string baseUrl = "http://appcnds.darkforcesteam.com.cn/";
@@ -41,19 +42,19 @@ namespace Ichongli.Rosi
                 try
                 {
                     HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-                    //request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip"; 
+                    request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
 
                     response = (HttpWebResponse)await Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, TaskCreationOptions.None);
-                    //var gzip = response.Headers[HttpRequestHeader.ContentEncoding];
+                    var gzip = response.Headers[HttpRequestHeader.ContentEncoding];
                     using (var stream = response.GetResponseStream())
                     {
-                        //if (gzip != null)
-                        //{
-                        //    byte[] gzipBs = new byte[stream.Length];
-                        //    await stream.ReadAsync(gzipBs, 0, gzipBs.Length);
-                        //    json = GZipStream.UncompressString(gzipBs);
-                        //}
-                        //else
+                        if (gzip != null)
+                        {
+                            byte[] gzipBs = new byte[stream.Length];
+                            await stream.ReadAsync(gzipBs, 0, gzipBs.Length);
+                            json = GZipStream.UncompressString(gzipBs);
+                        }
+                        else
                         {
                             using (var reader = new StreamReader(stream))
                             {
