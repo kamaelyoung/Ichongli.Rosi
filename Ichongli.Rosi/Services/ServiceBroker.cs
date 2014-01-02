@@ -12,8 +12,8 @@ namespace Ichongli.Rosi.Services
     public class ServiceBroker : IServiceBroker
     {
         private const string CategoryIndex = "api/core/get_category_index/";
-        private const string PostFromCategory = "api/core/get_category_posts/?category_id={0}&page={1}";
-        private const string LatestPosts = "?json=get_recent_posts&page={0}";
+        private const string PostFromCategory = "api/core/get_category_posts/?include=id,title,thumbnail&category_id={0}&page={1}";
+        private const string LatestPosts = "?json=get_recent_posts?include=id,title,thumbnail&page{0}";
         private const string Post = "api/get_post/?post_id={0}";
 
 
