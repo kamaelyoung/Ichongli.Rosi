@@ -67,7 +67,7 @@
             {
                 try
                 {
-                    if (url.EndsWith(".webp"))
+                    //if (url.EndsWith(".webp"))
                     {
                         if (!isoFile.DirectoryExists(path))
                         {
@@ -98,7 +98,7 @@
                                                 }
                                             }
 
-                                            var source = Common.GetWriteableBitmap(bytes);
+                                            var source = bytes.ToBitmapImage();
                                             if (img.Tag.Equals(url))
                                             {
                                                 img.Source = source;
@@ -112,7 +112,7 @@
                                 {
                                     byte[] bytes = new byte[s.Length];
                                     s.Read(bytes, 0, bytes.Length);
-                                    var source = Common.GetWriteableBitmap(bytes);
+                                    var source = bytes.ToBitmapImage();
                                     if (MD5.GetMd5String(img.Tag.ToString()).Equals(fileName))
                                     {
                                         img.Source = source;
@@ -129,7 +129,7 @@
                                 {
                                     byte[] bytes = new byte[stream.Length];
                                     await stream.ReadAsync(bytes, 0, bytes.Length);
-                                    var source = Common.GetWriteableBitmap(bytes);
+                                    var source = bytes.ToBitmapImage();
                                     if (img.Tag.Equals(url))
                                     {
                                         img.Source = source;
@@ -148,11 +148,11 @@
                             catch { }
                         }
                     }
-                    else
-                    {
-                        img.Opacity = 1;
-                        img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
-                    }
+                    // else
+                    //{
+                    //  img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));                        
+                    // StoryBordImg(img);
+                    //}
                 }
                 catch { }
 
