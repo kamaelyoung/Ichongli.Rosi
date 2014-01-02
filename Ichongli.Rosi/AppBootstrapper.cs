@@ -1,13 +1,17 @@
 ﻿using Caliburn.Micro;
 using Ichongli.Rosi.Interfaces;
 using Ichongli.Rosi.Services;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Ninject;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace Ichongli.Rosi
 {
@@ -18,6 +22,7 @@ namespace Ichongli.Rosi
         protected override void Configure()
         {
             this.ConfigureContainer();
+            InitializePhoneApplication();
         }
 
         private void ConfigureContainer()

@@ -16,6 +16,10 @@
                 .InPhoneState();
             Property(x => x.Items)
                 .InAppSettings();
+            Property(x => x.IsLoading)
+                .InAppSettings();
+            Property(x => x.BigImage)
+                .InAppSettings();
         }
     }
 }

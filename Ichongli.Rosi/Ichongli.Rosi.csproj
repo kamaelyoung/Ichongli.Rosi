@@ -94,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppBootstrapper.InitializePhoneApplication.cs" />
     <Compile Include="IChongliHelper.cs" />
     <Compile Include="Interfaces\IServiceBroker.cs" />
     <Compile Include="Interfaces\IServiceAuth.cs" />
