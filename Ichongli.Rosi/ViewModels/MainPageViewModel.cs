@@ -26,6 +26,7 @@ namespace Ichongli.Rosi.ViewModels
         private readonly IEventAggregator eventAggregator;
         private readonly IServiceBroker serviceBroker;
         private readonly IServiceUser _serviceUser;
+        private readonly IProgressService _progressService;
 
         private ObservableCollection<Models.Ui.Item> _Categories = new ObservableCollection<Models.Ui.Item>();
         public ObservableCollection<Models.Ui.Item> Categories
@@ -65,6 +66,7 @@ namespace Ichongli.Rosi.ViewModels
                 NotifyOfPropertyChange(() => BigImage);
             }
         }
+
         private bool isLoading = false;
         public bool IsLoading
         {
@@ -80,18 +82,19 @@ namespace Ichongli.Rosi.ViewModels
         }
 
 
-        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser)
+        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService)
         {
             this.navigationService = navigationService;
             this.eventAggregator = eventAggregator;
             this.serviceBroker = serviceBroker;
             this._serviceUser = serviceUser;
+            this._progressService = progressService;
             this.eventAggregator.Subscribe(this);
         }
 
         protected override async void OnInitialize()
         {
-            this.isLoading = true;
+            this._progressService.Show();
             if (this.Categories.Count == 0)
             {
                 try
@@ -137,10 +140,9 @@ namespace Ichongli.Rosi.ViewModels
                     };
                     this.Items.Add(p);
                 }
-                //if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
-                BigImage = latest.posts[0].thumbnail;//[0].images.medium.url;
-
-                this.isLoading = false;
+                if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
+                    BigImage = latest.posts[0].thumbnail;//[0].images.medium.url;
+                this._progressService.Hide();
             }
         }
 
@@ -180,7 +182,7 @@ namespace Ichongli.Rosi.ViewModels
                 if (e1.Result == CustomMessageBoxResult.LeftButton)
                 {
                     //UmengAnalytics.onEvent("114", "手动清空缓存");
-                    MyStatic.WaitState("清除缓存", 0.6);
+                    this._progressService.Show("清除缓存");
                     this.ClearCacheMethod();
                 }
                 else
@@ -208,13 +210,13 @@ namespace Ichongli.Rosi.ViewModels
                 bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
                 {
                     //Common.ShowMsg(AppResource.ClearSuccess, new double[0]);
-                    MyStatic.Cancel();
+                    this._progressService.Hide();
                     GC.Collect();
                     file.Dispose();
                 });
                 bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
                 {
-                    MyStatic.WaitState("已清理" + (object)e1.ProgressPercentage + "%", 0.6);
+                    this._progressService.Show("已清理" + (object)e1.ProgressPercentage + "%");
                 });
                 bw.RunWorkerAsync();
             }
@@ -224,8 +226,8 @@ namespace Ichongli.Rosi.ViewModels
                 timer.Interval = TimeSpan.FromMilliseconds(3000.0);
                 timer.Tick += (EventHandler)((s1, e1) =>
                 {
-                    timer.Stop();
-                    MyStatic.Cancel();
+                    timer.Stop(); 
+                    this._progressService.Hide();
                     //Common.ShowMsg(AppResource.ClearSuccess, new double[0]);
                 });
                 timer.Start();

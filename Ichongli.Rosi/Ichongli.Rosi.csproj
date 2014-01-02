@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="AppBootstrapper.InitializePhoneApplication.cs" />
     <Compile Include="IChongliHelper.cs" />
+    <Compile Include="Interfaces\IProgressService.cs" />
     <Compile Include="Interfaces\IServiceBroker.cs" />
     <Compile Include="Interfaces\IServiceAuth.cs" />
     <Compile Include="Interfaces\IServiceUser.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Models\Ui\HomeItem.cs" />
     <Compile Include="Models\Ui\ListItem.cs" />
     <Compile Include="Models\Ui\PostProperties.cs" />
+    <Compile Include="Services\ProgressService.cs" />
     <Compile Include="Services\ServiceBroker.cs" />
     <Compile Include="Services\ServiceAuth.cs" />
     <Compile Include="Services\ServiceUser.cs" />

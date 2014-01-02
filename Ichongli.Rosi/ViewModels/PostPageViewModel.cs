@@ -20,6 +20,7 @@ namespace Ichongli.Rosi.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IUxService _uxService;
         private readonly IServiceBroker _serviceBroker;
+        private readonly IProgressService _progressService;
 
         private int _PostID;
         public int PostID
@@ -45,12 +46,13 @@ namespace Ichongli.Rosi.ViewModels
 
         }
 
-        public PostPageViewModel(IUxService uxService, INavigationService navigationService, IServiceBroker serviceBroker, IEventAggregator eventAggregator)
+        public PostPageViewModel(IUxService uxService, INavigationService navigationService, IServiceBroker serviceBroker, IEventAggregator eventAggregator, IProgressService progressService)
         {
             this._navigationService = navigationService;
             this._uxService = uxService;
             this._serviceBroker = serviceBroker;
             this._eventAggregator = eventAggregator;
+            this._progressService = progressService;
         }
 
         private string _BigImage;
@@ -215,7 +217,7 @@ namespace Ichongli.Rosi.ViewModels
 
         private async void LoadData()
         {
-
+            this._progressService.Show();
             var rootPost = await this._serviceBroker.GetPostById(this.PostID);
             var post = rootPost.Post;
             try
@@ -264,6 +266,8 @@ namespace Ichongli.Rosi.ViewModels
             catch (Exception ex)
             {
             }
+
+            this._progressService.Hide();
         }
 
         public void Download()

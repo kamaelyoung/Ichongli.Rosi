@@ -34,6 +34,7 @@ namespace Ichongli.Rosi
             this._kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             this._kernel.Bind<IUxService>().To<UiUx>().InSingletonScope();
             this._kernel.Bind<IPhoneService>().ToConstant(new PhoneApplicationServiceAdapter(PhoneApplicationService.Current, RootFrame)).InSingletonScope();
+            this._kernel.Bind<IProgressService>().ToConstant(new ProgressService(RootFrame)).InSingletonScope();
             this._kernel.Bind<ILog>().ToMethod(context => LogManager.GetLog(context.Request.Target == null ? typeof(ILog) : context.Request.Target.Type));
             this._kernel.Bind<IServiceBroker>().To<ServiceBroker>();
             this._kernel.Bind<IServiceUser>().To<ServiceUser>();
