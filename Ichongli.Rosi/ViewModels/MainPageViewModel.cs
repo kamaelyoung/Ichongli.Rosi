@@ -81,7 +81,6 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-
         public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService)
         {
             this.navigationService = navigationService;
@@ -113,9 +112,13 @@ namespace Ichongli.Rosi.ViewModels
                     }
                     else
                     {
+
                     }
                 }
-                catch (Exception ex) { }
+                catch (Exception ex)
+                {
+                    this._progressService.Hide();
+                }
             }
         }
 
@@ -128,22 +131,20 @@ namespace Ichongli.Rosi.ViewModels
                 foreach (var item in latest.posts)
                 {
                     string img = item.thumbnail;
-                    //if (string.IsNullOrEmpty(img))
-                    //{
-                    //    img = Regex.Match(item.content, "<img.+?src=[\"'](.+?)[\"'].+?>", RegexOptions.IgnoreCase).Groups[1].Value;
-                    //}
                     var p = new Models.Ui.HomeItem
                     {
                         Title = item.title,
                         UniqueId = item.id.ToString(),
                         Url = img,
+                        Author = item.author.name,
+                        Date = item.date
                     };
                     this.Items.Add(p);
                 }
                 if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
                     BigImage = latest.posts[0].thumbnail;//[0].images.medium.url;
-                this._progressService.Hide();
             }
+            this._progressService.Hide();
         }
 
         public void NaivgatoDetail(HomeItem obj)
@@ -152,7 +153,16 @@ namespace Ichongli.Rosi.ViewModels
             {
                 this.navigationService.UriFor<PostPageViewModel>()
                     .WithParam(viewMode => viewMode.PostID, int.Parse(obj.UniqueId))
-                    .WithParam(viewMode => viewMode.CategoryId, obj.CategoryId)
+                    .Navigate();
+            }
+        }
+
+        public void NaivgatoCategorie(Item obj)
+        {
+            if (obj != null)
+            {
+                this.navigationService.UriFor<CategoriesPageViewModel>()
+                    .WithParam<Item>(viewModel => viewModel.Item, obj)
                     .Navigate();
             }
         }
@@ -161,7 +171,6 @@ namespace Ichongli.Rosi.ViewModels
         {
             var r = await this._serviceUser.Register("xiaohai", "49403700@qq.com", "yongqi", "ÎµÀ¶º£");
         }
-
 
         private int ProcessContract(int n1, int n2)
         {
@@ -226,7 +235,7 @@ namespace Ichongli.Rosi.ViewModels
                 timer.Interval = TimeSpan.FromMilliseconds(3000.0);
                 timer.Tick += (EventHandler)((s1, e1) =>
                 {
-                    timer.Stop(); 
+                    timer.Stop();
                     this._progressService.Hide();
                     //Common.ShowMsg(AppResource.ClearSuccess, new double[0]);
                 });

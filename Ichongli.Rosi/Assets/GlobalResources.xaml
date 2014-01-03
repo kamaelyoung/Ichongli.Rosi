@@ -35,7 +35,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="NewsItems">
-        <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]"  HorizontalAlignment="Stretch" Margin="5" BorderBrush="{StaticResource ThirdBackgroundBrush}" BorderThickness="0,0,0,1">
+        <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]" HorizontalAlignment="Stretch" Margin="5" BorderBrush="{StaticResource ThirdBackgroundBrush}" BorderThickness="0,0,0,1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160" />

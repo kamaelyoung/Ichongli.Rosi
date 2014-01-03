@@ -2,7 +2,7 @@
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource MainBackgroundBrush}">
-        <phone:Pivot Title="DFT Marketing" HeaderTemplate="{StaticResource PivotHeader}" Background="Transparent">
+        <phone:Pivot Title="{Binding Item.Title}" HeaderTemplate="{StaticResource PivotHeader}" Background="Transparent">
             <phone:PivotItem Header="内容" Margin="0"></phone:PivotItem>
         </phone:Pivot>
     </Grid>
