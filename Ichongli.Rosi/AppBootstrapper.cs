@@ -1,18 +1,11 @@
 ﻿using Caliburn.Micro;
+using Caliburn.Micro.Coding4Fun;
 using Ichongli.Rosi.Interfaces;
 using Ichongli.Rosi.Services;
-using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Ninject;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
-
 namespace Ichongli.Rosi
 {
     public partial class AppBootstrapper : PhoneBootstrapper
@@ -29,7 +22,7 @@ namespace Ichongli.Rosi
         {
             this._kernel = new StandardKernel();
 
-            this._kernel.Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
+            this._kernel.Bind<IWindowManager>().To<Coding4FunWindowManager>().InSingletonScope();
             this._kernel.Bind<INavigationService>().ToConstant(new FrameAdapter(RootFrame)).InSingletonScope();
             this._kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             this._kernel.Bind<IUxService>().To<UiUx>().InSingletonScope();

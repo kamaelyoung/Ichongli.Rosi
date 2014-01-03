@@ -27,6 +27,7 @@ namespace Ichongli.Rosi.ViewModels
         private readonly IServiceBroker serviceBroker;
         private readonly IServiceUser _serviceUser;
         private readonly IProgressService _progressService;
+        private readonly IWindowManager _windowManager;
 
         private ObservableCollection<Models.Ui.Item> _Categories = new ObservableCollection<Models.Ui.Item>();
         public ObservableCollection<Models.Ui.Item> Categories
@@ -81,13 +82,14 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService)
+        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
         {
             this.navigationService = navigationService;
             this.eventAggregator = eventAggregator;
             this.serviceBroker = serviceBroker;
             this._serviceUser = serviceUser;
             this._progressService = progressService;
+            this._windowManager = windowManager;
             this.eventAggregator.Subscribe(this);
         }
 
@@ -136,8 +138,6 @@ namespace Ichongli.Rosi.ViewModels
                         Title = item.title,
                         UniqueId = item.id.ToString(),
                         Url = img,
-                        Author = item.author.name,
-                        Date = item.date
                     };
                     this.Items.Add(p);
                 }
@@ -186,17 +186,22 @@ namespace Ichongli.Rosi.ViewModels
 
         public void ClearCache()
         {
-            Common.MsgBoxShow("提示", "确定", "取消", "清除缓存").Dismissed += (EventHandler<DismissedEventArgs>)((s1, e1) =>
+            var dialogViewModel = new DialogViewModel
             {
-                if (e1.Result == CustomMessageBoxResult.LeftButton)
+                Title = "Dialog",
+                Text = "It's a modal dialog. It blocks user interface.\r\n\r\nTap 'ok' to increase the counter."
+            };
+            dialogViewModel.Deactivated += (sender, args) =>
+            {
+                if (dialogViewModel.Result == DialogResult.Ok)
                 {
-                    //UmengAnalytics.onEvent("114", "手动清空缓存");
                     this._progressService.Show("清除缓存");
                     this.ClearCacheMethod();
                 }
                 else
                     SystemTray.Opacity = 0;
-            });
+            };
+            _windowManager.ShowDialog(dialogViewModel);
         }
 
         private void ClearCacheMethod()
