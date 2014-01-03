@@ -263,7 +263,10 @@ namespace Ichongli.Rosi.ViewModels
                 Title = "TryClose() closes the dialog",
                 Text = "This dialog will be displayed only for 2 seconds."
             };
-            _windowManager.ShowDialog(dialogViewModel);
+            _windowManager.ShowPopup(dialogViewModel, null, new Dictionary<string, object>
+            {
+                { "IgnoreBackKey", true }
+            });
             await TaskEx.Delay(TimeSpan.FromSeconds(2));
             dialogViewModel.TryClose();
         }
