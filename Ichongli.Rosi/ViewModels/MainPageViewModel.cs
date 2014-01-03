@@ -1,25 +1,25 @@
+using Caliburn.Micro;
+using System.Linq;
+using Ichongli.Rosi.Interfaces;
+using Ichongli.Rosi.Services;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using Ichongli.Rosi.Models.Ui;
+using Ichongli.Rosi.Models;
+using System.Collections.Generic;
+using System;
+using System.IO.IsolatedStorage;
+using System.ComponentModel;
+using System.Windows.Threading;
+using Ichongli.Rosi.Utilities;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using TaskEx = System.Threading.Tasks.Task;
 
 namespace Ichongli.Rosi.ViewModels
 {
-    using Caliburn.Micro;
-    using System.Linq;
-    using Ichongli.Rosi.Interfaces;
-    using Ichongli.Rosi.Services;
-    using System.Collections.ObjectModel;
-    using System.Windows;
-    using System.Threading.Tasks;
-    using System.Text.RegularExpressions;
-    using Ichongli.Rosi.Models.Ui;
-    using Ichongli.Rosi.Models;
-    using System.Collections.Generic;
-    using System;
-    using System.IO.IsolatedStorage;
-    using System.ComponentModel;
-    using System.Windows.Threading;
-    using Ichongli.Rosi.Utilities;
-    using Microsoft.Phone.Controls;
-    using Microsoft.Phone.Shell;
-
     public class MainPageViewModel : Screen, IHandle<SampleMessage>
     {
         private readonly INavigationService navigationService;
@@ -223,21 +223,10 @@ namespace Ichongli.Rosi.ViewModels
                 });
                 bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
                 {
-                    var dialogViewModel = new DialogViewModel
-                    {
-                        Title = "Popup",
-                        Text = "It's a popup. You can tap on dummy buttons below.\r\n\r\nTap 'ok' to increase the counter."
-                    };
-                    dialogViewModel.Deactivated += (sender, args) =>
-                    {
-                        if (dialogViewModel.Result == DialogResult.Ok)
-                        {
-                            this._progressService.Hide();
-                            GC.Collect();
-                            file.Dispose();
-                        }
-                    };
-                    _windowManager.ShowPopup(dialogViewModel);
+                    this._progressService.Hide();
+                    GC.Collect();
+                    file.Dispose();
+                    this.ShowDialogFor2Seconds();
                 });
                 bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
                 {
@@ -266,6 +255,17 @@ namespace Ichongli.Rosi.ViewModels
                 {
                 }
             }
+        }
+        public async void ShowDialogFor2Seconds()
+        {
+            var dialogViewModel = new DialogViewModel
+            {
+                Title = "TryClose() closes the dialog",
+                Text = "This dialog will be displayed only for 2 seconds."
+            };
+            _windowManager.ShowDialog(dialogViewModel);
+            await TaskEx.Delay(TimeSpan.FromSeconds(2));
+            dialogViewModel.TryClose();
         }
 
         public void Handle(SampleMessage message)

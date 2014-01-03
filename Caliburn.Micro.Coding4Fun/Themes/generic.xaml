@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:coding4Fun="clr-namespace:Caliburn.Micro.Coding4Fun"
+                    mc:Ignorable="d">
+    <Style TargetType="coding4Fun:Coding4FunDialog">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="coding4Fun:Coding4FunDialog">
+                    <Grid Background="{TemplateBinding Overlay}">
+                        <coding4Fun:Coding4FunDialogHost x:Name="ViewContainer"
+                                                         HorizontalContentAlignment="Stretch"
+                                                         VerticalContentAlignment="Stretch" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+    

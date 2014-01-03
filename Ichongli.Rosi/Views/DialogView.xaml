@@ -12,7 +12,7 @@
     d:DataContext="{d:DesignInstance viewModels:DialogViewModel}">
 
     <Grid Background="{StaticResource PhoneChromeBrush}"
-          VerticalAlignment="Top">
+          VerticalAlignment="Center">
         <StackPanel Margin="12 56 12 12">
             <TextBlock Text="{Binding Title}"
                        TextWrapping="Wrap"
