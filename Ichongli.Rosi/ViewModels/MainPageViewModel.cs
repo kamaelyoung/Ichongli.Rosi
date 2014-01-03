@@ -223,10 +223,21 @@ namespace Ichongli.Rosi.ViewModels
                 });
                 bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
                 {
-                    //Common.ShowMsg(AppResource.ClearSuccess, new double[0]);
-                    this._progressService.Hide();
-                    GC.Collect();
-                    file.Dispose();
+                    var dialogViewModel = new DialogViewModel
+                    {
+                        Title = "Popup",
+                        Text = "It's a popup. You can tap on dummy buttons below.\r\n\r\nTap 'ok' to increase the counter."
+                    };
+                    dialogViewModel.Deactivated += (sender, args) =>
+                    {
+                        if (dialogViewModel.Result == DialogResult.Ok)
+                        {
+                            this._progressService.Hide();
+                            GC.Collect();
+                            file.Dispose();
+                        }
+                    };
+                    _windowManager.ShowPopup(dialogViewModel);
                 });
                 bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
                 {
