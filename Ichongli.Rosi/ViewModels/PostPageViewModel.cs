@@ -13,14 +13,10 @@ using System.Threading.Tasks;
 
 namespace Ichongli.Rosi.ViewModels
 {
-    public class PostPageViewModel : Screen, IHandle<SampleMessage>
+    public class PostPageViewModel : ThinkViewModelBase
     {
-
-        private readonly INavigationService _navigationService;
-        private readonly IEventAggregator _eventAggregator;
         private readonly IUxService _uxService;
         private readonly IServiceBroker _serviceBroker;
-        private readonly IProgressService _progressService;
 
         private int _PostID;
         public int PostID
@@ -46,13 +42,11 @@ namespace Ichongli.Rosi.ViewModels
 
         }
 
-        public PostPageViewModel(IUxService uxService, INavigationService navigationService, IServiceBroker serviceBroker, IEventAggregator eventAggregator, IProgressService progressService)
+        public PostPageViewModel(IUxService uxService, INavigationService navigationService, IServiceBroker serviceBroker, IEventAggregator eventAggregator, IProgressService progressService, IWindowManager windowManager)
+            : base(progressService, windowManager, navigationService)
         {
-            this._navigationService = navigationService;
             this._uxService = uxService;
             this._serviceBroker = serviceBroker;
-            this._eventAggregator = eventAggregator;
-            this._progressService = progressService;
         }
 
         private string _BigImage;
@@ -253,6 +247,7 @@ namespace Ichongli.Rosi.ViewModels
                         Debug.WriteLine(photo.images.medium.url);
                         this.Photos.Add(new Models.Ui.ItemWithUrl
                         {
+                            ItemId = photo.id.ToString(),
                             Title = photo.title,
                             ItemImage = new Models.Ui.ItemImage()
                             {
@@ -278,6 +273,17 @@ namespace Ichongli.Rosi.ViewModels
             }
             catch (Exception ex)
             {
+            }
+        }
+
+        public void NaivgatoViewer(Models.Ui.ItemWithUrl obj)
+        {
+            if (obj != null)
+            {
+                AppBase.Current.Photos = this.Photos;
+                base._navigationService.UriFor<ViewerPageViewModel>()
+                    .WithParam(vm => vm.ItemID, obj.ItemId)
+                    .Navigate();
             }
         }
 

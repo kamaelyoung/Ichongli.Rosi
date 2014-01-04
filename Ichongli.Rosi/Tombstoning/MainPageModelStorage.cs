@@ -13,7 +13,8 @@
         public override void Configure()
         {
             Property(x => x.Categories)
-                .InPhoneState();
+                .InPhoneState()
+                .RestoreAfterActivation();
             Property(x => x.Items)
                 .InAppSettings();
             Property(x => x.IsLoading)

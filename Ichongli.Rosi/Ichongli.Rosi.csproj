@@ -119,6 +119,7 @@
     <Compile Include="Services\ServiceUser.cs" />
     <Compile Include="Services\UiUx.cs" />
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
+    <Compile Include="Tombstoning\ViewerPageModelStorage.cs" />
     <Compile Include="Utilities\AsyncExtensions.cs" />
     <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
@@ -131,6 +132,8 @@
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\PostPageViewModel.cs" />
     <Compile Include="ViewModels\SampleMessage.cs" />
+    <Compile Include="ViewModels\ThinkViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewerPageViewModel.cs" />
     <Compile Include="Views\CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,9 @@
     </Compile>
     <Compile Include="Views\PostPage.xaml.cs">
       <DependentUpon>PostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewerPage.xaml.cs">
+      <DependentUpon>ViewerPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,8 +254,9 @@
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit">
-      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPtoolkit.Kinnara.4.2014.01.03\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
@@ -253,14 +264,15 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.2-unstable-9051\lib\sl4-windowsphone71\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="PhonePerformance">
-      <HintPath>..\packages\PhonePerformance.1.2.1\lib\sl4-windowsphone71\PhonePerformance.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp8\System.Windows.Interactivity.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ichongli.Controls\Ichongli.Controls.csproj">
+      <Project>{CC64ACCD-C047-47A1-9E11-44AE2AFC39F1}</Project>
+      <Name>Ichongli.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ichongli.SDK\Ichongli.SDK.csproj">
       <Project>{6BCE8DCF-7683-48F2-9095-BB4664881DBF}</Project>
       <Name>Ichongli.SDK</Name>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,8 @@ namespace Ichongli.Rosi.Models
             get { return categories; }
             set { categories = value; }
         }
-
+        
+        public ObservableCollection<Models.Ui.ItemWithUrl> Photos { get; set; }
 
         private Dictionary<string, Models.REST.CategoryPosts.RootObject> posts = new Dictionary<string, Models.REST.CategoryPosts.RootObject>();
         public Dictionary<string, Models.REST.CategoryPosts.RootObject> Posts

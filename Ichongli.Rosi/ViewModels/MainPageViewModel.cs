@@ -17,17 +17,14 @@ using Ichongli.Rosi.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaskEx = System.Threading.Tasks.Task;
+using Coding4Fun.Toolkit.Controls;
 
 namespace Ichongli.Rosi.ViewModels
 {
-    public class MainPageViewModel : Screen, IHandle<SampleMessage>
+    public class MainPageViewModel : ThinkViewModelBase
     {
-        private readonly INavigationService navigationService;
-        private readonly IEventAggregator eventAggregator;
         private readonly IServiceBroker serviceBroker;
         private readonly IServiceUser _serviceUser;
-        private readonly IProgressService _progressService;
-        private readonly IWindowManager _windowManager;
 
         private ObservableCollection<Models.Ui.Item> _Categories = new ObservableCollection<Models.Ui.Item>();
         public ObservableCollection<Models.Ui.Item> Categories
@@ -83,19 +80,25 @@ namespace Ichongli.Rosi.ViewModels
         }
 
         public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
+            : base(progressService, windowManager, navigationService)
         {
-            this.navigationService = navigationService;
-            this.eventAggregator = eventAggregator;
             this.serviceBroker = serviceBroker;
             this._serviceUser = serviceUser;
-            this._progressService = progressService;
-            this._windowManager = windowManager;
-            this.eventAggregator.Subscribe(this);
         }
 
-        protected override async void OnInitialize()
+        protected override void OnActivate()
         {
-            this._progressService.Show();
+            base.OnActivate();
+            if (!base._isInitialized)
+            {
+                this.OnLoadData();
+                this._isInitialized = true;
+            }
+        }
+
+        private async void OnLoadData()
+        {
+            base._progressService.Show();
             if (this.Categories.Count == 0)
             {
                 try
@@ -114,12 +117,18 @@ namespace Ichongli.Rosi.ViewModels
                     }
                     else
                     {
-
+                        throw new Exception(categories.status);
                     }
                 }
                 catch (Exception ex)
                 {
                     this._progressService.Hide();
+                    var dialogViewModel = new DialogViewModel
+                    {
+                        Title = "获取分类错误",
+                        Text = ex.Message
+                    };
+                    this._windowManager.ShowPopup(dialogViewModel);
                 }
             }
         }
@@ -151,7 +160,7 @@ namespace Ichongli.Rosi.ViewModels
         {
             if (obj is HomeItem)
             {
-                this.navigationService.UriFor<PostPageViewModel>()
+                base._navigationService.UriFor<PostPageViewModel>()
                     .WithParam(viewMode => viewMode.PostID, int.Parse(obj.UniqueId))
                     .Navigate();
             }
@@ -161,8 +170,9 @@ namespace Ichongli.Rosi.ViewModels
         {
             if (obj != null)
             {
-                this.navigationService.UriFor<CategoriesPageViewModel>()
-                    .WithParam<Item>(viewModel => viewModel.Item, obj)
+                base._navigationService.UriFor<CategoriesPageViewModel>()
+                    .WithParam<string>(viewModel => viewModel.ItemID, obj.ItemId)
+                    .WithParam<string>(viewModel => viewModel.DisplayName, obj.Title)
                     .Navigate();
             }
         }
@@ -188,8 +198,8 @@ namespace Ichongli.Rosi.ViewModels
         {
             var dialogViewModel = new DialogViewModel
             {
-                Title = "Dialog",
-                Text = "It's a modal dialog. It blocks user interface.\r\n\r\nTap 'ok' to increase the counter."
+                Title = "提示",
+                Text = "您确定要清除所有缓存吗？"
             };
             dialogViewModel.Deactivated += (sender, args) =>
             {
@@ -226,7 +236,7 @@ namespace Ichongli.Rosi.ViewModels
                     this._progressService.Hide();
                     GC.Collect();
                     file.Dispose();
-                    this.ShowDialogFor2Seconds();
+                    this.ShowDialogFor2Seconds("清除完毕");
                 });
                 bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
                 {
@@ -234,41 +244,56 @@ namespace Ichongli.Rosi.ViewModels
                 });
                 bw.RunWorkerAsync();
             }
-            else
-            {
-                DispatcherTimer timer = new DispatcherTimer();
-                timer.Interval = TimeSpan.FromMilliseconds(3000.0);
-                timer.Tick += (EventHandler)((s1, e1) =>
-                {
-                    timer.Stop();
-                    this._progressService.Hide();
-                    //Common.ShowMsg(AppResource.ClearSuccess, new double[0]);
-                });
-                timer.Start();
-                try
-                {
-                    //SettingHelper.RemoveKey("ApiStart");
-                    //SettingHelper.RemoveKey("Expires");
-                    //SettingHelper.RemoveKey("ApiInit");
-                }
-                catch
-                {
-                }
-            }
         }
-        public async void ShowDialogFor2Seconds()
+
+        public async void ShowDialogFor2Seconds(string text)
         {
-            var dialogViewModel = new DialogViewModel
+            var dialogviewModel = new DialogViewModel
             {
-                Title = "TryClose() closes the dialog",
-                Text = "This dialog will be displayed only for 2 seconds."
+                Title = "Ignore back",
+                Text = "This dialog cannot be closed by pressing back key.",
             };
-            _windowManager.ShowPopup(dialogViewModel, null, new Dictionary<string, object>
+            _windowManager.ShowDialog(dialogviewModel, null, new Dictionary<string, object>
             {
                 { "IgnoreBackKey", true }
             });
+
             await TaskEx.Delay(TimeSpan.FromSeconds(2));
-            dialogViewModel.TryClose();
+            dialogviewModel.TryClose();
+        }
+
+        public void OnBackKeyPress(CancelEventArgs arg)
+        {
+            if (this._isCanClose)
+                this.TryClose();
+            else
+            {
+                arg.Cancel = true;
+                this.ShowCloseToastPrompt();
+            }
+        }
+
+        private bool _isCanClose;
+
+        public void ShowCloseToastPrompt()
+        {
+            var toast = new ToastPrompt();
+            toast.FontSize = 30;
+            toast.Message = "亲  再来一下就出去了哦～";
+            toast.TextOrientation = System.Windows.Controls.Orientation.Horizontal;
+            toast.Completed += toast_Completed;
+            this._isCanClose = true;
+            toast.Show();
+        }
+
+        void toast_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            var toast = sender as ToastPrompt;
+            if (toast != null)
+            {
+                toast.Completed -= toast_Completed;
+                this._isCanClose = false;
+            }
         }
 
         public void Handle(SampleMessage message)

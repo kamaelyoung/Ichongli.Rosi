@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Caliburn.Micro.Coding4Fun</id>
+    <version>1.0.1.0</version>
+    <title>Caliburn.Micro.Coding4Fun</title>
+    <authors>Alexander Tsoi</authors>
+    <owners>Alexander Tsoi</owners>
+    <licenseUrl>https://github.com/altso/caliburn4fun/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/altso/caliburn4fun</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Coding4Fun PopUp based IWindowManager implementation for Caliburn Micro.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>caliburn micro coding4fun window manager</tags>
+    <dependencies>
+      <dependency id="Caliburn.Micro" version="1.5.2" />
+      <dependency id="Coding4Fun.Toolkit.Controls" version="2.0.7" />
+    </dependencies>
+  </metadata>
+</package>

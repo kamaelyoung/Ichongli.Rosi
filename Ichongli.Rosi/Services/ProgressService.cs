@@ -42,7 +42,7 @@
             progressIndicator.Text = text;
             progressIndicator.IsIndeterminate = true;
             progressIndicator.IsVisible = true;
-            SystemTray.Opacity = 0.6;
+            SystemTray.Opacity = 0.2;
         }
 
         public void Hide()

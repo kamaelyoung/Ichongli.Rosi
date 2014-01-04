@@ -12,8 +12,8 @@
     d:DataContext="{d:DesignInstance viewModels:DialogViewModel}">
 
     <Grid Background="{StaticResource PhoneChromeBrush}"
-          VerticalAlignment="Center">
-        <StackPanel Margin="12 56 12 12">
+          VerticalAlignment="Center" Margin="32,0" >
+        <StackPanel Margin="12 12 12 12">
             <TextBlock Text="{Binding Title}"
                        TextWrapping="Wrap"
                        FontSize="{StaticResource PhoneFontSizeLarge}"
@@ -29,10 +29,10 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="Ok"
-                        Content="ok" />
+                        Content="确定"/>
                 <Button x:Name="TryClose"
-                        Content="cancel"
-                        Grid.Column="1" />
+                        Content="取消"
+                        Grid.Column="1"/>
             </Grid>
         </StackPanel>
     </Grid>
