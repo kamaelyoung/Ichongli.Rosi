@@ -7,9 +7,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480"
-    xmlns:viewModels="clr-namespace:Ichongli.Rosi.ViewModels"
-    d:DataContext="{d:DesignInstance viewModels:DialogViewModel}">
+    d:DesignHeight="480" d:DesignWidth="480">
 
     <Grid Background="{StaticResource PhoneChromeBrush}"
           VerticalAlignment="Center" Margin="32,0" >

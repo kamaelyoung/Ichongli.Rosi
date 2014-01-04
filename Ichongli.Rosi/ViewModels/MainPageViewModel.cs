@@ -248,15 +248,12 @@ namespace Ichongli.Rosi.ViewModels
 
         public async void ShowDialogFor2Seconds(string text)
         {
-            var dialogviewModel = new DialogViewModel
+            var dialogviewModel = new MessageViewModel
             {
                 Title = "Ignore back",
                 Text = "This dialog cannot be closed by pressing back key.",
             };
-            _windowManager.ShowDialog(dialogviewModel, null, new Dictionary<string, object>
-            {
-                { "IgnoreBackKey", true }
-            });
+            _windowManager.ShowPopup(dialogviewModel);
 
             await TaskEx.Delay(TimeSpan.FromSeconds(2));
             dialogviewModel.TryClose();
