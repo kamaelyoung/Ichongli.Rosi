@@ -12,16 +12,17 @@ namespace Ichongli.Rosi.ViewModels
 {
     public class ViewerPageViewModel : ThinkViewModelBase
     {
-        public ViewerPageViewModel(IProgressService progressService, IWindowManager windowManager, INavigationService navigationService)
+        private readonly ILockscreenHelper _lockscreenHelper;
+        public ViewerPageViewModel(IProgressService progressService, IWindowManager windowManager, INavigationService navigationService, ILockscreenHelper lockscreenHelper)
             : base(progressService, windowManager, navigationService)
         {
+            this._lockscreenHelper = lockscreenHelper;
             if (AppBase.Current.Photos != null)
             {
                 foreach (var info in AppBase.Current.Photos)
                 {
                     this.Photos.Add(info);
                 }
-
             }
         }
 
@@ -55,17 +56,22 @@ namespace Ichongli.Rosi.ViewModels
                 }
             }
         }
-        
+
         private bool isLoading = false;
-        public bool IsLoading
+
+        private bool _progressBarIsVisible = true;
+        public bool ProgressBarIsVisible
         {
-            get { return isLoading; }
+            get
+            {
+                return _progressBarIsVisible;
+            }
             set
             {
-                if (value != isLoading)
+                if (this._progressBarIsVisible != value)
                 {
-                    isLoading = value;
-                    NotifyOfPropertyChange("IsLoading");
+                    this._progressBarIsVisible = value;
+                    this.NotifyOfPropertyChange(() => ProgressBarIsVisible);
                 }
             }
         }
@@ -89,17 +95,22 @@ namespace Ichongli.Rosi.ViewModels
 
         public void OnSelectionChanged()
         {
-            this.IsLoading = true;
+            this.ProgressBarIsVisible = true;
         }
 
         public void OnImageOpened()
         {
-            this.IsLoading = false;
+            this.ProgressBarIsVisible = false;
         }
 
         public void OnImageFailed()
         {
-            this.IsLoading = false;
+            this.ProgressBarIsVisible = false;
+        }
+
+        public async void Lockscreen()
+        {
+            await this._lockscreenHelper.SetLockscreen(this.SelectItem.ItemImage.Medium);
         }
     }
 }

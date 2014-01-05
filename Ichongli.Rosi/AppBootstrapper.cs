@@ -1,11 +1,14 @@
 ﻿using Caliburn.Micro;
+using Caliburn.Micro.BindableAppBar;
 using Caliburn.Micro.Coding4Fun;
 using Ichongli.Rosi.Interfaces;
 using Ichongli.Rosi.Services;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Ninject;
 using System;
 using System.Collections.Generic;
+using System.Windows.Controls;
 namespace Ichongli.Rosi
 {
     public partial class AppBootstrapper : PhoneBootstrapper
@@ -28,11 +31,59 @@ namespace Ichongli.Rosi
             this._kernel.Bind<IUxService>().To<UiUx>().InSingletonScope();
             this._kernel.Bind<IPhoneService>().ToConstant(new PhoneApplicationServiceAdapter(PhoneApplicationService.Current, RootFrame)).InSingletonScope();
             this._kernel.Bind<IProgressService>().ToConstant(new ProgressService(RootFrame)).InSingletonScope();
+            this._kernel.Bind<ILockscreenHelper>().To<LockscreenHelper>().InSingletonScope();
+            this._kernel.Bind<IDownloadHelper>().To<DownloadHelper>().InSingletonScope();
+
+
             this._kernel.Bind<ILog>().ToMethod(context => LogManager.GetLog(context.Request.Target == null ? typeof(ILog) : context.Request.Target.Type));
             this._kernel.Bind<IServiceBroker>().To<ServiceBroker>();
             this._kernel.Bind<IServiceUser>().To<ServiceUser>();
             this._kernel.Bind<IServiceAuth>().To<ServiceAuth>();
 
+            AddCustomConventions();
+        }
+
+        private void AddCustomConventions()
+        {
+            // App Bar Conventions
+            ConventionManager.AddElementConvention<BindableAppBarButton>(
+                Control.IsEnabledProperty, "DataContext", "Click");
+            ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
+                Control.IsEnabledProperty, "DataContext", "Click");
+
+            ConventionManager.AddElementConvention<Pivot>(Pivot.ItemsSourceProperty, "SelectedItem", "SelectionChanged").ApplyBinding =
+                    (viewModelType, path, property, element, convention) =>
+                    {
+                        if (ConventionManager
+                                .GetElementConvention(typeof(ItemsControl))
+                                .ApplyBinding(viewModelType, path, property, element, convention))
+                        {
+                            ConventionManager
+                                    .ConfigureSelectedItem(element, Pivot.SelectedItemProperty, viewModelType, path);
+                            ConventionManager
+                                    .ApplyHeaderTemplate(element, Pivot.HeaderTemplateProperty, null, viewModelType);
+                            return true;
+                        }
+
+                        return false;
+                    };
+
+            ConventionManager.AddElementConvention<Panorama>(Panorama.ItemsSourceProperty, "SelectedItem", "SelectionChanged").ApplyBinding =
+                    (viewModelType, path, property, element, convention) =>
+                    {
+                        if (ConventionManager
+                                .GetElementConvention(typeof(ItemsControl))
+                                .ApplyBinding(viewModelType, path, property, element, convention))
+                        {
+                            ConventionManager
+                                    .ConfigureSelectedItem(element, Panorama.SelectedItemProperty, viewModelType, path);
+                            ConventionManager
+                                    .ApplyHeaderTemplate(element, Panorama.HeaderTemplateProperty, null, viewModelType);
+                            return true;
+                        }
+
+                        return false;
+                    };
         }
 
         protected override object GetInstance(Type service, string key)
@@ -49,5 +100,6 @@ namespace Ichongli.Rosi
         {
             this._kernel.Inject(instance);
         }
+
     }
 }
