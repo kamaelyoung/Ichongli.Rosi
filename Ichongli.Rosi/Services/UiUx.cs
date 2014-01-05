@@ -14,28 +14,15 @@ namespace Ichongli.Rosi.Services
 {
     public class UiUx : Interfaces.IUxService
     {
-        public Task ShowAlert(string m)
+        public void ShowToast(string m)
         {
-            return Task.Factory.StartNew(() =>
-            {
-                MessageBox.Show(m);
-            });
-
-
-        }
-
-        public Task ShowToast(string m)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                ToastPrompt toast = new ToastPrompt();
-                toast.FontSize = 20;
-                toast.Title = "";
-                toast.Message = m;
-                // toast.ImageSource = new BitmapImage(new Uri("/ApplicationIcon.png", UriKind.RelativeOrAbsolute));
-                toast.TextOrientation = System.Windows.Controls.Orientation.Horizontal;
-                toast.Show();
-            });
+            ToastPrompt toast = new ToastPrompt();
+            toast.FontSize = 20;
+            toast.Title = "";
+            toast.Message = m;
+            // toast.ImageSource = new BitmapImage(new Uri("/ApplicationIcon.png", UriKind.RelativeOrAbsolute));
+            toast.TextOrientation = System.Windows.Controls.Orientation.Horizontal;
+            toast.Show();
         }
 
         public void Share(string url, string title)

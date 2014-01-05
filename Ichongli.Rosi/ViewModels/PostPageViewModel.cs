@@ -244,7 +244,9 @@ namespace Ichongli.Rosi.ViewModels
                     this.BigImage = item.images.large.url;
                     foreach (var photo in post.attachments)
                     {
-                        Debug.WriteLine(photo.images.medium.url);
+                        if (photo.images == null)
+                            continue;
+
                         this.Photos.Add(new Models.Ui.ItemWithUrl
                         {
                             ItemId = photo.id.ToString(),
@@ -256,6 +258,17 @@ namespace Ichongli.Rosi.ViewModels
                             }
                         });
                     }
+                }
+                this.Tags.Clear();
+                if (post.tags != null && post.tags.Count > 0)
+                {
+                    foreach (var tag in post.tags)
+                        this.Tags.Add(new Models.Ui.PostPropertie()
+                        {
+                            Id = tag.id,
+                            Title = tag.title,
+                            Count = tag.post_count,
+                        });
                 }
             }
             catch (Exception ex)

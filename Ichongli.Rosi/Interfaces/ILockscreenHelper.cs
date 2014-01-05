@@ -9,5 +9,6 @@ namespace Ichongli.Rosi.Interfaces
     public interface ILockscreenHelper
     {
         Task SetLockscreen(string url);
+        Task SaveImage(Ichongli.Rosi.Models.Ui.ItemWithUrl url);
     }
 }

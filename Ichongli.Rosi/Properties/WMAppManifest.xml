@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="zh-CN" />
-  <App xmlns="" ProductID="{38917303-39d2-4a33-a299-a2cb513fbbc4}" Title="Ichongli.Rosi" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Ichongli.Rosi author" Description="Sample description" Publisher="Ichongli.Rosi" PublisherID="{7c2e8ce0-3c50-4811-81a0-fa93e67b3846}">
+  <App xmlns="" ProductID="{38917303-39d2-4a33-a299-a2cb513fbbc4}" Title="DFT应用市场" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Ichongli.Rosi author" Description="DFT应用市场" Publisher="Ichongli.Rosi" PublisherID="{7c2e8ce0-3c50-4811-81a0-fa93e67b3846}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -9,6 +9,10 @@
       <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_PHONEDIALER" />
+      <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="/Views/MainPage.xaml" ActivationPolicy="Resume" />
@@ -19,7 +23,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>Ichongli.Rosi</Title>
+          <Title>DFT应用市场</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
@@ -33,6 +37,9 @@
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
+    <Extensions>
+      <Extension ExtensionName="LockScreen_Background" ConsumerID="{111DFF24-AA15-4A96-8006-2BFF8122084F}" TaskID="_default" />
+    </Extensions>
     <ScreenResolutions>
       <ScreenResolution Name="ID_RESOLUTION_WVGA" />
       <ScreenResolution Name="ID_RESOLUTION_WXGA" />

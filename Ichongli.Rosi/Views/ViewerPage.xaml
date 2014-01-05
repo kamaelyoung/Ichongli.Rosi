@@ -8,13 +8,14 @@
             <toolkit:FlipView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Image micro:Message.Attach="[ImageOpened]=[OnImageOpened];[ImageFailed]=[OnImageFailed]" u:ImageNodify.Source="{Binding ItemImage.Medium}" />
+                        <Image micro:Message.Attach="[ImageOpened]=[OnImageOpened]" u:ImageNodify.Source="{Binding ItemImage.Medium}" />
                     </Grid>
                 </DataTemplate>
             </toolkit:FlipView.ItemTemplate>
         </toolkit:FlipView>
-        <bab:BindableAppBar x:Name="AppBar" Grid.Row="1" BarOpacity="0.3">
-            <bab:BindableAppBarButton x:Name="Lockscreen" Text="Lockscreen" />
+        <bab:BindableAppBar x:Name="AppBar" Grid.Row="1" BarOpacity="0.1">
+            <bab:BindableAppBarButton x:Name="Lockscreen" Text="锁屏" />
+            <bab:BindableAppBarButton x:Name="SaveImage" Text="保存" />
         </bab:BindableAppBar>
     </Grid>
 </phone:PhoneApplicationPage>

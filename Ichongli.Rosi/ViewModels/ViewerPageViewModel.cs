@@ -110,7 +110,14 @@ namespace Ichongli.Rosi.ViewModels
 
         public async void Lockscreen()
         {
-            await this._lockscreenHelper.SetLockscreen(this.SelectItem.ItemImage.Medium);
+            if (this.SelectItem.ItemImage != null && !string.IsNullOrEmpty(this.SelectItem.ItemImage.Medium))
+                await this._lockscreenHelper.SetLockscreen(this.SelectItem.ItemImage.Medium);
+        }
+
+        public async void SaveImage()
+        {
+            if (this.SelectItem.ItemImage != null && !string.IsNullOrEmpty(this.SelectItem.ItemImage.Medium))
+                await this._lockscreenHelper.SaveImage(this.SelectItem);
         }
     }
 }
