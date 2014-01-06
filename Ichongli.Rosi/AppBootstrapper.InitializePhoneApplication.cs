@@ -208,6 +208,17 @@ namespace Ichongli.Rosi
             RemoveCurrentDeactivationSettings();
         }
 
+        protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        {
+            InitializePhoneApplication();
+            base.OnStartup(sender, e);
+        }
+        
+        protected override void OnUnhandledException(object sender, System.Windows.ApplicationUnhandledExceptionEventArgs e)
+        {            
+            base.OnUnhandledException(sender, e);
+        }
+
         // Helper method for adding or updating a key/value pair in isolated storage
         public bool AddOrUpdateValue(string Key, Object value)
         {

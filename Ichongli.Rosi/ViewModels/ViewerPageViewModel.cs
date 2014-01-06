@@ -12,11 +12,14 @@ namespace Ichongli.Rosi.ViewModels
 {
     public class ViewerPageViewModel : ThinkViewModelBase
     {
-        private readonly ILockscreenHelper _lockscreenHelper;
-        public ViewerPageViewModel(IProgressService progressService, IWindowManager windowManager, INavigationService navigationService, ILockscreenHelper lockscreenHelper)
+        private readonly IUxService _uiService;
+        public ViewerPageViewModel(IProgressService progressService,
+            IWindowManager windowManager,
+            INavigationService navigationService,
+            IUxService uiService)
             : base(progressService, windowManager, navigationService)
         {
-            this._lockscreenHelper = lockscreenHelper;
+            this._uiService = uiService;
             if (AppBase.Current.Photos != null)
             {
                 foreach (var info in AppBase.Current.Photos)
@@ -111,13 +114,13 @@ namespace Ichongli.Rosi.ViewModels
         public async void Lockscreen()
         {
             if (this.SelectItem.ItemImage != null && !string.IsNullOrEmpty(this.SelectItem.ItemImage.Large))
-                await this._lockscreenHelper.SetLockscreen(this.SelectItem.ItemImage.Large);
+                await this._uiService.SetLockscreen(this.SelectItem.ItemImage.Large);
         }
 
         public async void SaveImage()
         {
             if (this.SelectItem.ItemImage != null && !string.IsNullOrEmpty(this.SelectItem.ItemImage.Medium))
-                await this._lockscreenHelper.SaveImage(this.SelectItem);
+                await this._uiService.SaveImage(this.SelectItem);
         }
     }
 }

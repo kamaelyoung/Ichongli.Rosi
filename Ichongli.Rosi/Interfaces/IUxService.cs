@@ -8,6 +8,9 @@ namespace Ichongli.Rosi.Interfaces
 {
     public interface IUxService
     {
+        Task SetLockscreen(string url);
+        Task SaveImage(Ichongli.Rosi.Models.Ui.ItemWithUrl url);
+
         void ShowAlert(string title, string m);
         Task ShowAlertFor2Seconds(string title, string m);
         void ShowToast(string m);
