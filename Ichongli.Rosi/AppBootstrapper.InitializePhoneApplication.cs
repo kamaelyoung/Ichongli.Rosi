@@ -217,29 +217,21 @@ namespace Ichongli.Rosi
 
         protected override void OnUnhandledException(object sender, System.Windows.ApplicationUnhandledExceptionEventArgs e)
         {
-            //BackgroundWorker bw = new BackgroundWorker();
-            //bw.WorkerReportsProgress = true;
-            //bw.DoWork += (DoWorkEventHandler)((s1, e1) =>
-            //{
 
-            //    //写入log信息到IsoFile中
-            //    var sbLogInfo = new StringBuilder();
+            //写入log信息到IsoFile中
+            var sbLogInfo = new StringBuilder();
 
-            //    sbLogInfo.AppendLine("ExceptionType: " + e.ExceptionObject.Message);
-            //    sbLogInfo.AppendLine("ExceptionInfo: " + e.ExceptionObject);
+            sbLogInfo.AppendLine("ExceptionType: " + e.ExceptionObject.Message);
+            sbLogInfo.AppendLine("ExceptionInfo: " + e.ExceptionObject);
 
-            //    string logInfo = sbLogInfo.ToString();
-            //    IChongliHelper.SubmitRespond(logInfo);
-            //});
-            //bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
-            //{
-            //    GC.Collect();
-            //});
-            //bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
-            //{
-            //});
-            //bw.RunWorkerAsync();
-            //EventLogger.Instance.WriteLog(logInfo);
+            string logInfo = sbLogInfo.ToString();
+            IChongliHelper.SubmitRespond(DateTime.Now + " :" + logInfo);
+
+            if (Debugger.IsAttached)
+            {
+                // 出现未处理的异常；强行进入调试器
+                Debugger.Break();
+            }
         }
 
         // Helper method for adding or updating a key/value pair in isolated storage

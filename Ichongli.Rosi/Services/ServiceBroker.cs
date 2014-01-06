@@ -26,11 +26,15 @@ namespace Ichongli.Rosi.Services
 
         public async Task<Models.REST.CategoryPosts.RootObject> GetPostsFrom(string id, int page)
         {
-            StringBuilder Url = new StringBuilder();
-            Url.Append(IChongliHelper.baseUrl);
-            Url.AppendFormat(PostFromCategory, id, page);
-            Debug.WriteLine(Url.ToString());
-            return await IChongliHelper.DoHttpGet<Models.REST.CategoryPosts.RootObject>(Url);
+            try
+            {
+                StringBuilder Url = new StringBuilder();
+                Url.Append(IChongliHelper.baseUrl);
+                Url.AppendFormat(PostFromCategory, id, page);
+                Debug.WriteLine(Url.ToString());
+                return await IChongliHelper.DoHttpGet<Models.REST.CategoryPosts.RootObject>(Url);
+            }
+            catch { return new Models.REST.CategoryPosts.RootObject() { status = "error" }; }
         }
 
         public async Task<Models.REST.CategoryPosts.RootObject> GetLatestPosts(int page)
