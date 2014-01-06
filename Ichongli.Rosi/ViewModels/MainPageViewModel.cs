@@ -25,6 +25,7 @@ namespace Ichongli.Rosi.ViewModels
     {
         private readonly IServiceBroker serviceBroker;
         private readonly IServiceUser _serviceUser;
+        private readonly IUxService _uxService;
 
         private ObservableCollection<Models.Ui.Item> _Categories = new ObservableCollection<Models.Ui.Item>();
         public ObservableCollection<Models.Ui.Item> Categories
@@ -79,11 +80,12 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        public MainPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
+        public MainPageViewModel(IUxService uxService, INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
             : base(progressService, windowManager, navigationService)
         {
             this.serviceBroker = serviceBroker;
             this._serviceUser = serviceUser;
+            this._uxService = uxService;
         }
 
         protected override void OnActivate()
@@ -248,15 +250,7 @@ namespace Ichongli.Rosi.ViewModels
 
         public async void ShowDialogFor2Seconds(string text)
         {
-            var dialogviewModel = new MessageViewModel
-            {
-                Title = "Ignore back",
-                Text = "This dialog cannot be closed by pressing back key.",
-            };
-            _windowManager.ShowPopup(dialogviewModel);
-
-            await TaskEx.Delay(TimeSpan.FromSeconds(2));
-            dialogviewModel.TryClose();
+            await this._uxService.ShowAlertFor2Seconds(string.Empty, text);
         }
 
         public void OnBackKeyPress(CancelEventArgs arg)

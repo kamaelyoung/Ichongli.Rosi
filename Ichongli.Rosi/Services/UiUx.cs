@@ -1,4 +1,6 @@
-﻿using Coding4Fun.Toolkit.Controls;
+﻿using Caliburn.Micro;
+using Coding4Fun.Toolkit.Controls;
+using Ichongli.Rosi.ViewModels;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System;
@@ -9,11 +11,41 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using TaskEx = System.Threading.Tasks.Task;
 
 namespace Ichongli.Rosi.Services
 {
     public class UiUx : Interfaces.IUxService
     {
+        private readonly IWindowManager _windowManager;
+        public UiUx(IWindowManager windowManager)
+        {
+            this._windowManager = windowManager;
+        }
+
+        public async Task ShowAlertFor2Seconds(string title, string m)
+        {
+            var dialogviewModel = new MessageViewModel
+            {
+                Title = title,
+                Text = m,
+            };
+            _windowManager.ShowPopup(dialogviewModel);
+
+            await TaskEx.Delay(TimeSpan.FromSeconds(2));
+            dialogviewModel.TryClose();
+        }
+
+        public void ShowAlert(string title, string m)
+        {
+            var dialogviewModel = new MessageViewModel
+            {
+                Title = title,
+                Text = m,
+            };
+            _windowManager.ShowPopup(dialogviewModel);
+        }
+
         public void ShowToast(string m)
         {
             ToastPrompt toast = new ToastPrompt();

@@ -47,7 +47,7 @@ namespace Ichongli.Rosi.Services
                 this._uxService.ShowToast("保存图片...");
                 try
                 {
-                    var bitmapImage = await _downloadHelper.GetImage(item.ItemImage.Medium);
+                    var bitmapImage = await _downloadHelper.GetImage(item.ItemImage.Large);
                     WriteableBitmap wb = new WriteableBitmap(bitmapImage);
                     using (MemoryStream resource_0 = new MemoryStream())
                     {

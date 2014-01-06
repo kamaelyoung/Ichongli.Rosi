@@ -8,6 +8,8 @@ namespace Ichongli.Rosi.Interfaces
 {
     public interface IUxService
     {
+        void ShowAlert(string title, string m);
+        Task ShowAlertFor2Seconds(string title, string m);
         void ShowToast(string m);
 
         string PrepHTML(string content, string BackgroundColor, string FontColor);

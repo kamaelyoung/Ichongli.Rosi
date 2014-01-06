@@ -57,6 +57,21 @@ namespace Ichongli.Rosi.Models.Ui
                 }
             }
         }
+
+        private string _large;
+        public string Large
+        {
+            get
+            { return this._large; }
+            set
+            {
+                if (this._large != value)
+                {
+                    this._large = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
     }
 
     public class Item : ModelBase

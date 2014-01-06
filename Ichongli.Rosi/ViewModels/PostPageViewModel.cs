@@ -254,7 +254,8 @@ namespace Ichongli.Rosi.ViewModels
                             ItemImage = new Models.Ui.ItemImage()
                             {
                                 Thumbnail = photo.images.thumbnail.url,
-                                Medium = photo.images.medium.url
+                                Medium = photo.images.medium.url,
+                                Large = photo.images.large.url,
                             }
                         });
                     }
