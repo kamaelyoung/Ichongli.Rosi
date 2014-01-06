@@ -135,10 +135,6 @@ namespace Ichongli.Rosi.ViewModels
                         });
                     }
                 }
-                else
-                {
-
-                }
 
                 this.IsLoading = false;
                 base._progressService.Hide();

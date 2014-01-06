@@ -45,8 +45,8 @@
 
                 <!--Pivot item two-->
                 <phone:PivotItem xmlns:ichongli="clr-namespace:Ichongli.Controls;assembly=Ichongli.Controls" Header="图片" Margin="0">
-                    <ichongli:ThinkLonglistselector Margin="10 0 0 0" ItemsSource="{Binding Photos}" LayoutMode="Grid" x:Name="PhotoGrid" IsGroupingEnabled="False" GridCellSize="148,248">
-                        <ichongli:ThinkLonglistselector.ItemTemplate>
+                    <toolkit:LongListMultiSelector Margin="10 0 0 0" ItemsSource="{Binding Photos}" LayoutMode="Grid" x:Name="PhotoGrid" IsGroupingEnabled="False" GridCellSize="148,248">
+                        <toolkit:LongListMultiSelector.ItemTemplate>
                             <DataTemplate>
                                 <Grid xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" micro:Message.Attach="[Tap]=[NaivgatoViewer($datacontext)]">
                                     <Border Background="#f5f5f5" BorderBrush="#ffffff" BorderThickness="2" Margin="0,0,10,10">
@@ -54,8 +54,8 @@
                                     </Border>
                                 </Grid>
                             </DataTemplate>
-                        </ichongli:ThinkLonglistselector.ItemTemplate>
-                    </ichongli:ThinkLonglistselector>
+                        </toolkit:LongListMultiSelector.ItemTemplate>
+                    </toolkit:LongListMultiSelector>
                 </phone:PivotItem>
             </phone:Pivot>
             <!--<bab:BindableAppBar x:Name="AppBar" Grid.Row="1" BarOpacity="0.3">

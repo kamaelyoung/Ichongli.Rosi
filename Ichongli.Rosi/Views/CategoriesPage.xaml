@@ -6,8 +6,8 @@
             <phone:PivotItem Margin="0" Header="{Binding DisplayTitle}">
                 <ichongli:ThinkLonglistselector Margin="0,0,-12,0" ItemsSource="{Binding Items}" 
                                                 ItemTemplate="{StaticResource NewsItems}"
-                                                micro:Message.Attach="[DataRequest]=[Feedbacks]" 
-                                                IsLoading="{Binding IsLoading}">
+                                                IsLoading="{Binding IsLoading}"
+                                                micro:Message.Attach="[DataRequest]=[Feedbacks]">
                 </ichongli:ThinkLonglistselector>
             </phone:PivotItem>
         </phone:Pivot>

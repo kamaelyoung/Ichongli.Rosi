@@ -50,40 +50,6 @@ namespace Ichongli.Rosi
                 Control.IsEnabledProperty, "DataContext", "Click");
             ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
                 Control.IsEnabledProperty, "DataContext", "Click");
-
-            ConventionManager.AddElementConvention<Pivot>(Pivot.ItemsSourceProperty, "SelectedItem", "SelectionChanged").ApplyBinding =
-                    (viewModelType, path, property, element, convention) =>
-                    {
-                        if (ConventionManager
-                                .GetElementConvention(typeof(ItemsControl))
-                                .ApplyBinding(viewModelType, path, property, element, convention))
-                        {
-                            ConventionManager
-                                    .ConfigureSelectedItem(element, Pivot.SelectedItemProperty, viewModelType, path);
-                            ConventionManager
-                                    .ApplyHeaderTemplate(element, Pivot.HeaderTemplateProperty, null, viewModelType);
-                            return true;
-                        }
-
-                        return false;
-                    };
-
-            ConventionManager.AddElementConvention<Panorama>(Panorama.ItemsSourceProperty, "SelectedItem", "SelectionChanged").ApplyBinding =
-                    (viewModelType, path, property, element, convention) =>
-                    {
-                        if (ConventionManager
-                                .GetElementConvention(typeof(ItemsControl))
-                                .ApplyBinding(viewModelType, path, property, element, convention))
-                        {
-                            ConventionManager
-                                    .ConfigureSelectedItem(element, Panorama.SelectedItemProperty, viewModelType, path);
-                            ConventionManager
-                                    .ApplyHeaderTemplate(element, Panorama.HeaderTemplateProperty, null, viewModelType);
-                            return true;
-                        }
-
-                        return false;
-                    };
         }
 
         protected override object GetInstance(Type service, string key)
