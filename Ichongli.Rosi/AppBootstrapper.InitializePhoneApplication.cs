@@ -6,6 +6,7 @@ using Microsoft.Phone.Shell;
 using Ninject;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -213,10 +214,32 @@ namespace Ichongli.Rosi
             InitializePhoneApplication();
             base.OnStartup(sender, e);
         }
-        
+
         protected override void OnUnhandledException(object sender, System.Windows.ApplicationUnhandledExceptionEventArgs e)
-        {            
-            base.OnUnhandledException(sender, e);
+        {
+            //BackgroundWorker bw = new BackgroundWorker();
+            //bw.WorkerReportsProgress = true;
+            //bw.DoWork += (DoWorkEventHandler)((s1, e1) =>
+            //{
+
+            //    //写入log信息到IsoFile中
+            //    var sbLogInfo = new StringBuilder();
+
+            //    sbLogInfo.AppendLine("ExceptionType: " + e.ExceptionObject.Message);
+            //    sbLogInfo.AppendLine("ExceptionInfo: " + e.ExceptionObject);
+
+            //    string logInfo = sbLogInfo.ToString();
+            //    IChongliHelper.SubmitRespond(logInfo);
+            //});
+            //bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
+            //{
+            //    GC.Collect();
+            //});
+            //bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
+            //{
+            //});
+            //bw.RunWorkerAsync();
+            //EventLogger.Instance.WriteLog(logInfo);
         }
 
         // Helper method for adding or updating a key/value pair in isolated storage

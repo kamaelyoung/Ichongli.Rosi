@@ -22,7 +22,7 @@ namespace Ichongli.Rosi.Services
     public class UiUx : Interfaces.IUxService
     {
         private readonly IDownloadHelper _downloadHelper;
-        
+
         private readonly IWindowManager _windowManager;
         public UiUx(IWindowManager windowManager, IDownloadHelper downloadHelper)
         {

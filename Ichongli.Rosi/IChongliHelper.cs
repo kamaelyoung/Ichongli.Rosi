@@ -72,5 +72,12 @@
                 return json;
             });
         }
+
+        public static void SubmitRespond(string content)
+        {
+            HttpPost.GetBackJson("http://www.moodjoy.com/api/respond/submit_comment/", string.Format(respond, HttpUtility.HtmlEncode(content)), null);
+        }
+
+        private const string respond = "post_id=2&name=kamaelyoung&email=kamaelyoung@live.com&content={0}";
     }
 }

@@ -16,7 +16,6 @@ namespace Ichongli.Rosi.Services
         private const string LatestPosts = "api/get_recent_posts/?include=id,title,thumbnail&page={0}";
         private const string Post = "api/get_post/?post_id={0}";
 
-
         public async Task<Models.REST.Categories.RootObject> GetCategories()
         {
             StringBuilder Url = new StringBuilder();
