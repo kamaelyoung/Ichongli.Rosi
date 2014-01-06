@@ -3,8 +3,11 @@
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource MainBackgroundBrush}">
         <phone:Pivot HeaderTemplate="{StaticResource PivotHeader}" Background="Transparent">
-            <phone:PivotItem Margin="0" Header="{Binding DisplayName}">
-                <ichongli:ThinkLonglistselector Margin="0,0,-12,0" ItemsSource="{Binding Items}" ItemTemplate="{StaticResource NewsItems}" micro:Message.Attach="[DataRequest]=[Feedbacks]" IsLoading="{Binding IsLoading}"> 
+            <phone:PivotItem Margin="0" Header="{Binding DisplayTitle}">
+                <ichongli:ThinkLonglistselector Margin="0,0,-12,0" ItemsSource="{Binding Items}" 
+                                                ItemTemplate="{StaticResource NewsItems}" 
+                                                micro:Message.Attach="[DataRequest]=[Feedbacks]" 
+                                                IsLoading="{Binding IsLoading}">
                 </ichongli:ThinkLonglistselector>
             </phone:PivotItem>
         </phone:Pivot>

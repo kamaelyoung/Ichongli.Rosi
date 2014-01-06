@@ -174,7 +174,7 @@ namespace Ichongli.Rosi.ViewModels
             {
                 base._navigationService.UriFor<CategoriesPageViewModel>()
                     .WithParam<string>(viewModel => viewModel.ItemID, obj.ItemId)
-                    .WithParam<string>(viewModel => viewModel.DisplayName, obj.Title)
+                    .WithParam<string>(viewModel => viewModel.DisplayTitle, obj.Title)
                     .Navigate();
             }
         }

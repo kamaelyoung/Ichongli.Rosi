@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Ichongli.Rosi.ViewModels
 {
@@ -19,19 +20,19 @@ namespace Ichongli.Rosi.ViewModels
             this._serviceBroker = serviceBroker;
         }
 
-        private string _DisplayName;
-        public string DisplayName
+        private string _DisplayTitle;
+        public string DisplayTitle
         {
             get
             {
-                return this._DisplayName;
+                return this._DisplayTitle;
             }
             set
             {
-                if (this._DisplayName != value)
+                if (this._DisplayTitle != value)
                 {
-                    this._DisplayName = value;
-                    this.NotifyOfPropertyChange(() => DisplayName);
+                    this._DisplayTitle = value;
+                    this.NotifyOfPropertyChange(() => DisplayTitle);
                 }
             }
         }
@@ -53,7 +54,7 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        private bool _IsLoading;
+        private bool _IsLoading = false;
         public bool IsLoading
         {
             get
@@ -65,7 +66,7 @@ namespace Ichongli.Rosi.ViewModels
                 if (this._IsLoading != value)
                 {
                     this._IsLoading = value;
-                    this.NotifyOfPropertyChange(() => IsLoading);
+                    this.NotifyOfPropertyChange("IsLoading");
                 }
             }
         }
@@ -103,11 +104,15 @@ namespace Ichongli.Rosi.ViewModels
             base.OnActivate();
             if (!base._isInitialized)
             {
-                this.OnLoadData();
                 this._isInitialized = true;
+                this.Feedbacks();
             }
         }
 
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+        }
         private int _pageIndex = 1;
         private int _totalPages = 0;
 
@@ -120,14 +125,14 @@ namespace Ichongli.Rosi.ViewModels
         {
             if (this.Items.Count <= 0 || this._pageIndex <= this._totalPages)
             {
-                base._progressService.Show();
                 this.IsLoading = true;
+                base._progressService.Show();
                 var latest = await this._serviceBroker.GetPostsFrom(this.ItemID, this._pageIndex);
                 if (latest != null)
                 {
-                    this.IsLoading = false;
                     this._pageIndex += 1;
                     this._totalPages = latest.pages;
+
                     foreach (var item in latest.posts)
                     {
                         this.Items.Add(new Models.Ui.HomeItem
@@ -138,19 +143,16 @@ namespace Ichongli.Rosi.ViewModels
                             Url = item.thumbnail
                         });
                     }
+
                 }
                 else
                 {
 
                 }
 
+                this.IsLoading = false;
                 base._progressService.Hide();
             }
-        }
-
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
         }
 
         public void NaivgatoDetail(Models.Ui.HomeItem obj)
