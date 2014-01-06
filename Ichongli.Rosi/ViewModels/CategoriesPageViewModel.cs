@@ -11,13 +11,27 @@ using System.Windows;
 
 namespace Ichongli.Rosi.ViewModels
 {
-    public class CategoriesPageViewModel : ThinkViewModelBase
+    public class CategoriesPageViewModel : Screen
     {
         private readonly IServiceBroker _serviceBroker;
-        public CategoriesPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker _serviceBroker, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
-            : base(progressService, windowManager, navigationService)
+        private readonly INavigationService _navigationService;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IProgressService _progressService;
+        private readonly IWindowManager _windowManager;
+        private bool _isInitialized;
+        public CategoriesPageViewModel(INavigationService navigationService,
+            IEventAggregator eventAggregator,
+            IServiceBroker serviceBroker,
+            IProgressService progressService,
+            IWindowManager windowManager)
         {
             this._serviceBroker = serviceBroker;
+            this._navigationService = navigationService;
+            this._eventAggregator = eventAggregator;
+            this._progressService = progressService;
+            this._windowManager = windowManager;
+
+            this.Items = new ObservableCollection<Models.Ui.HomeItem>();
         }
 
         private string _DisplayTitle;
@@ -86,17 +100,22 @@ namespace Ichongli.Rosi.ViewModels
         {
             get
             {
-                if (this._Items == null)
-                    this._Items = new ObservableCollection<Models.Ui.HomeItem>();
-
                 return this._Items;
+            }
+            set
+            {
+                if (this._Items == value)
+                    return;
+                this._Items = value;
+                this.NotifyOfPropertyChange(() => Items);
             }
         }
 
-        protected override void OnViewLoaded(object view)
+        protected override void OnViewReady(object view)
         {
-            base.OnViewLoaded(view);
-            if (!base._isInitialized)
+            base.OnViewReady(view);
+
+            if (!this._isInitialized)
             {
                 this._isInitialized = true;
                 this.Feedbacks();
@@ -116,7 +135,7 @@ namespace Ichongli.Rosi.ViewModels
             if (this.Items.Count <= 0 || this._pageIndex <= this._totalPages)
             {
                 this.IsLoading = true;
-                base._progressService.Show();
+                this._progressService.Show();
                 var latest = await this._serviceBroker.GetPostsFrom(this.ItemID, this._pageIndex);
 
                 if (latest != null)
@@ -137,7 +156,7 @@ namespace Ichongli.Rosi.ViewModels
                 }
 
                 this.IsLoading = false;
-                base._progressService.Hide();
+                this._progressService.Hide();
             }
         }
 
@@ -145,7 +164,7 @@ namespace Ichongli.Rosi.ViewModels
         {
             if (obj is Models.Ui.HomeItem)
             {
-                base._navigationService.UriFor<PostPageViewModel>()
+                this._navigationService.UriFor<PostPageViewModel>()
                     .WithParam(viewMode => viewMode.PostID, int.Parse(obj.UniqueId))
                     .Navigate();
             }

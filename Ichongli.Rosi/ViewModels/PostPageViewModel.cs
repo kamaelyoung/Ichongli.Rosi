@@ -47,6 +47,7 @@ namespace Ichongli.Rosi.ViewModels
         {
             this._uxService = uxService;
             this._serviceBroker = serviceBroker;
+            this.Photos = new ObservableCollection<Models.Ui.ItemWithUrl>();
         }
 
         private string _BigImage;
@@ -174,9 +175,14 @@ namespace Ichongli.Rosi.ViewModels
         {
             get
             {
-                if (this._Photos == null)
-                    this._Photos = new ObservableCollection<Models.Ui.ItemWithUrl>();
                 return this._Photos;
+            }
+            set
+            {
+                if (this._Photos == value)
+                    return;
+                this._Photos = value;
+                this.NotifyOfPropertyChange(() => Photos);
             }
         }
 
