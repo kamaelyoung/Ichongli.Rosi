@@ -147,45 +147,36 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        private ObservableCollection<Models.Ui.PostPropertie> _Tags = new ObservableCollection<Models.Ui.PostPropertie>();
+        private ObservableCollection<Models.Ui.PostPropertie> _Tags;
         public ObservableCollection<Models.Ui.PostPropertie> Tags
         {
-            get { return this._Tags; }
-            set
+            get
             {
-                if (_Tags != value)
-                {
-                    _Tags = value;
-                    this.NotifyOfPropertyChange(() => Tags);
-                }
+                if (this._Tags == null)
+                    this._Tags = new ObservableCollection<Models.Ui.PostPropertie>();
+                return this._Tags;
             }
         }
 
-        private ObservableCollection<Models.Ui.PostPropertie> _Categories = new ObservableCollection<Models.Ui.PostPropertie>();
+        private ObservableCollection<Models.Ui.PostPropertie> _Categories;
         public ObservableCollection<Models.Ui.PostPropertie> Categories
         {
-            get { return this._Categories; }
-            set
+            get
             {
-                if (_Categories != value)
-                {
-                    _Categories = value;
-                    this.NotifyOfPropertyChange("Categories");
-                }
+                if (this._Categories == null)
+                    this._Categories = new ObservableCollection<Models.Ui.PostPropertie>();
+                return this._Categories;
             }
         }
 
-        private ObservableCollection<Models.Ui.ItemWithUrl> _Photos = new ObservableCollection<Models.Ui.ItemWithUrl>();
+        private ObservableCollection<Models.Ui.ItemWithUrl> _Photos;
         public ObservableCollection<Models.Ui.ItemWithUrl> Photos
         {
-            get { return this._Photos; }
-            set
+            get
             {
-                if (_Photos != value)
-                {
-                    _Photos = value;
-                    this.NotifyOfPropertyChange("Photos");
-                }
+                if (this._Photos == null)
+                    this._Photos = new ObservableCollection<Models.Ui.ItemWithUrl>();
+                return this._Photos;
             }
         }
 

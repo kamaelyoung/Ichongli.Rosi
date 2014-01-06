@@ -71,37 +71,32 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        private ObservableCollection<Models.Ui.Item> _Categories = new ObservableCollection<Models.Ui.Item>();
+        private ObservableCollection<Models.Ui.Item> _Categories;
         public ObservableCollection<Models.Ui.Item> Categories
         {
-            get { return this._Categories; }
-            set
+            get
             {
-                if (_Categories != value)
-                {
-                    _Categories = value;
-                    this.NotifyOfPropertyChange(() => Categories);
-                }
+                if (this._Categories == null)
+                    this._Categories = new ObservableCollection<Models.Ui.Item>();
+                return this._Categories;
             }
         }
 
-        private ObservableCollection<Models.Ui.HomeItem> _Items = new ObservableCollection<Models.Ui.HomeItem>();
+        private ObservableCollection<Models.Ui.HomeItem> _Items;
         public ObservableCollection<Models.Ui.HomeItem> Items
         {
-            get { return this._Items; }
-            set
+            get
             {
-                if (_Items != value)
-                {
-                    _Items = value;
-                    this.NotifyOfPropertyChange(() => Items);
-                }
+                if (this._Items == null)
+                    this._Items = new ObservableCollection<Models.Ui.HomeItem>();
+
+                return this._Items;
             }
         }
 
-        protected override void OnActivate()
+        protected override void OnViewLoaded(object view)
         {
-            base.OnActivate();
+            base.OnViewLoaded(view);
             if (!base._isInitialized)
             {
                 this._isInitialized = true;
@@ -109,10 +104,6 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-        }
         private int _pageIndex = 1;
         private int _totalPages = 0;
 
@@ -128,6 +119,7 @@ namespace Ichongli.Rosi.ViewModels
                 this.IsLoading = true;
                 base._progressService.Show();
                 var latest = await this._serviceBroker.GetPostsFrom(this.ItemID, this._pageIndex);
+
                 if (latest != null)
                 {
                     this._pageIndex += 1;
@@ -143,13 +135,12 @@ namespace Ichongli.Rosi.ViewModels
                             Url = item.thumbnail
                         });
                     }
-
                 }
                 else
                 {
 
                 }
-
+                //await Task.Delay(10);
                 this.IsLoading = false;
                 base._progressService.Hide();
             }

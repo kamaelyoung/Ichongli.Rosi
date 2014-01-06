@@ -27,31 +27,25 @@ namespace Ichongli.Rosi.ViewModels
         private readonly IServiceUser _serviceUser;
         private readonly IUxService _uxService;
 
-        private ObservableCollection<Models.Ui.Item> _Categories = new ObservableCollection<Models.Ui.Item>();
+        private ObservableCollection<Models.Ui.Item> _Categories;
         public ObservableCollection<Models.Ui.Item> Categories
         {
-            get { return this._Categories; }
-            set
+            get
             {
-                if (_Categories != value)
-                {
-                    _Categories = value;
-                    this.NotifyOfPropertyChange(() => Categories);
-                }
+                if (this._Categories == null)
+                    this._Categories = new ObservableCollection<Item>();
+                return this._Categories;
             }
         }
 
-        private ObservableCollection<Models.Ui.HomeItem> _Items = new ObservableCollection<Models.Ui.HomeItem>();
+        private ObservableCollection<Models.Ui.HomeItem> _Items;
         public ObservableCollection<Models.Ui.HomeItem> Items
         {
-            get { return this._Items; }
-            set
+            get
             {
-                if (_Items != value)
-                {
-                    _Items = value;
-                    this.NotifyOfPropertyChange(() => Items);
-                }
+                if (this._Items == null)
+                    this._Items = new ObservableCollection<HomeItem>();
+                return this._Items;
             }
         }
 
