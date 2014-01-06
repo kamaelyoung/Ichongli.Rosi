@@ -63,11 +63,10 @@ namespace Ichongli.Rosi.ViewModels
             }
             set
             {
-                if (this._IsLoading != value)
-                {
-                    this._IsLoading = value;
-                    this.NotifyOfPropertyChange("IsLoading");
-                }
+                if (value.Equals(this._IsLoading))
+                    return;
+                this._IsLoading = value;
+                this.NotifyOfPropertyChange(() => IsLoading);
             }
         }
 
@@ -140,7 +139,7 @@ namespace Ichongli.Rosi.ViewModels
                 {
 
                 }
-                //await Task.Delay(10);
+
                 this.IsLoading = false;
                 base._progressService.Hide();
             }
