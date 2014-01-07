@@ -225,6 +225,7 @@ namespace Ichongli.Rosi
             sbLogInfo.AppendLine("ExceptionInfo: " + e.ExceptionObject);
 
             string logInfo = sbLogInfo.ToString();
+
             IChongliHelper.SubmitRespond(DateTime.Now + " :" + logInfo);
 
             if (Debugger.IsAttached)

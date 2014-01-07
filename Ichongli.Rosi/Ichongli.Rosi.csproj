@@ -126,6 +126,7 @@
     <Compile Include="Tombstoning\ViewerPageModelStorage.cs" />
     <Compile Include="Utilities\AsyncExtensions.cs" />
     <Compile Include="Utilities\Common.cs" />
+    <Compile Include="Utilities\HttpHelper.cs" />
     <Compile Include="Utilities\HttpPost.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\ImageNodify.cs" />

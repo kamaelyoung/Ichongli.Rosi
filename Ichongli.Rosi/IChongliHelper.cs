@@ -9,6 +9,7 @@
     using System.Net;
     using System.Text;
     using System.Threading.Tasks;
+    using Ichongli.Rosi.Utilities;
 
     public static class IChongliHelper
     {
@@ -29,55 +30,13 @@
 
         public async static Task<T> DoHttpGet<T>(StringBuilder Url)
         {
-            var content = await RequestAwait(Url.ToString());
+            var content = await HttpHelper.RequestAwait(Url.ToString());
             return JsonConvert.DeserializeObject<T>(content);
-        }
-
-        private static Task<string> RequestAwait(string url)
-        {
-            return Task.Run(async () =>
-            {
-                string json = string.Empty;
-                HttpWebResponse response = null;
-                try
-                {
-                    HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-                    request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
-
-                    response = (HttpWebResponse)await Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, TaskCreationOptions.None);
-                    var gzip = response.Headers[HttpRequestHeader.ContentEncoding];
-                    using (var stream = response.GetResponseStream())
-                    {
-                        if (gzip != null)
-                        {
-                            byte[] gzipBs = new byte[stream.Length];
-                            await stream.ReadAsync(gzipBs, 0, gzipBs.Length);
-                            json = GZipStream.UncompressString(gzipBs);
-                        }
-                        else
-                        {
-                            using (var reader = new StreamReader(stream))
-                            {
-                                json = await reader.ReadToEndAsync();
-                            }
-                        }
-                    }
-                    if (response != null)
-                        response.Close();
-                }
-                catch
-                {
-                    json = null;
-                }
-                return json;
-            });
         }
 
         public static void SubmitRespond(string content)
         {
-            HttpPost.GetBackJson("http://www.moodjoy.com/api/respond/submit_comment/", string.Format(respond, HttpUtility.HtmlEncode(content)), null);
+            HttpPost.GetBackJson("http://www.moodjoy.com/api/respond/submit_comment/", string.Format("post_id=2&name=kamaelyoung&email=kamaelyoung@live.com&content={0}", HttpUtility.HtmlEncode(content)), null);
         }
-
-        private const string respond = "post_id=2&name=kamaelyoung&email=kamaelyoung@live.com&content={0}";
     }
 }
