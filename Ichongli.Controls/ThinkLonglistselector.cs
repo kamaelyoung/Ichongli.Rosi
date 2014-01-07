@@ -12,7 +12,8 @@ using System.Windows.Shapes;
 
 namespace Ichongli.Controls
 {
-    public class ThinkLonglistselector: LongListSelector {
+    public class ThinkLonglistselector : LongListSelector
+    {
         private const int Offset = 2;
 
         public static readonly DependencyProperty IsLoadingProperty =
@@ -21,30 +22,44 @@ namespace Ichongli.Controls
 
         public ThinkLonglistselector()
         {
-            ItemRealized += OnItemRealized;
+            ItemRealized += ThinkLonglistselector_ItemRealized;
+            ItemUnrealized += ThinkLonglistselector_ItemUnrealized;
         }
 
-        public bool IsLoading {
+        void ThinkLonglistselector_ItemRealized(object sender, ItemRealizationEventArgs e)
+        {
+            if (!IsLoading && ItemsSource != null && ItemsSource.Count >= Offset)
+            {
+                if (e.ItemKind == LongListSelectorItemKind.Item)
+                {
+                    object offsetItem = ItemsSource[ItemsSource.Count - Offset];
+                    if ((e.Container.Content == offsetItem))
+                    {
+                        OnDataRequest();
+                    }
+                }
+            }
+        }
+
+        void ThinkLonglistselector_ItemUnrealized(object sender, ItemRealizationEventArgs e)
+        {
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+        }
+
+        public bool IsLoading
+        {
             get { return (bool)GetValue(IsLoadingProperty); }
             set { SetValue(IsLoadingProperty, value); }
         }
 
         public event EventHandler DataRequest;
 
-        protected virtual void OnDataRequest() {
+        protected virtual void OnDataRequest()
+        {
             EventHandler handler = DataRequest;
             if (handler != null) handler(this, EventArgs.Empty);
         }
 
-        private void OnItemRealized(object sender, ItemRealizationEventArgs itemRealizationEventArgs) {
-            if (!IsLoading && ItemsSource != null && ItemsSource.Count >= Offset) {
-                if (itemRealizationEventArgs.ItemKind == LongListSelectorItemKind.Item) {
-                    object offsetItem = ItemsSource[ItemsSource.Count - Offset];
-                    if ((itemRealizationEventArgs.Container.Content == offsetItem)) {
-                        OnDataRequest();
-                    }
-                }
-            }
-        }
     }
 }
