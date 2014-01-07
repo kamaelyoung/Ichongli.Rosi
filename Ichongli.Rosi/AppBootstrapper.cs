@@ -36,17 +36,17 @@ namespace Ichongli.Rosi
             this._kernel.Bind<IServiceUser>().To<ServiceUser>();
             this._kernel.Bind<IServiceAuth>().To<ServiceAuth>();
 
-            AddCustomConventions();
+            //AddCustomConventions();
         }
 
-        private void AddCustomConventions()
-        {
-            // App Bar Conventions
-            ConventionManager.AddElementConvention<BindableAppBarButton>(
-                Control.IsEnabledProperty, "DataContext", "Click");
-            ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
-                Control.IsEnabledProperty, "DataContext", "Click");
-        }
+        //private void AddCustomConventions()
+        //{
+        //    // App Bar Conventions
+        //    ConventionManager.AddElementConvention<BindableAppBarButton>(
+        //        Control.IsEnabledProperty, "DataContext", "Click");
+        //    ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
+        //        Control.IsEnabledProperty, "DataContext", "Click");
+        //}
 
         protected override object GetInstance(Type service, string key)
         {
