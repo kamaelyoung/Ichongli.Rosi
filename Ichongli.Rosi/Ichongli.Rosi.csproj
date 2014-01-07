@@ -110,6 +110,8 @@
     <Compile Include="Models\REST\CategoryPost.cs" />
     <Compile Include="Models\REST\Nonce.cs" />
     <Compile Include="Models\REST\Register.cs" />
+    <Compile Include="Models\REST\User.cs" />
+    <Compile Include="Models\REST\Validate.cs" />
     <Compile Include="Models\Ui\Author.cs" />
     <Compile Include="Models\Ui\HomeItem.cs" />
     <Compile Include="Models\Ui\ListItem.cs" />
@@ -290,13 +292,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ichongli.Controls\Ichongli.Controls.csproj">
+    <ProjectReference Include="..\Ichongli.Controls\ThinkWP.Controls.csproj">
       <Project>{CC64ACCD-C047-47A1-9E11-44AE2AFC39F1}</Project>
-      <Name>Ichongli.Controls</Name>
+      <Name>ThinkWP.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ichongli.SDK\Ichongli.SDK.csproj">
+    <ProjectReference Include="..\Ichongli.SDK\ThinkWP.SDK.csproj">
       <Project>{6BCE8DCF-7683-48F2-9095-BB4664881DBF}</Project>
-      <Name>Ichongli.SDK</Name>
+      <Name>ThinkWP.SDK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

@@ -6,13 +6,13 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ichongli.SDK")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ThinkWP.SDK")]
+[assembly: AssemblyDescription("ThinkWP.SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ichongli.SDK")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("ThinkWP")]
+[assembly: AssemblyProduct("ThinkWP.SDK")]
+[assembly: AssemblyCopyright("Copyright ©ThinkWP  2014")]
+[assembly: AssemblyTrademark("ThinkWP")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

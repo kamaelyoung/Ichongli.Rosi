@@ -8,8 +8,8 @@ namespace Ichongli.Rosi.Interfaces
 {
     public interface IServiceAuth
     {
-        Task<string> generate_auth_cookie(string username, string password);
-        Task<string> validate_auth_cookie(string cookie);
-        Task<string> get_currentuserinfo(string cookie);
+        Task<Models.REST.UserRoot> generate_auth_cookie(string username, string password);
+        Task<Models.REST.Validate> validate_auth_cookie(string cookie);
+        Task<Models.REST.UserRoot> get_currentuserinfo(string cookie);
     }
 }

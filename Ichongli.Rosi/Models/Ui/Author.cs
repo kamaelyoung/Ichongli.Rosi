@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ichongli.Rosi.Models.Ui
 {
-   public class Author:ModelBase
+    public class Author : ModelBase
     {
 
 
@@ -22,7 +22,7 @@ namespace Ichongli.Rosi.Models.Ui
                 }
             }
         }
-        
+
         private string _Nickname;
         public string Nickname
         {
@@ -36,7 +36,7 @@ namespace Ichongli.Rosi.Models.Ui
                 }
             }
         }
-        
+
         private string _Name;
         public string Name
         {
@@ -50,6 +50,6 @@ namespace Ichongli.Rosi.Models.Ui
                 }
             }
         }
-        
+
     }
 }

@@ -1,14 +1,14 @@
-﻿<phone:PhoneApplicationPage x:Class="Ichongli.Rosi.Views.CategoriesPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}" xmlns:ichongli="clr-namespace:Ichongli.Controls;assembly=Ichongli.Controls" xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" SupportedOrientations="Portrait" Orientation="Portrait" mc:Ignorable="d" shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0" shell:SystemTray.ForegroundColor="#427fed">
+﻿<phone:PhoneApplicationPage x:Class="Ichongli.Rosi.Views.CategoriesPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}" xmlns:thinkwp="clr-namespace:ThinkWP.Controls;assembly=ThinkWP.Controls"  xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" SupportedOrientations="Portrait" Orientation="Portrait" shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0" shell:SystemTray.ForegroundColor="#427fed">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource MainBackgroundBrush}">
         <phone:Pivot HeaderTemplate="{StaticResource PivotHeader}" Background="Transparent">
             <phone:PivotItem Margin="0" Header="{Binding DisplayTitle}">
-                <ichongli:ThinkLonglistselector Margin="0,0,-12,0" ItemsSource="{Binding Items}" 
+                <thinkwp:ThinkLonglistselector Margin="0,0,-12,0" ItemsSource="{Binding Items}" 
                                                 ItemTemplate="{StaticResource NewsItems}"
                                                 IsLoading="{Binding IsLoading}"
                                                 micro:Message.Attach="[DataRequest]=[Feedbacks]">
-                </ichongli:ThinkLonglistselector>
+                </thinkwp:ThinkLonglistselector>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

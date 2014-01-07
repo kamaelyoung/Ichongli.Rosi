@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 
-namespace Ichongli.Controls
+namespace ThinkWP.Controls
 {
     public class ThinkPivot : Pivot {
         private PhoneApplicationFrame _currentApplicationFrame;

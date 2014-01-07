@@ -91,7 +91,7 @@
 using System;
 using Interop=System.Runtime.InteropServices;
 
-namespace Ichongli.SDK.Third.Gzip
+namespace ThinkWP.SDK.Third.Gzip
 {
 
     /// <summary>

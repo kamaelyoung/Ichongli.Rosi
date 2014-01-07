@@ -27,7 +27,7 @@
 using System;
 using System.IO;
 
-namespace Ichongli.SDK.Third.Gzip
+namespace ThinkWP.SDK.Third.Gzip
 {
 
     internal enum ZlibStreamFlavor { ZLIB = 1950, DEFLATE = 1951, GZIP = 1952 }

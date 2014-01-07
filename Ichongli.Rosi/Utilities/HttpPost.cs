@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Ichongli.SDK.Third.Gzip;
+using ThinkWP.SDK.Third.Gzip;
 
 namespace Ichongli.Rosi
 {

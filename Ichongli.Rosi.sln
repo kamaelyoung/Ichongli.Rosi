@@ -5,9 +5,9 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichongli.Rosi", "Ichongli.Rosi\Ichongli.Rosi.csproj", "{38917303-39D2-4A33-A299-A2CB513FBBC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichongli.SDK", "Ichongli.SDK\Ichongli.SDK.csproj", "{6BCE8DCF-7683-48F2-9095-BB4664881DBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThinkWP.SDK", "Ichongli.SDK\ThinkWP.SDK.csproj", "{6BCE8DCF-7683-48F2-9095-BB4664881DBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichongli.Controls", "Ichongli.Controls\Ichongli.Controls.csproj", "{CC64ACCD-C047-47A1-9E11-44AE2AFC39F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThinkWP.Controls", "Ichongli.Controls\ThinkWP.Controls.csproj", "{CC64ACCD-C047-47A1-9E11-44AE2AFC39F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -29,7 +29,7 @@
 using System;
 using Interop = System.Runtime.InteropServices;
 
-namespace Ichongli.SDK.Third.Gzip
+namespace ThinkWP.SDK.Third.Gzip
 {
     /// <summary>
     ///   Computes a CRC-32. The CRC-32 algorithm is parameterized - you

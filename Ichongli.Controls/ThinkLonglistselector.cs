@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace Ichongli.Controls
+namespace ThinkWP.Controls
 {
     public class ThinkLonglistselector : LongListSelector
     {

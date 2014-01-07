@@ -165,7 +165,7 @@
             DoubleAnimation anim = new DoubleAnimation();
             anim.From = 0;
             anim.To = 1;
-            anim.Duration = TimeSpan.FromMilliseconds(500);
+            anim.Duration = TimeSpan.FromMilliseconds(2000);
             Storyboard.SetTarget(anim, img);
             Storyboard.SetTargetProperty(anim, new PropertyPath("Opacity"));
             sb.Children.Add(anim);

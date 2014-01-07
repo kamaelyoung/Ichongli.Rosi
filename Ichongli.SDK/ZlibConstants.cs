@@ -63,7 +63,7 @@
 
 using System;
 
-namespace Ichongli.SDK.Third.Gzip
+namespace ThinkWP.SDK.Third.Gzip
 {
     /// <summary>
     /// A bunch of constants used in the Zlib interface.

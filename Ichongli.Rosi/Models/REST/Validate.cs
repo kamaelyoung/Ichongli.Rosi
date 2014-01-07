@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ichongli.Rosi.Models.REST
 {
-    public class Nonce
+    public class Validate
     {
         public string status { get; set; }
-        public string controller { get; set; }
-        public string method { get; set; }
-        public string nonce { get; set; }
+        public bool valid { get; set; }
         public string error { get; set; }
     }
 }

@@ -6,14 +6,18 @@ using System.Resources;
 // 有关程序集的常规信息通过下列特性集 
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Ichongli.Controls")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ThinkWP.Controls")]
+[assembly: AssemblyDescription("ThinkWP.Controls")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ichongli.Controls")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("ThinkWP")]
+[assembly: AssemblyProduct("ThinkWP.Controls")]
+[assembly: AssemblyCopyright("Copyright ©ThinkWP  2014")]
+[assembly: AssemblyTrademark("ThinkWP")]
 [assembly: AssemblyCulture("")]
+
+//toolkit:
+[assembly: System.Windows.Markup.XmlnsDefinition("http://schemas.thinkwp.org/toolkit/client/2013", "ThinkWP.Controls")]
+[assembly: System.Windows.Markup.XmlnsPrefix("http://schemas.thinkwp.org/toolkit/client/2013", "thinkwp")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
 // COM 组件不可见。  如果需要从 COM 访问此程序集中的某个类型，

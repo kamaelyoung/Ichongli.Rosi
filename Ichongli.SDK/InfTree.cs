@@ -62,7 +62,7 @@
 
 
 using System;
-namespace Ichongli.SDK.Third.Gzip
+namespace ThinkWP.SDK.Third.Gzip
 {
         
         sealed class InfTree

@@ -1,6 +1,6 @@
 ﻿namespace Ichongli.Rosi
 {
-    using Ichongli.SDK.Third.Gzip;
+    using ThinkWP.SDK.Third.Gzip;
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;

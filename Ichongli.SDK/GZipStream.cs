@@ -30,7 +30,7 @@
 using System;
 using System.IO;
 
-namespace Ichongli.SDK.Third.Gzip
+namespace ThinkWP.SDK.Third.Gzip
 {
     /// <summary>
     ///   A class for compressing and decompressing GZIP streams.

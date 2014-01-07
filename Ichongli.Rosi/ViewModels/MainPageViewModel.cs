@@ -290,7 +290,11 @@ namespace Ichongli.Rosi.ViewModels
 
         public async void Login()
         {
-            var str = await this._serviceAuth.generate_auth_cookie("tuigirls", "yongqi29");
+            var userRoot = await this._serviceAuth.generate_auth_cookie("tuigirls", "yongqi29");
+            if (userRoot.status == "ok")
+            {
+                this._uxService.ShowToast("ª∂”≠ªÿ¿¥" + userRoot.user.displayname);
+            }
         }
     }
 }
