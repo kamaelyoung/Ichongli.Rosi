@@ -9,29 +9,24 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
 
-    <Grid Background="{StaticResource PhoneChromeBrush}"
+    <Border Background="#ffffff" CornerRadius="6"
           VerticalAlignment="Center" Margin="32,0" >
         <StackPanel Margin="12 12 12 12">
-            <TextBlock Text="{Binding Title}"
-                       TextWrapping="Wrap"
-                       FontSize="{StaticResource PhoneFontSizeLarge}"
-                       Margin="{StaticResource PhoneHorizontalMargin}"
-                       FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
             <TextBlock Style="{StaticResource PhoneTextTitle3Style}"
                        TextWrapping="Wrap"
                        Margin="12 24"
-                       Text="{Binding Text}" />
+                       Text="{Binding Text}" Foreground="#FF262626" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="Ok"
-                        Content="确定"/>
+                        Content="确定" Foreground="#FF262626"/>
                 <Button x:Name="TryClose"
                         Content="取消"
-                        Grid.Column="1"/>
+                        Grid.Column="1" Foreground="#FF262626"/>
             </Grid>
         </StackPanel>
-    </Grid>
+    </Border>
 </UserControl>

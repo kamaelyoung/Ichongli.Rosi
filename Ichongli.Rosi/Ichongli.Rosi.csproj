@@ -247,7 +247,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\TopPanoramaLogo.png" />
-    <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -266,10 +265,6 @@
     </Reference>
     <Reference Include="Caliburn.Micro.BindableAppBar">
       <HintPath>..\packages\Caliburn.Micro.BindableAppBar.1.0.5.0\lib\wp80\Caliburn.Micro.BindableAppBar.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.Micro.Coding4Fun, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Caliburn.Micro.Coding4Fun.1.0.1.0\lib\windowsphone8\Caliburn.Micro.Coding4Fun.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Extensions">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp8\Caliburn.Micro.Extensions.dll</HintPath>
@@ -293,6 +288,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Caliburn.Micro.Coding4Fun\Caliburn.Micro.Coding4Fun.csproj">
+      <Project>{1D096C13-FF45-4C43-9729-E48E8F56C237}</Project>
+      <Name>Caliburn.Micro.Coding4Fun</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ichongli.Controls\ThinkWP.Controls.csproj">
       <Project>{CC64ACCD-C047-47A1-9E11-44AE2AFC39F1}</Project>
       <Name>ThinkWP.Controls</Name>

@@ -2,7 +2,7 @@
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource MainBackgroundBrush}">
-        <phone:Pivot HeaderTemplate="{StaticResource PivotHeader}" Background="Transparent">
+        <thinkwp:ThinkPivot HeaderTemplate="{StaticResource PivotHeader}" Background="Transparent">
             <phone:PivotItem Margin="0" Header="{Binding DisplayTitle}">
                 <thinkwp:ThinkLonglistselector Margin="0,0,-12,0" ItemsSource="{Binding Items}" 
                                                 ItemTemplate="{StaticResource NewsItems}"
@@ -10,7 +10,7 @@
                                                 micro:Message.Attach="[DataRequest]=[Feedbacks]">
                 </thinkwp:ThinkLonglistselector>
             </phone:PivotItem>
-        </phone:Pivot>
+        </thinkwp:ThinkPivot>
     </Grid>
 
 </phone:PhoneApplicationPage>
