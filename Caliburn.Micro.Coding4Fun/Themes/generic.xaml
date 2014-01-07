@@ -8,7 +8,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="coding4Fun:Coding4FunDialog">
-                    <Grid Background="#0CFFFFFF">
+                    <Grid Background="#19000000">
                         <coding4Fun:Coding4FunDialogHost x:Name="ViewContainer"
                                                          HorizontalContentAlignment="Stretch"
                                                          VerticalContentAlignment="Stretch" />

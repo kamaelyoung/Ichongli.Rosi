@@ -11,21 +11,22 @@
 
     <Border Background="#ffffff" CornerRadius="6"
           VerticalAlignment="Center" Margin="32,0" >
-        <StackPanel Margin="12 12 12 12">
+        <StackPanel>
             <TextBlock Style="{StaticResource PhoneTextTitle3Style}"
                        TextWrapping="Wrap"
                        Margin="12 24"
                        Text="{Binding Text}" Foreground="#FF262626" />
+
+            <Rectangle Height="1" Fill="#d8d8d8" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Ok"
-                        Content="确定" Foreground="#FF262626"/>
-                <Button x:Name="TryClose"
-                        Content="取消"
-                        Grid.Column="1" Foreground="#FF262626"/>
+                <Button x:Name="TryClose" Content="取消" Foreground="#262626" />
+                <Rectangle Width="1" Fill="#d8d8d8" Grid.Column="1"/>
+                <Button x:Name="Ok" Grid.Column="2" Content="确定" Foreground="#262626" />
             </Grid>
         </StackPanel>
     </Border>

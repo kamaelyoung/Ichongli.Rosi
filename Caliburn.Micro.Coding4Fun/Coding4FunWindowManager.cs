@@ -21,8 +21,7 @@ namespace Caliburn.Micro.Coding4Fun
             var dialog = new Coding4FunDialog
             {
                 Context = context,
-                RootModel = rootModel,
-                Overlay = overlay
+                RootModel = rootModel
             };
 
             if (settings != null)
