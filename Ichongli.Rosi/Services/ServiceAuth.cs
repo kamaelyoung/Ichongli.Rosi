@@ -8,7 +8,7 @@ namespace Ichongli.Rosi.Services
 {
     public class ServiceAuth : Interfaces.IServiceAuth
     {
-        private const string registerUrl = "api/auth/generate_auth_cookie/&username={0}&nonce={1}&password={4}";
+        private const string loginUrl = "api/auth/generate_auth_cookie/?username={0}&nonce={1}&password={4}";
         private const string currentuserinfoUrl = "api/auth/get_currentuserinfo/?cookie={0}";
         private const string validate_auth_cookieUrl = "api/auth/validate_auth_cookie/?cookie={0}";
         public async Task<string> generate_auth_cookie(string username, string password)
@@ -18,7 +18,9 @@ namespace Ichongli.Rosi.Services
             {
                 StringBuilder Url = new StringBuilder();
                 Url.Append(IChongliHelper.baseUrl);
-                Url.AppendFormat(registerUrl, username, nonce.nonce, password);
+                Url.AppendFormat(loginUrl, username, nonce.nonce, password);
+                //HttpPost.GetBackJson("http://www.moodjoy.com/api/respond/submit_comment/", string.Format(respond, HttpUtility.HtmlEncode(content)), null);
+
                 return await IChongliHelper.DoHttpGet<string>(Url);
             }
             else

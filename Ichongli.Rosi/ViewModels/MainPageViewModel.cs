@@ -26,6 +26,7 @@ namespace Ichongli.Rosi.ViewModels
         private readonly IServiceBroker serviceBroker;
         private readonly IServiceUser _serviceUser;
         private readonly IUxService _uxService;
+        private readonly IServiceAuth _serviceAuth;
 
         private ObservableCollection<Models.Ui.Item> _Categories;
         public ObservableCollection<Models.Ui.Item> Categories
@@ -74,12 +75,13 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        public MainPageViewModel(IUxService uxService, INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
+        public MainPageViewModel(IServiceAuth serviceAuth, IUxService uxService, INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
             : base(progressService, windowManager, navigationService)
         {
             this.serviceBroker = serviceBroker;
             this._serviceUser = serviceUser;
             this._uxService = uxService;
+            this._serviceAuth = serviceAuth;
         }
 
         protected override void OnActivate()
@@ -284,6 +286,11 @@ namespace Ichongli.Rosi.ViewModels
         public void Handle(SampleMessage message)
         {
 
+        }
+
+        public async void Login()
+        {
+            var str = await this._serviceAuth.generate_auth_cookie("tuigirls", "yongqi29");
         }
     }
 }

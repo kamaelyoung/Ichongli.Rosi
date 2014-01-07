@@ -95,10 +95,20 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
+        private ObservableCollection<Models.Ui.HomeItem> _Items;
         public ObservableCollection<Models.Ui.HomeItem> Items
         {
-            get;
-            private set;
+            get
+            {
+                return this._Items;
+            }
+            set
+            {
+                if (this._Items == value)
+                    return;
+                this._Items = value;
+                this.NotifyOfPropertyChange(() => Items);
+            }
         }
 
         protected override void OnViewReady(object view)

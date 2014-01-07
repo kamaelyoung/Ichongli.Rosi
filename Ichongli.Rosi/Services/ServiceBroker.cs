@@ -36,7 +36,7 @@ namespace Ichongli.Rosi.Services
             }
             catch { return new Models.REST.CategoryPosts.RootObject() { status = "error" }; }
         }
-
+                
         public async Task<Models.REST.CategoryPosts.RootObject> GetLatestPosts(int page)
         {
             StringBuilder Url = new StringBuilder();

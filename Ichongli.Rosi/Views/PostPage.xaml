@@ -45,13 +45,15 @@
 
                 <!--Pivot item two-->
                 <phone:PivotItem xmlns:ichongli="clr-namespace:Ichongli.Controls;assembly=Ichongli.Controls" Header="图片" Margin="0">
-                    <toolkit:LongListMultiSelector Margin="10 0 0 0" ItemsSource="{Binding Photos}" LayoutMode="Grid" x:Name="PhotoGrid" IsGroupingEnabled="False" GridCellSize="148,248">
+                    <toolkit:LongListMultiSelector VirtualizingStackPanel.VirtualizationMode="Recycling" Margin="10 0 0 0" ItemsSource="{Binding Photos}" LayoutMode="Grid" x:Name="PhotoGrid" IsGroupingEnabled="False" GridCellSize="148,248">
                         <toolkit:LongListMultiSelector.ItemTemplate>
                             <DataTemplate>
                                 <Grid xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" micro:Message.Attach="[Tap]=[NaivgatoViewer($datacontext)]">
                                     <Border Background="#f5f5f5" BorderBrush="#ffffff" BorderThickness="2" Margin="0,0,10,10">
-                                        <image:ImageControl />
-                                         <!--<Image utilities:ImageNodify.Source="{Binding ItemImage.Thumbnail}" Width="148" Height="248" Stretch="UniformToFill" />-->
+                                        <Grid>
+                                            <TextBlock HorizontalAlignment="Center" Margin="0,2,0,0" TextWrapping="Wrap" Text="Loading..." VerticalAlignment="Center" Foreground="Black" />
+                                            <Image utilities:ImageNodify.Source="{Binding ItemImage.Thumbnail}" CacheMode="BitmapCache" Width="148" Height="248" Stretch="UniformToFill" />
+                                        </Grid>
                                     </Border>
                                 </Grid>
                             </DataTemplate>

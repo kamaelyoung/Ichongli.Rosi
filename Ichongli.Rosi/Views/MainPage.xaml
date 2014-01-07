@@ -39,6 +39,7 @@
                 <StackPanel>
                     <Button Content="注册" x:Name="Register" />
                     <Button Content="清除缓存" x:Name="ClearCache" />
+                    <Button Content="登录" x:Name="Login"/>
                 </StackPanel>
             </phone:PanoramaItem>
         </phone:Panorama>
