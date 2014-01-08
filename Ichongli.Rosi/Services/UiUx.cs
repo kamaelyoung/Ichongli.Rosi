@@ -7,7 +7,9 @@ using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -22,12 +24,13 @@ namespace Ichongli.Rosi.Services
     public class UiUx : Interfaces.IUxService
     {
         private readonly IDownloadHelper _downloadHelper;
-
         private readonly IWindowManager _windowManager;
-        public UiUx(IWindowManager windowManager, IDownloadHelper downloadHelper)
+        private readonly IProgressService _progressService;
+        public UiUx(IWindowManager windowManager, IDownloadHelper downloadHelper, IProgressService progressService)
         {
             this._windowManager = windowManager;
             this._downloadHelper = downloadHelper;
+            this._progressService = progressService;
         }
 
         public async Task ShowAlertFor2Seconds(string title, string m)
@@ -386,6 +389,70 @@ namespace Ichongli.Rosi.Services
             catch (System.Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+        }
+
+
+        public void ClearCache()
+        {
+            var dialogViewModel = new DialogViewModel
+            {
+                Title = "提示",
+                Text = "您确定要清除所有缓存吗？"
+            };
+            dialogViewModel.Deactivated += (sender, args) =>
+            {
+                if (dialogViewModel.Result == DialogResult.Ok)
+                {
+                    //this.ShowToast("清除缓存");
+                    this.ClearCacheMethod();
+                }
+                else
+                    SystemTray.Opacity = 0;
+            };
+            _windowManager.ShowDialog(dialogViewModel);
+        }
+        private int ProcessContract(int n1, int n2)
+        {
+            try
+            {
+                return System.Convert.ToInt32(Math.Round(System.Convert.ToDecimal(float.Parse(n1.ToString()) / float.Parse(n2.ToString())), 2) * new Decimal(100));
+            }
+            catch
+            {
+            }
+            return 0;
+        }
+
+        private void ClearCacheMethod()
+        {
+            IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication();
+            if (file.DirectoryExists("ImageCache"))
+            {
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.WorkerReportsProgress = true;
+                bw.DoWork += (DoWorkEventHandler)((s1, e1) =>
+                {
+                    string[] local_1 = file.GetFileNames("ImageCache" + "\\*");
+                    int local_2 = local_1.Length - 1;
+                    for (int local_3 = 0; local_3 < local_1.Length; ++local_3)
+                    {
+                        bw.ReportProgress(ProcessContract(local_3, local_2));
+                        file.DeleteFile("ImageCache" + "\\" + local_1[local_3]);
+                    }
+                });
+                bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
+                {
+                    this._progressService.Hide();
+                    GC.Collect();
+                    file.Dispose();
+                    this.ShowToast("清理完毕");
+                });
+                bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
+                {
+                    this._progressService.Show("已清理" + (object)e1.ProgressPercentage + "%");
+                });
+                bw.RunWorkerAsync();
             }
         }
     }

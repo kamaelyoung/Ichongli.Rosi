@@ -8,6 +8,7 @@ namespace Ichongli.Rosi.Interfaces
 {
     public interface IUxService
     {
+        void ClearCache();
         Task SetLockscreen(string url);
         Task SaveImage(Ichongli.Rosi.Models.Ui.ItemWithUrl url);
 

@@ -148,11 +148,6 @@
                             catch { }
                         }
                     }
-                    // else
-                    //{
-                    //  img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));                        
-                    // StoryBordImg(img);
-                    //}
                 }
                 catch { }
 
@@ -165,7 +160,7 @@
             DoubleAnimation anim = new DoubleAnimation();
             anim.From = 0;
             anim.To = 1;
-            anim.Duration = TimeSpan.FromMilliseconds(2000);
+            anim.Duration = TimeSpan.FromMilliseconds(500);
             Storyboard.SetTarget(anim, img);
             Storyboard.SetTargetProperty(anim, new PropertyPath("Opacity"));
             sb.Children.Add(anim);

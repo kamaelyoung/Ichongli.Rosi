@@ -180,75 +180,11 @@ namespace Ichongli.Rosi.ViewModels
             var r = await this._serviceUser.Register("xiaohai", "49403700@qq.com", "yongqi", "蔚蓝海");
         }
 
-        private int ProcessContract(int n1, int n2)
-        {
-            try
-            {
-                return System.Convert.ToInt32(Math.Round(System.Convert.ToDecimal(float.Parse(n1.ToString()) / float.Parse(n2.ToString())), 2) * new Decimal(100));
-            }
-            catch
-            {
-            }
-            return 0;
-        }
-
         public void ClearCache()
         {
-            var dialogViewModel = new DialogViewModel
-            {
-                Title = "提示",
-                Text = "您确定要清除所有缓存吗？"
-            };
-            dialogViewModel.Deactivated += (sender, args) =>
-            {
-                if (dialogViewModel.Result == DialogResult.Ok)
-                {
-                    this._progressService.Show("清除缓存");
-                    this.ClearCacheMethod();
-                }
-                else
-                    SystemTray.Opacity = 0;
-            };
-            _windowManager.ShowDialog(dialogViewModel);
+            this._uxService.ClearCache();
         }
-
-        private void ClearCacheMethod()
-        {
-            IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication();
-            if (file.DirectoryExists("ImageCache"))
-            {
-                BackgroundWorker bw = new BackgroundWorker();
-                bw.WorkerReportsProgress = true;
-                bw.DoWork += (DoWorkEventHandler)((s1, e1) =>
-                {
-                    string[] local_1 = file.GetFileNames("ImageCache" + "\\*");
-                    int local_2 = local_1.Length - 1;
-                    for (int local_3 = 0; local_3 < local_1.Length; ++local_3)
-                    {
-                        bw.ReportProgress(ProcessContract(local_3, local_2));
-                        file.DeleteFile("ImageCache" + "\\" + local_1[local_3]);
-                    }
-                });
-                bw.RunWorkerCompleted += (RunWorkerCompletedEventHandler)((s1, e1) =>
-                {
-                    this._progressService.Hide();
-                    GC.Collect();
-                    file.Dispose();
-                    this.ShowDialogFor2Seconds("清除完毕");
-                });
-                bw.ProgressChanged += (ProgressChangedEventHandler)((s1, e1) =>
-                {
-                    this._progressService.Show("已清理" + (object)e1.ProgressPercentage + "%");
-                });
-                bw.RunWorkerAsync();
-            }
-        }
-
-        public async void ShowDialogFor2Seconds(string text)
-        {
-            await this._uxService.ShowAlertFor2Seconds(string.Empty, text);
-        }
-
+        
         public void OnBackKeyPress(CancelEventArgs arg)
         {
             if (this._isCanClose)
@@ -265,7 +201,7 @@ namespace Ichongli.Rosi.ViewModels
         public void ShowCloseToastPrompt()
         {
             var toast = new ToastPrompt();
-            toast.FontSize = 30;
+            toast.FontSize = 20;
             toast.Message = "亲  再来一下就出去了哦～";
             toast.TextOrientation = System.Windows.Controls.Orientation.Horizontal;
             toast.Completed += toast_Completed;

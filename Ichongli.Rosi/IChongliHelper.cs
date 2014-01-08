@@ -30,8 +30,16 @@
 
         public async static Task<T> DoHttpGet<T>(StringBuilder Url)
         {
-            var content = await HttpHelper.RequestAwait(Url.ToString());
-            return JsonConvert.DeserializeObject<T>(content);
+            try
+            {
+                var content = await HttpHelper.RequestAwait(Url.ToString());
+                return JsonConvert.DeserializeObject<T>(content);
+            }
+            catch (Exception ex)
+            {
+                SubmitRespond(ex.Message);
+                return default(T);
+            }
         }
 
         public static void SubmitRespond(string content)

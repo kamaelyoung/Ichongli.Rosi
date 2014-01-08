@@ -14,8 +14,8 @@
             </toolkit:FlipView.ItemTemplate>
         </toolkit:FlipView>
         <bab:BindableAppBar x:Name="AppBar" Grid.Row="1" BarOpacity="0.1">
-            <bab:BindableAppBarButton x:Name="Lockscreen" Text="锁屏" />
-            <bab:BindableAppBarButton x:Name="SaveImage" Text="保存" />
+            <bab:BindableAppBarButton micro:Message.Attach="[Click]=[Lockscreen]" Text="锁屏" IconUri="/Assets/lock.png"/>
+            <bab:BindableAppBarButton micro:Message.Attach="[Click]=[SaveImage]" Text="保存" IconUri="/Assets/save.png" />
         </bab:BindableAppBar>
     </Grid>
 </phone:PhoneApplicationPage>
