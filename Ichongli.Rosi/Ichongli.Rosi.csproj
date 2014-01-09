@@ -289,6 +289,12 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.2-unstable-9051\lib\sl4-windowsphone71\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Parse">
+      <HintPath>..\packages\parse.1.2.12\lib\wp8\Parse.dll</HintPath>
+    </Reference>
+    <Reference Include="Parse.Phone">
+      <HintPath>..\packages\parse.1.2.12\lib\wp8\Parse.Phone.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp8\System.Windows.Interactivity.dll</HintPath>
     </Reference>

@@ -8,6 +8,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Ichongli.Rosi.Resources;
 using System.Net;
+using Parse;
 
 namespace Ichongli.Rosi
 {
@@ -20,6 +21,8 @@ namespace Ichongli.Rosi
         {
             // 标准 XAML 初始化
             InitializeComponent();
+
+            ParseClient.Initialize("guC2YcdOyhm16rpuB1tDo4U6elEgZGH17AC2t7sX", "XezmH3Srdmbdh4eIXCiYUjl9N9d6Va1RISWcEvrC");
         }
 
     }
