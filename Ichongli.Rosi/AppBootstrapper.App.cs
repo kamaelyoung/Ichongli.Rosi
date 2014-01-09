@@ -211,14 +211,14 @@ namespace Ichongli.Rosi
             RemoveCurrentDeactivationSettings();
         }
 
-        protected async override void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
             InitializePhoneApplication();
             ParseAnalytics.TrackAppOpens(RootFrame);
 
             // By convention, the empty string is considered a "Broadcast" channel
             // Note that we had to add "async" to the OnLaunched definition to use the await keyword
-            await ParsePush.SubscribeAsync("");
+            //await ParsePush.SubscribeAsync("");
 
             base.OnStartup(sender, e);
         }
