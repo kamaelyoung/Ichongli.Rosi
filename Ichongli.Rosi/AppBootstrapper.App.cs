@@ -4,7 +4,6 @@ using Ichongli.Rosi.Services;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Ninject;
-using Parse;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -206,7 +205,6 @@ namespace Ichongli.Rosi
 
         protected async override void OnLaunch(object sender, LaunchingEventArgs e)
         {
-            await ParseAnalytics.TrackAppOpenedAsync();
             // When a new instance of the app is launched, clear all deactivation settings
             RemoveCurrentDeactivationSettings();
         }
@@ -214,12 +212,6 @@ namespace Ichongli.Rosi
         protected async override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
             InitializePhoneApplication();
-            ParseAnalytics.TrackAppOpens(RootFrame);
-
-            // By convention, the empty string is considered a "Broadcast" channel
-            // Note that we had to add "async" to the OnLaunched definition to use the await keyword
-            await ParsePush.SubscribeAsync("");
-
             base.OnStartup(sender, e);
         }
 
