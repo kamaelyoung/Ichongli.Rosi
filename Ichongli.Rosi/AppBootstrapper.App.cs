@@ -214,6 +214,7 @@ namespace Ichongli.Rosi
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
             InitializePhoneApplication();
+
             base.OnStartup(sender, e);
         }
 
