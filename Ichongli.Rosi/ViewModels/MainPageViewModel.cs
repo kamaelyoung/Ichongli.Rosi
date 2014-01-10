@@ -18,6 +18,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaskEx = System.Threading.Tasks.Task;
 using Coding4Fun.Toolkit.Controls;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace Ichongli.Rosi.ViewModels
 {
@@ -88,12 +89,17 @@ namespace Ichongli.Rosi.ViewModels
         {
             base.OnActivate();
 
-            
-
-            if (!base._isInitialized)
+            if (DeviceNetworkInformation.IsNetworkAvailable)
             {
-                this.OnLoadData();
-                this._isInitialized = true;
+                if (!base._isInitialized)
+                {
+                    this.OnLoadData();
+                    this._isInitialized = true;
+                }
+            }
+            else
+            {
+                this._uxService.ShowAlert("", "请打开网络连接。");                
             }
         }
 

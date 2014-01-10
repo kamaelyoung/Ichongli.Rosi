@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Ichongli.Rosi.Interfaces;
 using Ichongli.Rosi.Models;
+using Microsoft.Phone.Net.NetworkInformation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -84,15 +85,18 @@ namespace Ichongli.Rosi.ViewModels
         protected override void OnActivate()
         {
             base.OnActivate();
-            if (!this._isInitialized)
+            if (DeviceNetworkInformation.IsNetworkAvailable)
             {
-                if (this.Photos.Count > 0)
+                if (!this._isInitialized)
                 {
-                    var selected = this.Photos.FirstOrDefault(p => p.ItemId == this.ItemID);
-                    if (selected != null)
-                        this.SelectItem = selected;
+                    if (this.Photos.Count > 0)
+                    {
+                        var selected = this.Photos.FirstOrDefault(p => p.ItemId == this.ItemID);
+                        if (selected != null)
+                            this.SelectItem = selected;
+                    }
+                    this._isInitialized = true;
                 }
-                this._isInitialized = true;
             }
         }
 
