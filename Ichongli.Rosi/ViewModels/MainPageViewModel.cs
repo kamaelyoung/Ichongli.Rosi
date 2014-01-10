@@ -87,6 +87,9 @@ namespace Ichongli.Rosi.ViewModels
         protected override void OnActivate()
         {
             base.OnActivate();
+
+            
+
             if (!base._isInitialized)
             {
                 this.OnLoadData();
@@ -103,7 +106,7 @@ namespace Ichongli.Rosi.ViewModels
                 {
                     var categories = await serviceBroker.GetCategories();
 
-                    if (categories.status.ToLower() == "ok")
+                    if (categories != null && categories.status.ToLower() == "ok")
                     {
                         var filtered = categories.categories.Where(o => o.parent == 0);
                         foreach (var item in filtered)
@@ -115,7 +118,7 @@ namespace Ichongli.Rosi.ViewModels
                     }
                     else
                     {
-                        throw new Exception(categories.status);
+                        throw new Exception(categories == null ? "没有分类信息" : categories.status);
                     }
                 }
                 catch (Exception ex)
@@ -184,7 +187,7 @@ namespace Ichongli.Rosi.ViewModels
         {
             this._uxService.ClearCache();
         }
-        
+
         public void OnBackKeyPress(CancelEventArgs arg)
         {
             if (this._isCanClose)

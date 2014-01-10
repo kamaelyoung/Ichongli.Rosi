@@ -12,7 +12,9 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Navigation;
+using Windows.Networking.Connectivity;
 
 namespace Ichongli.Rosi
 {
@@ -203,13 +205,13 @@ namespace Ichongli.Rosi
             SaveCurrentDeactivationSettings();
         }
 
-        protected async override void OnLaunch(object sender, LaunchingEventArgs e)
+        protected override void OnLaunch(object sender, LaunchingEventArgs e)
         {
             // When a new instance of the app is launched, clear all deactivation settings
             RemoveCurrentDeactivationSettings();
         }
 
-        protected async override void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
             InitializePhoneApplication();
             base.OnStartup(sender, e);
