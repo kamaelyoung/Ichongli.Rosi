@@ -59,9 +59,7 @@ namespace Ichongli.Rosi.ViewModels
                 }
             }
         }
-
-        private bool isLoading = false;
-
+        
         private bool _progressBarIsVisible = true;
         public bool ProgressBarIsVisible
         {

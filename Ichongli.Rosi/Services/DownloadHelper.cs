@@ -16,8 +16,6 @@ namespace Ichongli.Rosi.Services
         public async Task<BitmapImage> GetImage(string url, bool go = false)
         {
             byte[] imageBytes = null;
-            bool shouldGet = false;
-            //string url = go ? imageMetaData.imageThumbnail : imageMetaData.imageUrl;
             try
             {
                 using (var stream = await new WebClient().OpenReadTaskAsync(new Uri(url, UriKind.Absolute)))
@@ -25,38 +23,17 @@ namespace Ichongli.Rosi.Services
                     imageBytes = new byte[stream.Length];
                     stream.Read(imageBytes, 0, imageBytes.Length);
                 }
+
+                var imageStream = new MemoryStream(imageBytes);
+
+                BitmapImage image = new BitmapImage();
+                image.SetSource(imageStream);
+                return image;
             }
             catch (Exception e)
             {
-                shouldGet = true;
+                return null;
             }
-            if (shouldGet)
-            {
-                //imageBytes = await queue.Enqueue(1, async () =>
-                //    {
-
-                //        using (var client = new HttpClient())
-                //        {
-                //            byte[] tempimageBytes = null;
-                //            try
-                //            {
-                //                tempimageBytes = await client.GetByteArrayAsync(url);
-                //                await BlobCache.LocalMachine.Insert(url, tempimageBytes);
-                //            }
-                //            catch (Exception e)
-                //            {
-                //                //MessageBox.Show("Please check your network connection");
-                //            }
-                //            return tempimageBytes;
-                //        }
-                //    });
-            }
-            var imageStream = new MemoryStream(imageBytes);
-
-            //BECAUSE WP8 SAID SO
-            BitmapImage image = new BitmapImage();
-            image.SetSource(imageStream);
-            return image;
         }
     }
 }
