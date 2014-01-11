@@ -18,7 +18,6 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaskEx = System.Threading.Tasks.Task;
 using Coding4Fun.Toolkit.Controls;
-using Microsoft.Phone.Net.NetworkInformation;
 
 namespace Ichongli.Rosi.ViewModels
 {
@@ -88,18 +87,10 @@ namespace Ichongli.Rosi.ViewModels
         protected override void OnActivate()
         {
             base.OnActivate();
-
-            if (DeviceNetworkInformation.IsNetworkAvailable)
+            if (!base._isInitialized)
             {
-                if (!base._isInitialized)
-                {
-                    this.OnLoadData();
-                    this._isInitialized = true;
-                }
-            }
-            else
-            {
-                this._uxService.ShowAlert("", "请打开网络连接。");                
+                this.OnLoadData();
+                this._isInitialized = true;
             }
         }
 
@@ -112,7 +103,7 @@ namespace Ichongli.Rosi.ViewModels
                 {
                     var categories = await serviceBroker.GetCategories();
 
-                    if (categories != null && categories.status.ToLower() == "ok")
+                    if (categories.status.ToLower() == "ok")
                     {
                         var filtered = categories.categories.Where(o => o.parent == 0);
                         foreach (var item in filtered)
@@ -124,7 +115,7 @@ namespace Ichongli.Rosi.ViewModels
                     }
                     else
                     {
-                        throw new Exception(categories == null ? "没有分类信息" : categories.status);
+                        throw new Exception(categories.status);
                     }
                 }
                 catch (Exception ex)
@@ -193,7 +184,7 @@ namespace Ichongli.Rosi.ViewModels
         {
             this._uxService.ClearCache();
         }
-
+        
         public void OnBackKeyPress(CancelEventArgs arg)
         {
             if (this._isCanClose)

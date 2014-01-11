@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using Ichongli.Rosi.Interfaces;
 using Ichongli.Rosi.Models;
-using Microsoft.Phone.Net.NetworkInformation;
 using Microsoft.Phone.Tasks;
 using System;
 using System.Collections.Generic;
@@ -203,14 +202,8 @@ namespace Ichongli.Rosi.ViewModels
 
         protected override void OnInitialize()
         {
-            if (DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                this.LoadData();
-            }
-            else
-            {
-                this._uxService.ShowAlert("", "请打开网络连接。");
-            }
+            this.LoadData();
+            //base.OnInitialize();
         }
 
         private async void LoadData()
