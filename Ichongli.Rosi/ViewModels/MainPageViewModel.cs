@@ -108,7 +108,7 @@ namespace Ichongli.Rosi.ViewModels
                         var filtered = categories.categories.Where(o => o.parent == 0);
                         foreach (var item in filtered)
                         {
-                            this.Categories.Add(new Models.Ui.Item { Title = item.title.ToLower(), ItemId = item.id.ToString() });
+                            this.Categories.Add(new Models.Ui.Item { Title = item.title.ToLower(), ItemId = item.id.ToString(), Description = item.description });
                         }
 
                         await LoadLastPosts();
@@ -184,40 +184,40 @@ namespace Ichongli.Rosi.ViewModels
         {
             this._uxService.ClearCache();
         }
-        
+
         public void OnBackKeyPress(CancelEventArgs arg)
         {
-            if (this._isCanClose)
-                this.TryClose();
-            else
-            {
-                arg.Cancel = true;
-                this.ShowCloseToastPrompt();
-            }
+            // if (this._isCanClose)
+            this.TryClose();
+            //else
+            //{
+            //    arg.Cancel = true;
+            //    this.ShowCloseToastPrompt();
+            //}
         }
 
-        private bool _isCanClose;
+        //private bool _isCanClose;
 
-        public void ShowCloseToastPrompt()
-        {
-            var toast = new ToastPrompt();
-            toast.FontSize = 20;
-            toast.Message = "亲  再来一下就出去了哦～";
-            toast.TextOrientation = System.Windows.Controls.Orientation.Horizontal;
-            toast.Completed += toast_Completed;
-            this._isCanClose = true;
-            toast.Show();
-        }
+        //public void ShowCloseToastPrompt()
+        //{
+        //    var toast = new ToastPrompt();
+        //    toast.FontSize = 20;
+        //    toast.Message = "亲  再来一下就出去了哦～";
+        //    toast.TextOrientation = System.Windows.Controls.Orientation.Horizontal;
+        //    toast.Completed += toast_Completed;
+        //    this._isCanClose = true;
+        //    toast.Show();
+        //}
 
-        void toast_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
-        {
-            var toast = sender as ToastPrompt;
-            if (toast != null)
-            {
-                toast.Completed -= toast_Completed;
-                this._isCanClose = false;
-            }
-        }
+        //void toast_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
+        //{
+        //    var toast = sender as ToastPrompt;
+        //    if (toast != null)
+        //    {
+        //        toast.Completed -= toast_Completed;
+        //        this._isCanClose = false;
+        //    }
+        //}
 
         public void Handle(SampleMessage message)
         {
@@ -226,7 +226,7 @@ namespace Ichongli.Rosi.ViewModels
 
         public async void Login()
         {
-            var userRoot = await this._serviceAuth.generate_auth_cookie("tuigirls", "yongqi29");
+            var userRoot = await this._serviceAuth.generate_auth_cookie("", "");
             if (userRoot.status == "ok")
             {
                 this._uxService.ShowToast("欢迎回来" + userRoot.user.displayname);

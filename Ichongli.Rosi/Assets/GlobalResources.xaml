@@ -31,7 +31,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="PanoramaHeaderTemplate">
-        <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource ThirdBackgroundBrush}" Margin="0,20,0,0" />
+        <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource ThirdBackgroundBrush}" FontSize="35"/>
     </DataTemplate>
 
     <DataTemplate x:Key="NewsItems">

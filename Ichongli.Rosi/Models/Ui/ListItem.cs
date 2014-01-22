@@ -105,5 +105,19 @@ namespace Ichongli.Rosi.Models.Ui
             }
         }
 
+        private string _description;
+        public string Description
+        {
+            get { return this._description; }
+            set
+            {
+                if (this._description != value)
+                {
+                    this._description = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+
     }
 }
