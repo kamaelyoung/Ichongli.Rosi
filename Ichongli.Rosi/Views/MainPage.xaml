@@ -61,7 +61,7 @@
                         </Border>
                     </thinkwp:TiltControl>
                     <thinkwp:TiltControl Grid.Column="1">
-                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#f9b256" micro:Message.Attach="[Tap]=[MarketplaceReviewTask]">
+                        <Border BorderBrush="#2672ec" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#9B4F96" micro:Message.Attach="[Tap]=[MarketplaceReviewTask]">
                             <TextBlock Text="五星伺候" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                         </Border>
                     </thinkwp:TiltControl>
