@@ -12,8 +12,8 @@
             </phone:Panorama.Background>
 
             <phone:PanoramaItem Header="最新">
-                <phone:LongListSelector toolkit:TiltEffect.IsTiltEnabled="True" ItemsSource="{Binding Items}" IsGroupingEnabled="False" GridCellSize="138,138" LayoutMode="Grid" Margin="0,0,-12,0">
-                    <phone:LongListSelector.ItemTemplate>
+                <toolkit:LongListMultiSelector toolkit:TiltEffect.IsTiltEnabled="True" ItemsSource="{Binding Items}" IsGroupingEnabled="False" GridCellSize="138,138" LayoutMode="Grid" Margin="0,0,-12,0">
+                    <toolkit:LongListMultiSelector.ItemTemplate>
                         <DataTemplate>
                             <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]" HorizontalAlignment="Stretch" Margin="0,0,2,2" Width="136" Height="136" BorderBrush="White" BorderThickness="1" Background="#f5f5f5">
                                 <Grid>
@@ -24,8 +24,8 @@
                                 </Grid>
                             </Border>
                         </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                    </toolkit:LongListMultiSelector.ItemTemplate>
+                </toolkit:LongListMultiSelector>
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
@@ -56,12 +56,12 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <thinkwp:TiltControl>
-                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#f9b256" micro:Message.Attach="[Tap]=[ClearCache]">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#2672ec" micro:Message.Attach="[Tap]=[ClearCache]">
                             <TextBlock Text="清除缓存" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                         </Border>
                     </thinkwp:TiltControl>
                     <thinkwp:TiltControl Grid.Column="1">
-                        <Border BorderBrush="#2672ec" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#9B4F96" micro:Message.Attach="[Tap]=[MarketplaceReviewTask]">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#9B4F96" micro:Message.Attach="[Tap]=[MarketplaceReviewTask]">
                             <TextBlock Text="五星伺候" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                         </Border>
                     </thinkwp:TiltControl>
