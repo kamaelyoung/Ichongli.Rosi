@@ -97,7 +97,6 @@
                             </phonePrimitives:PanningTitleLayer>
                         </Border>
                         <Border HorizontalAlignment="Left" Grid.Row="1" Background="Transparent">
-
                             <phonePrimitives:PanningLayer x:Name="ItemsLayer">
                                 <ItemsPresenter x:Name="items" />
                             </phonePrimitives:PanningLayer>

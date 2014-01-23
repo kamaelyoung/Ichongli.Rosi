@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="zh-CN" />
-  <App xmlns="" ProductID="{38917303-39d2-4a33-a299-a2cb513fbbc4}" Title="模悦" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Ichongli.Rosi author" Description="模悦" Publisher="Ichongli.Rosi" PublisherID="{7c2e8ce0-3c50-4811-81a0-fa93e67b3846}">
+  <App xmlns="" ProductID="{38917303-39d2-4a33-a299-a2cb513fbbc4}" Title="模悦" RuntimeType="Silverlight" Version="1.0.0.1" Genre="apps.normal" Author="Ichongli.Rosi author" Description="模悦,国模rosi推女郎" Publisher="Ichongli.Rosi" PublisherID="{7c2e8ce0-3c50-4811-81a0-fa93e67b3846}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -23,7 +23,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>DFT应用市场</Title>
+          <Title>模悦</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

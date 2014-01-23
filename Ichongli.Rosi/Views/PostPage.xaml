@@ -11,11 +11,11 @@
                 <RowDefinition  />
             </Grid.RowDefinitions>
             <TextBlock VerticalAlignment="Bottom" Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource ThirdBackgroundBrush}" Margin="12"/>
-            <toolkit:LongListMultiSelector VirtualizingStackPanel.VirtualizationMode="Recycling" Grid.Row="1" Margin="0 0 12 12" ItemsSource="{Binding Photos}" LayoutMode="Grid" x:Name="PhotoGrid" IsGroupingEnabled="False" GridCellSize="148,248">
+            <toolkit:LongListMultiSelector VirtualizingStackPanel.VirtualizationMode="Recycling" Grid.Row="1" Margin="-5 0 7 12" ItemsSource="{Binding Photos}" LayoutMode="Grid" x:Name="PhotoGrid" IsGroupingEnabled="False" GridCellSize="155,255">
                 <toolkit:LongListMultiSelector.ItemTemplate>
                     <DataTemplate>
                         <Grid micro:Message.Attach="[Tap]=[NaivgatoViewer($datacontext)]">
-                            <Border Background="#ffffff" BorderBrush="#ffffff" BorderThickness="1" Margin="0,0,4,4">
+                            <Border Background="#ffffff" BorderBrush="#ffffff" BorderThickness="2" Margin="0,0,5,5">
                                 <Grid>
                                     <TextBlock HorizontalAlignment="Center" Margin="0,2,0,0" TextWrapping="Wrap" Text="Loading..." VerticalAlignment="Center" Foreground="Black" />
                                     <Image utilities:ImageNodify.Source="{Binding ItemImage.Thumbnail}" CacheMode="BitmapCache" Width="148" Height="248" Stretch="UniformToFill" />

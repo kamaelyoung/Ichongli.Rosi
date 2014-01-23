@@ -18,6 +18,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaskEx = System.Threading.Tasks.Task;
 using Coding4Fun.Toolkit.Controls;
+using Microsoft.Phone.Tasks;
 
 namespace Ichongli.Rosi.ViewModels
 {
@@ -183,6 +184,12 @@ namespace Ichongli.Rosi.ViewModels
         public void ClearCache()
         {
             this._uxService.ClearCache();
+        }
+
+        public void MarketplaceReviewTask()
+        {
+            MarketplaceReviewTask market = new MarketplaceReviewTask();
+            market.Show();
         }
 
         public void OnBackKeyPress(CancelEventArgs arg)

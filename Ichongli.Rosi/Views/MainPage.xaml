@@ -12,12 +12,12 @@
             </phone:Panorama.Background>
 
             <phone:PanoramaItem Header="最新">
-                <phone:LongListSelector toolkit:TiltEffect.IsTiltEnabled="True" ItemsSource="{Binding Items}" IsGroupingEnabled="False" GridCellSize="204,204" LayoutMode="Grid" Margin="0,0,-4,0">
+                <phone:LongListSelector toolkit:TiltEffect.IsTiltEnabled="True" ItemsSource="{Binding Items}" IsGroupingEnabled="False" GridCellSize="138,138" LayoutMode="Grid" Margin="0,0,-12,0">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]" HorizontalAlignment="Stretch" Margin="0,0,4,4" Width="200" Height="200" BorderBrush="White" BorderThickness="1" Background="#f5f5f5">
+                            <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]" HorizontalAlignment="Stretch" Margin="0,0,2,2" Width="136" Height="136" BorderBrush="White" BorderThickness="1" Background="#f5f5f5">
                                 <Grid>
-                                    <Image Stretch="UniformToFill" Height="200" Width="200" utilities:ImageNodify.Source="{Binding Url}" />
+                                    <Image Stretch="UniformToFill" Height="136" Width="136" utilities:ImageNodify.Source="{Binding Url}" />
                                     <StackPanel VerticalAlignment="Bottom" Background="#66000000">
                                         <TextBlock Text="{Binding Title}" TextTrimming="WordEllipsis" Margin="5,8" Foreground="#ffffff" />
                                     </StackPanel>
@@ -30,10 +30,10 @@
 
             <!--Panorama item two-->
             <phone:PanoramaItem Header="分类">
-                <phone:LongListSelector toolkit:TiltEffect.IsTiltEnabled="True" x:Name="RecentList" ItemsSource="{Binding Categories}" IsGroupingEnabled="False" GridCellSize="204,204" LayoutMode="Grid" Margin="0,0,-4,0">
+                <phone:LongListSelector toolkit:TiltEffect.IsTiltEnabled="True" x:Name="RecentList" ItemsSource="{Binding Categories}" IsGroupingEnabled="False" GridCellSize="138,138" LayoutMode="Grid" Margin="0,0,-12,0">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <Border micro:Message.Attach="[Tap]=[NaivgatoCategorie($datacontext)]" BorderThickness="1" BorderBrush="#ffffff" Background="{Binding Description}" Margin="0,0,4,4">
+                            <Border micro:Message.Attach="[Tap]=[NaivgatoCategorie($datacontext)]" BorderThickness="1" BorderBrush="#ffffff" Background="{Binding Description}" Margin="0,0,2,2">
                                 <Grid>
                                     <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Grid>
@@ -52,11 +52,17 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <thinkwp:TiltControl>
-                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="200" Height="200" Margin="0,0,4,4" Background="#f9b256" micro:Message.Attach="[Tap]=[ClearCache]">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#f9b256" micro:Message.Attach="[Tap]=[ClearCache]">
                             <TextBlock Text="清除缓存" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
+                        </Border>
+                    </thinkwp:TiltControl>
+                    <thinkwp:TiltControl Grid.Column="1">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#f9b256" micro:Message.Attach="[Tap]=[MarketplaceReviewTask]">
+                            <TextBlock Text="五星伺候" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                         </Border>
                     </thinkwp:TiltControl>
                 </Grid>

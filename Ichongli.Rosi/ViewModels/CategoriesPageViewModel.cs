@@ -84,6 +84,20 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
+        private string _BigImage;
+        public string BigImage
+        {
+            get { return this._BigImage; }
+            set
+            {
+                if (_BigImage != value)
+                {
+                    _BigImage = value;
+                    this.NotifyOfPropertyChange(() => BigImage);
+                }
+            }
+        }
+
         private ObservableCollection<Models.Ui.Item> _Categories;
         public ObservableCollection<Models.Ui.Item> Categories
         {

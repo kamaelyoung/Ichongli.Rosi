@@ -8,6 +8,7 @@
             <toolkit:FlipView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
+                        <TextBlock Text="Loading..." Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <Image micro:Message.Attach="[ImageOpened]=[OnImageOpened]" u:ImageNodify.Source="{Binding ItemImage.Medium}" />
                     </Grid>
                 </DataTemplate>
