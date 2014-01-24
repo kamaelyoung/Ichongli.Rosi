@@ -120,7 +120,6 @@
     <Compile Include="Tombstoning\MainPageModelStorage.cs" />
     <Compile Include="Tombstoning\ViewerPageModelStorage.cs" />
     <Compile Include="Utilities\AsyncExtensions.cs" />
-    <Compile Include="Utilities\Common.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\ImageNodify.cs" />
     <Compile Include="Utilities\JsonTryParse.cs" />
@@ -246,11 +245,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\TopPanoramaLogo.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
@@ -272,10 +268,6 @@
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WPtoolkit.Kinnara.4.2014.01.07\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -300,9 +292,9 @@
       <Project>{1D096C13-FF45-4C43-9729-E48E8F56C237}</Project>
       <Name>Caliburn.Micro.Coding4Fun</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ichongli.Controls\ThinkWP.Controls.csproj">
-      <Project>{CC64ACCD-C047-47A1-9E11-44AE2AFC39F1}</Project>
-      <Name>ThinkWP.Controls</Name>
+    <ProjectReference Include="..\Thinkwp.Controls\Thinkwp.Controls.csproj">
+      <Project>{2483BE74-215B-41FE-B1DE-AEB1CA39B7CA}</Project>
+      <Name>Thinkwp.Controls</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
