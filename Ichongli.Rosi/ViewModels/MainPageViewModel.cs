@@ -25,9 +25,7 @@ namespace Ichongli.Rosi.ViewModels
     public class MainPageViewModel : ThinkViewModelBase
     {
         private readonly IServiceBroker serviceBroker;
-        private readonly IServiceUser _serviceUser;
         private readonly IUxService _uxService;
-        private readonly IServiceAuth _serviceAuth;
 
         private ObservableCollection<Models.Ui.Item> _Categories;
         public ObservableCollection<Models.Ui.Item> Categories
@@ -76,13 +74,11 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        public MainPageViewModel(IServiceAuth serviceAuth, IUxService uxService, INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IServiceUser serviceUser, IProgressService progressService, IWindowManager windowManager)
+        public MainPageViewModel(  IUxService uxService, INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker,  IProgressService progressService, IWindowManager windowManager)
             : base(progressService, windowManager, navigationService)
         {
             this.serviceBroker = serviceBroker;
-            this._serviceUser = serviceUser;
             this._uxService = uxService;
-            this._serviceAuth = serviceAuth;
         }
 
         protected override void OnActivate()
@@ -176,11 +172,6 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        public async void Register()
-        {
-            var r = await this._serviceUser.Register("xiaohai", "49403700@qq.com", "yongqi", "Œµ¿∂∫£");
-        }
-
         public void ClearCache()
         {
             this._uxService.ClearCache();
@@ -231,13 +222,5 @@ namespace Ichongli.Rosi.ViewModels
 
         }
 
-        public async void Login()
-        {
-            var userRoot = await this._serviceAuth.generate_auth_cookie("", "");
-            if (userRoot.status == "ok")
-            {
-                this._uxService.ShowToast("ª∂”≠ªÿ¿¥" + userRoot.user.displayname);
-            }
-        }
     }
 }

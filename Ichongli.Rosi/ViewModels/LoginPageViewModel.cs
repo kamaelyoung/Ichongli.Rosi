@@ -12,12 +12,10 @@ namespace Ichongli.Rosi.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
-        private readonly IServiceAuth _serviceAuth;
-        public LoginPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IServiceAuth serviceAuth)
+        public LoginPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
             this._navigationService = navigationService;
             this._eventAggregator = eventAggregator;
-            this._serviceAuth = serviceAuth;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Ichongli.Rosi.Utilities;
+using System.Net.Http;
 
 namespace Ichongli.Rosi.Services
 {
@@ -18,7 +19,10 @@ namespace Ichongli.Rosi.Services
             byte[] imageBytes = null;
             try
             {
-                using (var stream = await new WebClient().OpenReadTaskAsync(new Uri(url, UriKind.Absolute)))
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 {
                     imageBytes = new byte[stream.Length];
                     stream.Read(imageBytes, 0, imageBytes.Length);
@@ -30,7 +34,7 @@ namespace Ichongli.Rosi.Services
                 image.SetSource(imageStream);
                 return image;
             }
-            catch (Exception e)
+            catch (HttpRequestException ex)
             {
                 return null;
             }

@@ -9,28 +9,6 @@ using System.Windows.Media.Imaging;
 
 namespace Ichongli.Rosi.Utilities
 {
-    public static class AsyncExtensions
-    {
-        public static Task<Stream> OpenReadTaskAsync(this WebClient client, Uri uri)
-        {
-            var taskComplete = new TaskCompletionSource<Stream>();
-            client.OpenReadCompleted += (sender, args) =>
-            {
-                try
-                {
-                    taskComplete.TrySetResult(args.Result);
-                }
-                catch
-                {
-                    taskComplete.TrySetResult(null);
-                }
-            };
-            client.OpenReadAsync(uri);
-            return taskComplete.Task;
-        }
-
-    }
-
     public static class ImageExtensions
     {
         public static BitmapImage ToBitmapImage(this byte[] bytes)

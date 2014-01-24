@@ -229,8 +229,6 @@ namespace Ichongli.Rosi
 
             string logInfo = sbLogInfo.ToString();
 
-            IChongliHelper.SubmitRespond(DateTime.Now + " :" + logInfo);
-
             if (Debugger.IsAttached)
             {
                 // 出现未处理的异常；强行进入调试器

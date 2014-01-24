@@ -19,6 +19,7 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using Windows.Storage;
+    using System.Net.Http;
 
     public class ImageNodify
     {
@@ -84,7 +85,11 @@
                                 {
                                     #region 请求本地失败
                                     img.Tag = url;
-                                    using (Stream stream = await new WebClient().OpenReadTaskAsync(new Uri(url, UriKind.Absolute)))
+
+                                    var httpClient = new HttpClient();
+                                    var response = await httpClient.GetAsync(url);
+                                    response.EnsureSuccessStatusCode();
+                                    using (var stream = await response.Content.ReadAsStreamAsync())
                                     {
                                         byte[] bytes = new byte[stream.Length];
                                         stream.Read(bytes, 0, bytes.Length);
@@ -125,7 +130,10 @@
                         {
                             try
                             {
-                                using (Stream stream = await new WebClient().OpenReadTaskAsync(new Uri(url, UriKind.Absolute)))
+                                var httpClient = new HttpClient();
+                                var response = await httpClient.GetAsync(url);
+                                response.EnsureSuccessStatusCode();
+                                using (var stream = await response.Content.ReadAsStreamAsync())
                                 {
                                     byte[] bytes = new byte[stream.Length];
                                     await stream.ReadAsync(bytes, 0, bytes.Length);
