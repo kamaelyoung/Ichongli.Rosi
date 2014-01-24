@@ -12,20 +12,20 @@
             </phone:Panorama.Background>
 
             <phone:PanoramaItem Header="最新">
-                <toolkit:LongListMultiSelector toolkit:TiltEffect.IsTiltEnabled="True" ItemsSource="{Binding Items}" IsGroupingEnabled="False" GridCellSize="138,138" LayoutMode="Grid" Margin="0,0,-12,0">
-                    <toolkit:LongListMultiSelector.ItemTemplate>
+                <phone:LongListSelector toolkit:TiltEffect.IsTiltEnabled="True" ItemsSource="{Binding Items}" IsGroupingEnabled="False" GridCellSize="138,138" LayoutMode="Grid" Margin="0,0,-12,0">
+                    <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]" HorizontalAlignment="Stretch" Margin="0,0,2,2" Width="136" Height="136" BorderBrush="White" BorderThickness="1" Background="#f5f5f5">
+                            <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]" Margin="0,0,2,2" BorderBrush="White" BorderThickness="1" Background="#f5f5f5">
                                 <Grid>
-                                    <Image Stretch="UniformToFill" Height="136" Width="136" utilities:ImageNodify.Source="{Binding Url}" />
+                                    <Image Stretch="UniformToFill" utilities:ImageNodify.Source="{Binding Url}" />
                                     <StackPanel VerticalAlignment="Bottom" Background="#66000000">
                                         <TextBlock Text="{Binding Title}" TextTrimming="WordEllipsis" Margin="5,8" Foreground="#ffffff" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
                         </DataTemplate>
-                    </toolkit:LongListMultiSelector.ItemTemplate>
-                </toolkit:LongListMultiSelector>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
