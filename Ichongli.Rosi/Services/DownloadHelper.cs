@@ -7,7 +7,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Ichongli.Rosi.Utilities;
 using System.Net.Http;
 
 namespace Ichongli.Rosi.Services

@@ -13,7 +13,6 @@ using System;
 using System.IO.IsolatedStorage;
 using System.ComponentModel;
 using System.Windows.Threading;
-using Ichongli.Rosi.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaskEx = System.Threading.Tasks.Task;
@@ -74,7 +73,7 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
-        public MainPageViewModel(  IUxService uxService, INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker,  IProgressService progressService, IWindowManager windowManager)
+        public MainPageViewModel(IUxService uxService, INavigationService navigationService, IEventAggregator eventAggregator, IServiceBroker serviceBroker, IProgressService progressService, IWindowManager windowManager)
             : base(progressService, windowManager, navigationService)
         {
             this.serviceBroker = serviceBroker;
@@ -185,42 +184,12 @@ namespace Ichongli.Rosi.ViewModels
 
         public void OnBackKeyPress(CancelEventArgs arg)
         {
-            // if (this._isCanClose)
             this.TryClose();
-            //else
-            //{
-            //    arg.Cancel = true;
-            //    this.ShowCloseToastPrompt();
-            //}
         }
-
-        //private bool _isCanClose;
-
-        //public void ShowCloseToastPrompt()
-        //{
-        //    var toast = new ToastPrompt();
-        //    toast.FontSize = 20;
-        //    toast.Message = "亲  再来一下就出去了哦～";
-        //    toast.TextOrientation = System.Windows.Controls.Orientation.Horizontal;
-        //    toast.Completed += toast_Completed;
-        //    this._isCanClose = true;
-        //    toast.Show();
-        //}
-
-        //void toast_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
-        //{
-        //    var toast = sender as ToastPrompt;
-        //    if (toast != null)
-        //    {
-        //        toast.Completed -= toast_Completed;
-        //        this._isCanClose = false;
-        //    }
-        //}
 
         public void Handle(SampleMessage message)
         {
 
         }
-
     }
 }

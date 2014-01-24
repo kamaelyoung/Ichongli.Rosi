@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ichongli.Rosi.Utilities
+namespace Thinkwp.Controls
 {
     public class MD5 : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿<phone:PhoneApplicationPage x:Class="Ichongli.Rosi.Views.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}" SupportedOrientations="Portrait" Orientation="Portrait" shell:SystemTray.Opacity="0" shell:SystemTray.IsVisible="True" xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" shell:SystemTray.ForegroundColor="#427fed" xmlns:thinkwp="clr-namespace:Thinkwp.Controls;assembly=Thinkwp.Controls" xmlns:utilities="clr-namespace:Ichongli.Rosi.Utilities">
+﻿<phone:PhoneApplicationPage x:Class="Ichongli.Rosi.Views.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}" SupportedOrientations="Portrait" Orientation="Portrait" shell:SystemTray.Opacity="0" shell:SystemTray.IsVisible="True" xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" shell:SystemTray.ForegroundColor="#427fed" xmlns:thinkwp="clr-namespace:Thinkwp.Controls;assembly=Thinkwp.Controls">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource MainBackgroundBrush}">
@@ -17,7 +17,7 @@
                         <DataTemplate>
                             <Border micro:Message.Attach="[Tap]=[NaivgatoDetail($datacontext)]" Margin="0,0,2,2" BorderBrush="White" BorderThickness="1" Background="#f5f5f5">
                                 <Grid>
-                                    <Image Stretch="UniformToFill" utilities:ImageNodify.Source="{Binding Url}" />
+                                    <Image Stretch="UniformToFill" thinkwp:ThinkImage.Source="{Binding Url}" />
                                     <StackPanel VerticalAlignment="Bottom" Background="#66000000">
                                         <TextBlock Text="{Binding Title}" TextTrimming="WordEllipsis" Margin="5,8" Foreground="#ffffff" />
                                     </StackPanel>

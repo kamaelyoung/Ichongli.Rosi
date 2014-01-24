@@ -4,6 +4,7 @@
     using System.IO;
     using System.IO.IsolatedStorage;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
@@ -135,7 +136,10 @@
         {
             try
             {
-                using (var stream = await new WebClient().OpenReadTaskAsync(new Uri(imageurl, UriKind.Absolute)))
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(imageurl);
+                response.EnsureSuccessStatusCode();
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 {
                     //检测图片缓存文件夹是否存在，不存在则创建
                     if (!IsolatedStorage.DirectoryExists(CachePath))
@@ -157,7 +161,7 @@
                     return bitmapImage;
                 }
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
                 return new BitmapImage();
             }
@@ -197,7 +201,7 @@
         /// <returns></returns>
         private static string GetCacheFilePath(string imageUrl)
         {
-            var imageName = HttpUtility.UrlEncode(imageUrl);
+            var imageName = MD5.GetMd5String(imageUrl);
             return Path.Combine(CachePath, imageName);
         }
 
