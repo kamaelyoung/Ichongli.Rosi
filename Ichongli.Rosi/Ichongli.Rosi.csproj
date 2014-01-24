@@ -304,10 +304,6 @@
       <Project>{CC64ACCD-C047-47A1-9E11-44AE2AFC39F1}</Project>
       <Name>ThinkWP.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ichongli.SDK\ThinkWP.SDK.csproj">
-      <Project>{6BCE8DCF-7683-48F2-9095-BB4664881DBF}</Project>
-      <Name>ThinkWP.SDK</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
