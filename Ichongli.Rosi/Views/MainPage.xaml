@@ -51,27 +51,26 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <thinkwp:TiltControl>
-                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#2672ec" micro:Message.Attach="[Tap]=[ClearCache]">
+                    <thinkwp:TiltControl HorizontalContentAlignment="Stretch">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Height="136" Margin="0,0,2,2" Background="#2672ec" micro:Message.Attach="[Tap]=[ClearCache]">
                             <TextBlock Text="清除缓存" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                         </Border>
                     </thinkwp:TiltControl>
-                    <thinkwp:TiltControl Grid.Column="1">
-                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#9B4F96" micro:Message.Attach="[Tap]=[MarketplaceReviewTask]">
+                    <thinkwp:TiltControl HorizontalContentAlignment="Stretch" Grid.Column="1">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Height="136" Margin="0,0,2,2" Background="#9B4F96" micro:Message.Attach="[Tap]=[MarketplaceReviewTask]">
                             <TextBlock Text="五星伺候" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                         </Border>
                     </thinkwp:TiltControl>
-                    <thinkwp:TiltControl Grid.Column="2">
-                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#9B4F96">
+                    <thinkwp:TiltControl HorizontalContentAlignment="Stretch" Grid.Row="1">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Height="136" Margin="0,0,2,2" Background="#9B4F96">
                             <TextBlock Text="购买高清套图请联系QQ1799012677" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                         </Border>
                     </thinkwp:TiltControl>
-                    <thinkwp:TiltControl Grid.Row="1">
-                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#2672ec" micro:Message.Attach="[Tap]=[ToMe]">
+                    <thinkwp:TiltControl HorizontalContentAlignment="Stretch" Grid.Row="1" Grid.Column="1">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Height="136" Margin="0,0,2,2" Background="#2672ec" micro:Message.Attach="[Tap]=[ToMe]">
                             <TextBlock Text="欢迎捐助，款项将用来维护服务器" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                         </Border>
                     </thinkwp:TiltControl>
