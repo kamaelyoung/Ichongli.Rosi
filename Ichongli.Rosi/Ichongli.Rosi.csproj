@@ -283,6 +283,9 @@
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp8\System.Windows.Interactivity.dll</HintPath>
     </Reference>
+    <Reference Include="UmengAnalyticsWP8">
+      <HintPath>..\packages\UmengAnalyticsWP.2.0\lib\wp8\UmengAnalyticsWP8.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Caliburn.Micro.Coding4Fun\Caliburn.Micro.Coding4Fun.csproj">

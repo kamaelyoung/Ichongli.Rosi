@@ -20,6 +20,9 @@ namespace Ichongli.Rosi
         {
             // 标准 XAML 初始化
             InitializeComponent();
+            UmengSDK.UmengAnalytics.Init("52e2044956240b5a320c1d26");
+            UmengSDK.UmengAnalytics.IsDebug = true;//是否输出调试信息
+
         }
 
     }
