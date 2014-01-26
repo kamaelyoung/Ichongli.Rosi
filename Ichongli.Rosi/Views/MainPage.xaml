@@ -68,6 +68,6 @@
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>
-        <ggad:AdView AdUnitID="a152e4afab147d7" Height="80" Width="480" VerticalAlignment="Top"/>        
+        <ggad:AdView AdUnitID="a152e4afab147d7" Format="Banner" VerticalAlignment="Top"/>        
     </Grid>
 </phone:PhoneApplicationPage>
