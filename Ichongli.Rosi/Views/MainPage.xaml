@@ -65,6 +65,16 @@
                             <TextBlock Text="五星伺候" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                         </Border>
                     </thinkwp:TiltControl>
+                    <thinkwp:TiltControl Grid.Column="2">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#9B4F96">
+                            <TextBlock Text="购买高清套图请联系QQ1799012677" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        </Border>
+                    </thinkwp:TiltControl>
+                    <thinkwp:TiltControl Grid.Row="1">
+                        <Border BorderBrush="#ffffff" BorderThickness="1" Width="136" Height="136" Margin="0,0,2,2" Background="#2672ec" micro:Message.Attach="[Tap]=[ToMe]">
+                            <TextBlock Text="欢迎捐助，款项将用来维护服务器" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        </Border>
+                    </thinkwp:TiltControl>
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>   

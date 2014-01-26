@@ -182,6 +182,11 @@ namespace Ichongli.Rosi.ViewModels
             market.Show();
         }
 
+        public void ToMe()
+        {
+            this._uxService.OpenIe("https://me.alipay.com/moodjoy");
+        }
+
         public void OnBackKeyPress(CancelEventArgs arg)
         {
             this.TryClose();
