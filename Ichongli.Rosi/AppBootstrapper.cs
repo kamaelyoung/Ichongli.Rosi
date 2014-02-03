@@ -34,17 +34,17 @@ namespace Ichongli.Rosi
             this._kernel.Bind<ILog>().ToMethod(context => LogManager.GetLog(context.Request.Target == null ? typeof(ILog) : context.Request.Target.Type));
             this._kernel.Bind<IServiceBroker>().To<ServiceBroker>();
 
-            //AddCustomConventions();
+            AddCustomConventions();
         }
 
-        //private void AddCustomConventions()
-        //{
-        //    // App Bar Conventions
-        //    ConventionManager.AddElementConvention<BindableAppBarButton>(
-        //        Control.IsEnabledProperty, "DataContext", "Click");
-        //    ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
-        //        Control.IsEnabledProperty, "DataContext", "Click");
-        //}
+        private void AddCustomConventions()
+        {
+            // App Bar Conventions
+            ConventionManager.AddElementConvention<BindableAppBarButton>(
+                Control.IsEnabledProperty, "DataContext", "Click");
+            ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
+                Control.IsEnabledProperty, "DataContext", "Click");
+        }
 
         protected override object GetInstance(Type service, string key)
         {
