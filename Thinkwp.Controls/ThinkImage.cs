@@ -19,193 +19,156 @@
     /// </summary>
     public class ThinkImage
     {
-        #region Source Attach Property
-
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.RegisterAttached("Source", typeof(string), typeof(ThinkImage), new PropertyMetadata(default(string), SourcePropertyChanged));
+            DependencyProperty.RegisterAttached(
+                "Source",
+                typeof(string),
+                typeof(ThinkImage),
+                new PropertyMetadata(null, OnSourceWithSourceChanged));
 
-        public static void SetSource(Image image, string value)
+        public static string GetSource(Image img)
         {
-            image.SetValue(SourceProperty, value);
+            if (img == null)
+            {
+                return null;
+            }
+            return (string)img.GetValue(SourceProperty);
         }
 
-        public static string GetSource(Image image)
+        public static void SetSource(Image img, string value)
         {
-            return (string)image.GetValue(SourceProperty);
+            if (img != null)
+            {
+                img.SetValue(SourceProperty, value);
+            }
         }
-        private static void SourcePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs ags)
+
+        private const string path = "ImageCache";
+        private static IsolatedStorageFile isoFile = IsolatedStorageFile.GetUserStoreForApplication();
+        private async static void OnSourceWithSourceChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (ags.NewValue == ags.OldValue)
+            if (e.NewValue == null)
+            {
                 return;
-
-            var image = dependencyObject as Image;
-            if (image != null)
-            {
-                //获取加载真正图片过程中显示的加载中的图片路径
-                SetLoadingImageSource(image);
-                var imageurl = ags.NewValue as string;
-                SetRealImageSource(image, imageurl);
             }
-        }
+            var img = sender as Image;
+            img.Source = null;
+            img.Opacity = 0;
 
-        #endregion
+            string url = e.NewValue.ToString();
+            img.Tag = url;
 
-        #region LoadingSource Attach Property
+            await Task.Delay(100);
 
-        public static readonly DependencyProperty LoadingSourceProperty =
-            DependencyProperty.RegisterAttached("LoadingSource", typeof(string), typeof(ThinkImage), new PropertyMetadata(default(string)));
-
-        public static void SetLoadingSource(UIElement element, string value)
-        {
-            element.SetValue(LoadingSourceProperty, value);
-        }
-
-        public static string GetLoadingSource(UIElement element)
-        {
-            return (string)element.GetValue(LoadingSourceProperty);
-        }
-
-        #endregion
-
-        #region Field
-
-        private static readonly IsolatedStorageFile IsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
-        private const string CachePath = "ImageCache";
-
-        #endregion
-
-        #region Private Method
-
-
-        /// <summary>
-        /// 设置获取真实图片过程中显示的加载中图片
-        /// </summary>
-        /// <param name="image"></param>
-        private static void SetLoadingImageSource(Image image)
-        {
-            var loadingImageSource = GetLoadingSource(image);
-            if (string.IsNullOrEmpty(loadingImageSource))
+            if (!string.IsNullOrEmpty(url))
             {
-                image.Source = null;
-            }
-            else
-            {
-                image.Source = new BitmapImage(new Uri(loadingImageSource, UriKind.Relative));
-            }
-        }
-
-        private static async void SetRealImageSource(Image image, string imageurl)
-        {
-            //如果不是网络图片则将图片路径给Image进行展示
-            if (!imageurl.StartsWith("http"))
-                image.Source = new BitmapImage(new Uri(imageurl, UriKind.RelativeOrAbsolute));
-            else
-            {
-                if (CacheImageExists(imageurl))
+                try
                 {
-                    image.Source = await GetImageSourceFromCache(imageurl);
+                    //if (url.EndsWith(".webp"))
+                    {
+                        if (!isoFile.DirectoryExists(path))
+                        {
+                            isoFile.CreateDirectory(path);
+                        }
+                        string fileName = MD5.GetMd5String(url);
+                        string filePath = System.IO.Path.Combine(path, fileName);
+                        if (isoFile.FileExists(filePath))
+                        {
+                            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(filePath);
+                            using (Stream s = await file.OpenStreamForReadAsync())
+                            {
+                                if (s.Length == 0)
+                                {
+                                    #region 请求本地失败
+                                    img.Tag = url;
+                                    var httpClient = new HttpClient();
+                                    var response = await httpClient.GetAsync(url);
+                                    response.EnsureSuccessStatusCode();
+                                    using (var stream = await response.Content.ReadAsStreamAsync())
+                                    {
+                                        byte[] bytes = new byte[stream.Length];
+                                        stream.Read(bytes, 0, bytes.Length);
+                                        if (img.Tag.Equals(url))
+                                        {
+                                            if (!isoFile.FileExists(filePath))
+                                            {
+                                                using (var fileStream = new IsolatedStorageFileStream(filePath, FileMode.Create, isoFile))
+                                                {
+                                                    fileStream.Write(bytes, 0, bytes.Length);
+                                                }
+                                            }
+
+                                            var source = bytes.ToBitmapImage();
+                                            if (img.Tag.Equals(url))
+                                            {
+                                                img.Source = source;
+                                                StoryBordImg(img);
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                }
+                                else
+                                {
+                                    byte[] bytes = new byte[s.Length];
+                                    s.Read(bytes, 0, bytes.Length);
+                                    var source = bytes.ToBitmapImage();
+                                    if (MD5.GetMd5String(img.Tag.ToString()).Equals(fileName))
+                                    {
+                                        img.Source = source;
+                                        StoryBordImg(img);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                var httpClient = new HttpClient();
+                                var response = await httpClient.GetAsync(url);
+                                response.EnsureSuccessStatusCode();
+                                using (var stream = await response.Content.ReadAsStreamAsync())
+                                {
+                                    byte[] bytes = new byte[stream.Length];
+                                    await stream.ReadAsync(bytes, 0, bytes.Length);
+                                    var source = bytes.ToBitmapImage();
+                                    if (img.Tag.Equals(url))
+                                    {
+                                        img.Source = source;
+                                        StoryBordImg(img);
+                                        if (!isoFile.FileExists(filePath))
+                                        {
+                                            using (var fileStream = new IsolatedStorageFileStream(filePath, FileMode.Create, isoFile))
+                                            {
+                                                // App.Current.sizes += bytes.Length / 1024;
+                                                fileStream.Write(bytes, 0, bytes.Length);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
+                    }
                 }
-                else
-                {
-                    image.Source = await GetImageFromNetWork(imageurl);
-                }
-                StartStotyboard(image);
+                catch { }
+
             }
         }
 
-        /// <summary>
-        /// 为image执行一段渐进的动画
-        /// </summary>
-        /// <param name="img"></param>
-        private static void StartStotyboard(Image img)
+        public static void StoryBordImg(Image img)
         {
-            var sb = new Storyboard();
-            var anim = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromMilliseconds(500) };
+            Storyboard sb = new Storyboard();
+            DoubleAnimation anim = new DoubleAnimation();
+            anim.From = 0;
+            anim.To = 1;
+            anim.Duration = TimeSpan.FromMilliseconds(500);
             Storyboard.SetTarget(anim, img);
             Storyboard.SetTargetProperty(anim, new PropertyPath("Opacity"));
             sb.Children.Add(anim);
             sb.Begin();
         }
-
-        /// <summary>
-        /// 获取网络图片
-        /// </summary>
-        /// <param name="imageurl"></param>
-        /// <returns></returns>
-        private static async Task<ImageSource> GetImageFromNetWork(string imageurl)
-        {
-            try
-            {
-                var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync(imageurl);
-                response.EnsureSuccessStatusCode();
-                using (var stream = await response.Content.ReadAsStreamAsync())
-                {
-                    //检测图片缓存文件夹是否存在，不存在则创建
-                    if (!IsolatedStorage.DirectoryExists(CachePath))
-                    {
-                        IsolatedStorage.CreateDirectory(CachePath);
-                    }
-                    //将下载的图片缓存到独立存储区中
-                    using (var isoStream = new IsolatedStorageFileStream(GetCacheFilePath(imageurl), FileMode.Create, IsolatedStorage))
-                    {
-                        var bytesInStream = new byte[stream.Length];
-                        stream.Read(bytesInStream, 0, bytesInStream.Length);
-                        isoStream.Write(bytesInStream, 0, bytesInStream.Length);
-                    }
-                    if (stream.CanSeek)
-                        stream.Seek(0, SeekOrigin.Begin);
-                    var bitmapImage = new BitmapImage();
-                    bitmapImage.SetSource(stream);
-
-                    return bitmapImage;
-                }
-            }
-            catch (HttpRequestException)
-            {
-                return new BitmapImage();
-            }
-        }
-
-        /// <summary>
-        /// 获取缓存的图片
-        /// </summary>
-        /// <param name="imageurl"></param>
-        /// <returns></returns>
-        private static async Task<ImageSource> GetImageSourceFromCache(string imageurl)
-        {
-            string filePath = GetCacheFilePath(imageurl);
-            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(filePath);
-            using (var stream = await file.OpenStreamForReadAsync())
-            {
-                var bitmapImage = new BitmapImage();
-                bitmapImage.SetSource(stream);
-                return bitmapImage;
-            }
-        }
-
-        /// <summary>
-        /// 判断指定名称的缓存文件是否存在
-        /// </summary>
-        /// <param name="imageurl"></param>
-        /// <returns></returns>
-        private static bool CacheImageExists(string imageurl)
-        {
-            return IsolatedStorage.FileExists(GetCacheFilePath(imageurl));
-        }
-
-        /// <summary>
-        /// 根据文件名称组合缓存文件的路径
-        /// </summary>
-        /// <param name="imageUrl"></param>
-        /// <returns></returns>
-        private static string GetCacheFilePath(string imageUrl)
-        {
-            var imageName = MD5.GetMd5String(imageUrl);
-            return Path.Combine(CachePath, imageName);
-        }
-
-        #endregion
 
         #region Public Method
 
@@ -218,11 +181,11 @@
             var total = await Task.Run(() =>
             {
                 long totalsize = 0;
-                if (IsolatedStorage.DirectoryExists(CachePath))
+                if (isoFile.DirectoryExists(path))
                 {
-                    foreach (var fileName in IsolatedStorage.GetFileNames(CachePath + "/"))
+                    foreach (var fileName in isoFile.GetFileNames(path + "/"))
                     {
-                        using (var file = IsolatedStorage.OpenFile(CachePath + "/" + fileName, FileMode.Open))
+                        using (var file = isoFile.OpenFile(path + "/" + fileName, FileMode.Open))
                         {
                             totalsize += file.Length;
                         }
@@ -240,11 +203,11 @@
         {
             return Task.Run(() =>
             {
-                if (IsolatedStorage.DirectoryExists(CachePath))
+                if (isoFile.DirectoryExists(path))
                 {
-                    foreach (var file in IsolatedStorage.GetFileNames(CachePath + "/"))
+                    foreach (var file in isoFile.GetFileNames(path + "/"))
                     {
-                        IsolatedStorage.DeleteFile(CachePath + "/" + file);
+                        isoFile.DeleteFile(path + "/" + file);
                     }
                 }
             });

@@ -81,7 +81,6 @@ namespace Ichongli.Rosi.ViewModels
 
         protected override void OnActivate()
         {
-            base.OnActivate();
             if (!this._isInitialized)
             {
                 if (this.Photos.Count > 0)

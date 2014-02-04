@@ -48,6 +48,16 @@ namespace Ichongli.Rosi.ViewModels
             }
         }
 
+        private ObservableCollection<Models.Ui.HomeItem> _AppItems;
+        public ObservableCollection<Models.Ui.HomeItem> AppItems
+        {
+            get
+            {
+                if (this._AppItems == null)
+                    this._AppItems = new ObservableCollection<HomeItem>();
+                return this._AppItems;
+            }
+        }
         private string _BigImage;
         public string BigImage
         {
@@ -146,6 +156,28 @@ namespace Ichongli.Rosi.ViewModels
                 }
                 if (latest.posts[0].attachments != null && latest.posts[0].attachments.Count > 0)
                     BigImage = latest.posts[0].thumbnail;//[0].images.medium.url;
+            }
+            this.LoadAppItems();
+
+        }
+
+        private async void LoadAppItems()
+        {
+            var apps = await serviceBroker.GetAppreCommended();
+            this.AppItems.Clear();
+            if (apps.count > 0)
+            {
+                foreach(var item in apps.posts)
+                {
+                    var img = item.thumbnail;
+                    var p = new Models.Ui.HomeItem
+                    {
+                        Title = item.title,
+                        UniqueId = item.id.ToString(),
+                        Url = img,
+                    };
+                    this.AppItems.Add(p);
+                }
             }
             this._progressService.Hide();
         }

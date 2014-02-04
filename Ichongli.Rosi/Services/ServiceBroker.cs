@@ -41,6 +41,18 @@ namespace Ichongli.Rosi.Services
             catch { return new Models.REST.CategoryPosts.RootObject() { status = "error" }; }
         }
 
+        public async Task<Models.REST.CategoryPosts.RootObject> GetAppreCommended()
+        {
+            try
+            {
+                StringBuilder Url = new StringBuilder();
+                Url.Append("http://www.thinkwp.org/api/get_category_posts/?slug=apprecommended");
+                Debug.WriteLine(Url.ToString());
+                return await DoHttpGet<Models.REST.CategoryPosts.RootObject>(Url);
+            }
+            catch { return new Models.REST.CategoryPosts.RootObject() { status = "error" }; }
+        }
+
         public async Task<Models.REST.CategoryPosts.RootObject> GetLatestPosts(int page)
         {
             StringBuilder Url = new StringBuilder();
